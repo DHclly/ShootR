@@ -1,9 +1,10 @@
+/// <reference path="../../Scripts/endgate-0.2.1.d.ts" />
+/// <reference path="../../Scripts/typings/signalr/signalr.d.ts" />
+/// <reference path="../Server/ServerAdapter.ts" />
+/// <reference path="GameInformer.ts" />
 var ShootR;
 (function (ShootR) {
-    /// <reference path="../../Scripts/endgate-0.2.0.d.ts" />
-    /// <reference path="../../Scripts/typings/signalr/signalr.d.ts" />
-    /// <reference path="../Server/ServerAdapter.ts" />
-    /// <reference path="GameInformer.ts" />
+    var Debug;
     (function (Debug) {
         var ConnectionState;
         (function (ConnectionState) {
@@ -12,17 +13,13 @@ var ShootR;
             ConnectionState[ConnectionState["Reconnecting"] = 2] = "Reconnecting";
             ConnectionState[ConnectionState["Disconnected"] = 4] = "Disconnected";
         })(ConnectionState || (ConnectionState = {}));
-
-        var ConnectionMonitor = (function () {
+        var ConnectionMonitor = /** @class */ (function () {
             function ConnectionMonitor(informer, serverAdapter) {
                 var _this = this;
                 this._textNode = informer.AddTextualInformation(ConnectionMonitor.TITLE);
                 this._textNode.FontSettings.FontWeight = "bold";
-
                 this._connection = serverAdapter.Connection;
-
                 this.UpdateText();
-
                 this._connection.stateChanged(function (stateChange) {
                     _this.UpdateText();
                 });
@@ -31,13 +28,11 @@ var ShootR;
                 this._textNode.Color = this.DetermineColor();
                 this._textNode.Text = this.GetStateText();
             };
-
             ConnectionMonitor.prototype.DetermineColor = function () {
                 return ConnectionMonitor.STATE_MAP[this.GetStateText()];
             };
-
             ConnectionMonitor.prototype.GetStateText = function () {
-                return ConnectionState[(this._connection).state];
+                return ConnectionState[this._connection.state];
             };
             ConnectionMonitor.TITLE = "Connection State";
             ConnectionMonitor.STATE_MAP = {
@@ -47,9 +42,8 @@ var ShootR;
                 Disconnected: eg.Graphics.Color.Red
             };
             return ConnectionMonitor;
-        })();
+        }());
         Debug.ConnectionMonitor = ConnectionMonitor;
-    })(ShootR.Debug || (ShootR.Debug = {}));
-    var Debug = ShootR.Debug;
+    })(Debug = ShootR.Debug || (ShootR.Debug = {}));
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=ConnectionMonitor.js.map

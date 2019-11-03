@@ -1,10 +1,5 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-/* TimeSpan.ts */
+/// <reference path="../Interfaces/ITyped.ts" />
+/// <reference path="../Interfaces/ICloneable.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -18,10 +13,10 @@ var EndGate;
             this.Milliseconds = milliseconds + seconds * TimeSpan._secondsMultiplier + minutes * TimeSpan._minutesMultiplier;
         }
         Object.defineProperty(TimeSpan.prototype, "Milliseconds", {
-            get: /**
+            /**
             * Gets or sets the number of milliseconds the TimeSpan represents.
             */
-            function () {
+            get: function () {
                 return this._milliseconds;
             },
             set: function (val) {
@@ -34,10 +29,10 @@ var EndGate;
         });
 
         Object.defineProperty(TimeSpan.prototype, "Seconds", {
-            get: /**
+            /**
             * Gets or sets the number of seconds the TimeSpan represents.
             */
-            function () {
+            get: function () {
                 return this._seconds;
             },
             set: function (val) {
@@ -50,10 +45,10 @@ var EndGate;
         });
 
         Object.defineProperty(TimeSpan.prototype, "Minutes", {
-            get: /**
+            /**
             * Gets or sets the number of minutes the TimeSpan represents.
             */
-            function () {
+            get: function () {
                 return this._minutes;
             },
             set: function (val) {
@@ -135,44 +130,44 @@ var EndGate;
             return this.Milliseconds + ":" + this.Seconds + ":" + this.Minutes;
         };
 
-        TimeSpan.FromMilliseconds = /**
+        /**
         * Returns a TimeSpan that represents the specified number of milliseconds.
         * @param val Number of milliseconds.
         */
-        function (val) {
+        TimeSpan.FromMilliseconds = function (val) {
             return new TimeSpan(val);
         };
 
-        TimeSpan.FromSeconds = /**
+        /**
         * Returns a TimeSpan that represents the specified number of seconds.
         * @param val Number of seconds.
         */
-        function (val) {
+        TimeSpan.FromSeconds = function (val) {
             return new TimeSpan(0, val);
         };
 
-        TimeSpan.FromMinutes = /**
+        /**
         * Returns a TimeSpan that represents the specified number of minutes.
         * @param val Number of minutes.
         */
-        function (val) {
+        TimeSpan.FromMinutes = function (val) {
             return new TimeSpan(0, 0, val);
         };
 
-        TimeSpan.DateSpan = /**
+        /**
         * Returns a TimeSpan that represents the time between the two dates.
         * @param from The from date.
         * @param to The to date.
         */
-        function (from, to) {
+        TimeSpan.DateSpan = function (from, to) {
             return new TimeSpan(to.getTime() - from.getTime());
         };
 
         Object.defineProperty(TimeSpan, "Zero", {
-            get: /**
+            /**
             * Gets a TimeSpan that represents a 0 millisecond time interval.
             */
-            function () {
+            get: function () {
                 return new TimeSpan(0);
             },
             enumerable: true,
@@ -184,8 +179,8 @@ var EndGate;
     })();
     EndGate.TimeSpan = TimeSpan;
 })(EndGate || (EndGate = {}));
-
-/* GameTime.ts */
+/// <reference path="Interfaces/ITyped.ts" />
+/// <reference path="Assets/TimeSpan.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -202,10 +197,10 @@ var EndGate;
             this.Update();
         }
         Object.defineProperty(GameTime.prototype, "Elapsed", {
-            get: /**
+            /**
             * Gets the elapsed time since the last update.
             */
-            function () {
+            get: function () {
                 return this._elapsed;
             },
             enumerable: true,
@@ -213,10 +208,10 @@ var EndGate;
         });
 
         Object.defineProperty(GameTime.prototype, "Now", {
-            get: /**
+            /**
             * Gets the current date time at the start of the update.
             */
-            function () {
+            get: function () {
                 return this._lastUpdate;
             },
             enumerable: true,
@@ -224,10 +219,10 @@ var EndGate;
         });
 
         Object.defineProperty(GameTime.prototype, "Total", {
-            get: /**
+            /**
             * Gets the total amount of time surpassed since construction.
             */
-            function () {
+            get: function () {
                 return EndGate.TimeSpan.DateSpan(this._start, new Date());
             },
             enumerable: true,
@@ -247,8 +242,10 @@ var EndGate;
     })();
     EndGate.GameTime = GameTime;
 })(EndGate || (EndGate = {}));
-
-/* Size2d.ts */
+/// <reference path="../GameTime.ts" />
+/// <reference path="../Vectors/Vector2d.ts" />
+/// <reference path="../../Interfaces/ICloneable.ts" />
+/// <reference path="../../Interfaces/ITyped.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -261,10 +258,10 @@ var EndGate;
             this.Height = typeof second !== "undefined" ? second : this.Width;
         }
         Object.defineProperty(Size2d, "Zero", {
-            get: /**
+            /**
             * Returns a Size2d with all its components set to zero.
             */
-            function () {
+            get: function () {
                 return new Size2d(0, 0);
             },
             enumerable: true,
@@ -272,10 +269,10 @@ var EndGate;
         });
 
         Object.defineProperty(Size2d, "One", {
-            get: /**
+            /**
             * Returns a Size2d with all its components set to one.
             */
-            function () {
+            get: function () {
                 return new Size2d(1, 1);
             },
             enumerable: true,
@@ -283,10 +280,10 @@ var EndGate;
         });
 
         Object.defineProperty(Size2d.prototype, "Radius", {
-            get: /**
+            /**
             * Gets the radius that encompasses the two dimensional size of this Size2d.
             */
-            function () {
+            get: function () {
                 return .5 * Math.sqrt(this.Width * this.Width + this.Height * this.Height);
             },
             enumerable: true,
@@ -294,10 +291,10 @@ var EndGate;
         });
 
         Object.defineProperty(Size2d.prototype, "HalfWidth", {
-            get: /**
+            /**
             * Gets half of the Width component of this Size2d.
             */
-            function () {
+            get: function () {
                 return this.Width / 2;
             },
             enumerable: true,
@@ -305,10 +302,10 @@ var EndGate;
         });
 
         Object.defineProperty(Size2d.prototype, "HalfHeight", {
-            get: /**
+            /**
             * Gets half of the Height component of this Size2d.
             */
-            function () {
+            get: function () {
                 return this.Height / 2;
             },
             enumerable: true,
@@ -425,16 +422,17 @@ var EndGate;
     })();
     EndGate.Size2d = Size2d;
 })(EndGate || (EndGate = {}));
-
 Math.roundTo = function (val, decimals) {
     var multiplier = Math.pow(10, decimals);
 
     return Math.round(val * multiplier) / multiplier;
 };
 
-(Math).twoPI = Math.PI * 2;
-
-/* Vector2d.ts */
+Math.twoPI = Math.PI * 2;
+/// <reference path="../../Interfaces/ITyped.ts" />
+/// <reference path="../../Interfaces/ICloneable.ts" />
+/// <reference path="../Sizes/Size2d.ts" />
+/// <reference path="../../Extensions/MathExtensions.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -447,10 +445,10 @@ var EndGate;
             this.Y = y || 0;
         }
         Object.defineProperty(Vector2d, "Zero", {
-            get: /**
+            /**
             * Returns a Vector2d with all its components set to zero.
             */
-            function () {
+            get: function () {
                 return new Vector2d(0, 0);
             },
             enumerable: true,
@@ -458,10 +456,10 @@ var EndGate;
         });
 
         Object.defineProperty(Vector2d, "One", {
-            get: /**
+            /**
             * Returns a Vector2d with all its components set to one.
             */
-            function () {
+            get: function () {
                 return new Vector2d(1, 1);
             },
             enumerable: true,
@@ -671,10 +669,11 @@ var EndGate;
     })();
     EndGate.Vector2d = Vector2d;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Interfaces/IMoveable.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Bounds2d.ts */
     (function (Bounds) {
         /**
         * Abstract bounds type that is used to detect intersections.
@@ -761,11 +760,11 @@ var EndGate;
     })(EndGate.Bounds || (EndGate.Bounds = {}));
     var Bounds = EndGate.Bounds;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Bounds/Bounds2d.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
 var EndGate;
 (function (EndGate) {
     (function (_) {
-        /* LooperCallback.ts */
         (function (Loopers) {
             var LooperCallback = (function () {
                 function LooperCallback(callback) {
@@ -782,11 +781,20 @@ var EndGate;
     })(EndGate._ || (EndGate._ = {}));
     var _ = EndGate._;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
+/// <reference path="LooperCallback.ts" />
+/// <reference path="LooperCallback.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 var EndGate;
 (function (EndGate) {
     (function (_) {
-        /* TimedCallback.ts */
         (function (Loopers) {
             var TimedCallback = (function (_super) {
                 __extends(TimedCallback, _super);
@@ -799,18 +807,19 @@ var EndGate;
                     this.Active = false;
                 }
                 return TimedCallback;
-            })(Loopers.LooperCallback);
+            })(EndGate._.Loopers.LooperCallback);
             Loopers.TimedCallback = TimedCallback;
         })(_.Loopers || (_.Loopers = {}));
         var Loopers = _.Loopers;
     })(EndGate._ || (EndGate._ = {}));
     var _ = EndGate._;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/ITyped.ts" />
+/// <reference path="ILooper.ts" />
+/// <reference path="TimedCallback.ts" />
 var EndGate;
 (function (EndGate) {
     (function (_) {
-        /* Looper.ts */
         (function (Loopers) {
             var Looper = (function () {
                 function Looper() {
@@ -887,15 +896,15 @@ var EndGate;
     })(EndGate._ || (EndGate._ = {}));
     var _ = EndGate._;
 })(EndGate || (EndGate = {}));
-
-window.OnRepaintCompleted = (window.requestAnimationFrame || (window).webkitRequestAnimationFrame || (window).mozRequestAnimationFrame || (window).oRequestAnimationFrame || (window).msRequestAnimationFrame || function (callback) {
-    (window).setTimeout(callback, 0);
+window.OnRepaintCompleted = (window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+    window.setTimeout(callback, 0);
 });
-
+/// <reference path="ILooper.ts" />
+/// <reference path="../Extensions/WindowExtensions.ts" />
+/// <reference path="LooperCallback.ts" />
 var EndGate;
 (function (EndGate) {
     (function (_) {
-        /* RepaintLooper.ts */
         (function (Loopers) {
             // This looper uses the request animation frame to run its internal loop
             // The method has been aliased as "OnRepaintCompleted" via the WindowExtensions
@@ -963,10 +972,13 @@ var EndGate;
     })(EndGate._ || (EndGate._ = {}));
     var _ = EndGate._;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="Interfaces/ITyped.ts" />
+/// <reference path="Loopers/Looper.ts" />
+/// <reference path="Loopers/RepaintLooper.ts" />
+/// <reference path="Loopers/TimedCallback.ts" />
+/// <reference path="Game.ts" />
 var EndGate;
 (function (EndGate) {
-    /* GameRunner.ts */
     (function (_) {
         var GameRunner = (function () {
             function GameRunner() {
@@ -1015,9 +1027,9 @@ var EndGate;
 
             GameRunner.prototype.TryLoopStart = function () {
                 if (this._callbackCount === 1) {
-                    this._updateLoop = new _.Loopers.Looper();
+                    this._updateLoop = new EndGate._.Loopers.Looper();
                     this._updateLoop.Start();
-                    this._drawLoop = new _.Loopers.RepaintLooper();
+                    this._drawLoop = new EndGate._.Loopers.RepaintLooper();
                     this._drawLoop.Start();
                 }
             };
@@ -1032,7 +1044,7 @@ var EndGate;
             };
 
             GameRunner.prototype.CreateAndCacheUpdateCallback = function (game) {
-                var updateCallback = new _.Loopers.TimedCallback(0, function () {
+                var updateCallback = new EndGate._.Loopers.TimedCallback(0, function () {
                     game._PrepareUpdate();
                 });
 
@@ -1042,7 +1054,7 @@ var EndGate;
             };
 
             GameRunner.prototype.CreateAndCacheDrawCallback = function (game) {
-                var drawCallback = new _.Loopers.LooperCallback(function () {
+                var drawCallback = new EndGate._.Loopers.LooperCallback(function () {
                     game._PrepareDraw();
                 });
 
@@ -1064,8 +1076,8 @@ var EndGate;
 })(EndGate || (EndGate = {}));
 
 var GameRunnerInstance = new EndGate._.GameRunner();
-
-/* EventHandler.ts */
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -1152,10 +1164,10 @@ var EndGate;
     })();
     EndGate.EventHandler = EventHandler;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Assets/Sizes/Size2d.ts" />
+/// <reference path="../Utilities/EventHandler.ts" />
 var EndGate;
 (function (EndGate) {
-    /* CollisionConfiguration.ts */
     (function (Collision) {
         /**
         * Defines a CollisionConfiguration object that is used to configure and optimize the collision manager.
@@ -1167,10 +1179,10 @@ var EndGate;
                 this._OnChange = new EndGate.EventHandler();
             }
             Object.defineProperty(CollisionConfiguration.prototype, "MinQuadTreeNodeSize", {
-                get: /**
+                /**
                 * Gets or sets the minimum quad tree node size.  For best performance this value should be equivalent to the smallest collidable object that will be monitored by the CollisionManager.  Changing this value re-creates the collision manager.  Values must represent a square.
                 */
-                function () {
+                get: function () {
                     return this._minQuadTreeNodeSize.Clone();
                 },
                 set: function (newSize) {
@@ -1186,10 +1198,10 @@ var EndGate;
             });
 
             Object.defineProperty(CollisionConfiguration.prototype, "InitialQuadTreeSize", {
-                get: /**
+                /**
                 * Gets or sets the initial quad tree size.  The quad tree used for collision detection will dynamically grow in size if items drift outside of its boundaries.  If this property is set it will re-instantiate a new quad tree.  Values must be divisible by the MinQuadTreeNodeSize and must represent a square.
                 */
-                function () {
+                get: function () {
                     return this._initialQuadTreeSize;
                 },
                 set: function (newSize) {
@@ -1212,8 +1224,8 @@ var EndGate;
     })(EndGate.Collision || (EndGate.Collision = {}));
     var Collision = EndGate.Collision;
 })(EndGate || (EndGate = {}));
-
-/* GameConfiguration.ts */
+/// <reference path="Assets/Sizes/Size2d.ts" />
+/// <reference path="Collision/CollisionConfiguration.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -1233,10 +1245,10 @@ var EndGate;
             this._collisionConfiguration = new EndGate.Collision.CollisionConfiguration(initialQuadTreeSize);
         }
         Object.defineProperty(GameConfiguration.prototype, "UpdateRate", {
-            get: /**
+            /**
             * Gets or sets the UpdateRate of the game.  Update rates are represented as X many updates per second.
             */
-            function () {
+            get: function () {
                 return this._updateRate;
             },
             set: function (updateRate) {
@@ -1248,10 +1260,10 @@ var EndGate;
         });
 
         Object.defineProperty(GameConfiguration.prototype, "CollisionConfiguration", {
-            get: /**
+            /**
             * Gets the CollisionConfiguration of the game.  These configurations are used to optimize the collision management performance.
             */
-            function () {
+            get: function () {
                 return this._collisionConfiguration;
             },
             enumerable: true,
@@ -1261,10 +1273,8 @@ var EndGate;
     })();
     EndGate.GameConfiguration = GameConfiguration;
 })(EndGate || (EndGate = {}));
-
 var EndGate;
 (function (EndGate) {
-    /* MinMax.ts */
     (function (_) {
         var MinMax = (function () {
             function MinMax(min, max) {
@@ -1277,10 +1287,10 @@ var EndGate;
     })(EndGate._ || (EndGate._ = {}));
     var _ = EndGate._;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Vector2d.ts" />
+/// <reference path="MinMax.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Vector2dHelpers.ts */
     (function (_) {
         var Vector2dHelpers = (function () {
             function Vector2dHelpers() {
@@ -1300,7 +1310,7 @@ var EndGate;
                     }
                 }
 
-                return new _.MinMax(min, max);
+                return new EndGate._.MinMax(min, max);
             };
             return Vector2dHelpers;
         })();
@@ -1308,10 +1318,11 @@ var EndGate;
     })(EndGate._ || (EndGate._ = {}));
     var _ = EndGate._;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="BoundingRectangle.ts" />
+/// <reference path="Bounds2d.ts" />
 var EndGate;
 (function (EndGate) {
-    /* BoundingCircle.ts */
     (function (Bounds) {
         /**
         * Defines a circle that can be used to detect intersections.
@@ -1422,15 +1433,17 @@ var EndGate;
                 return true;
             };
             return BoundingCircle;
-        })(Bounds.Bounds2d);
+        })(EndGate.Bounds.Bounds2d);
         Bounds.BoundingCircle = BoundingCircle;
     })(EndGate.Bounds || (EndGate.Bounds = {}));
     var Bounds = EndGate.Bounds;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Assets/Vectors/Helpers/Vector2dHelpers.ts" />
+/// <reference path="../Assets/Sizes/Size2d.ts" />
+/// <reference path="BoundingCircle.ts" />
+/// <reference path="Bounds2d.ts" />
 var EndGate;
 (function (EndGate) {
-    /* BoundingRectangle.ts */
     (function (Bounds) {
         /**
         * Defines a rectangle that can be used to detect intersections.
@@ -1459,10 +1472,10 @@ var EndGate;
             };
 
             Object.defineProperty(BoundingRectangle.prototype, "TopLeft", {
-                get: /**
+                /**
                 * Gets the top left corner of the BoundingRectangle.
                 */
-                function () {
+                get: function () {
                     if (this.Rotation === 0) {
                         return new EndGate.Vector2d(this.Position.X - this.Size.HalfWidth, this.Position.Y - this.Size.HalfHeight);
                     }
@@ -1474,10 +1487,10 @@ var EndGate;
             });
 
             Object.defineProperty(BoundingRectangle.prototype, "TopRight", {
-                get: /**
+                /**
                 * Gets the top right corner of the BoundingRectangle.
                 */
-                function () {
+                get: function () {
                     if (this.Rotation === 0) {
                         return new EndGate.Vector2d(this.Position.X + this.Size.HalfWidth, this.Position.Y - this.Size.HalfHeight);
                     }
@@ -1489,10 +1502,10 @@ var EndGate;
             });
 
             Object.defineProperty(BoundingRectangle.prototype, "BotLeft", {
-                get: /**
+                /**
                 * Gets the bottom left corner of the BoundingRectangle.
                 */
-                function () {
+                get: function () {
                     if (this.Rotation === 0) {
                         return new EndGate.Vector2d(this.Position.X - this.Size.HalfWidth, this.Position.Y + this.Size.HalfHeight);
                     }
@@ -1504,10 +1517,10 @@ var EndGate;
             });
 
             Object.defineProperty(BoundingRectangle.prototype, "BotRight", {
-                get: /**
+                /**
                 * Gets the bottom right corner of the BoundingRectangle.
                 */
-                function () {
+                get: function () {
                     if (this.Rotation === 0) {
                         return new EndGate.Vector2d(this.Position.X + this.Size.HalfWidth, this.Position.Y + this.Size.HalfHeight);
                     }
@@ -1552,6 +1565,7 @@ var EndGate;
                         var myProjections = EndGate._.Vector2dHelpers.GetMinMaxProjections(axi, myVertices);
                         var theirProjections = EndGate._.Vector2dHelpers.GetMinMaxProjections(axi, theirVertices);
 
+                        // No collision
                         if (theirProjections.Max < myProjections.Min || myProjections.Max < theirProjections.Min) {
                             return false;
                         }
@@ -1606,13 +1620,13 @@ var EndGate;
                 return true;
             };
             return BoundingRectangle;
-        })(Bounds.Bounds2d);
+        })(EndGate.Bounds.Bounds2d);
         Bounds.BoundingRectangle = BoundingRectangle;
     })(EndGate.Bounds || (EndGate.Bounds = {}));
     var Bounds = EndGate.Bounds;
 })(EndGate || (EndGate = {}));
-
-/* EventHandler1.ts */
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -1700,10 +1714,10 @@ var EndGate;
     })();
     EndGate.EventHandler1 = EventHandler1;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="Collidable.ts" />
 var EndGate;
 (function (EndGate) {
-    /* CollisionData.ts */
     (function (Collision) {
         /**
         * Defines a data object that is used to describe a collision event.
@@ -1722,10 +1736,14 @@ var EndGate;
     })(EndGate.Collision || (EndGate.Collision = {}));
     var Collision = EndGate.Collision;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
+/// <reference path="../Bounds/Bounds2d.ts" />
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="CollisionData.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Collidable.ts */
     (function (Collision) {
         /**
         * Defines a collidable object that can be used to detect collisions with other objects.
@@ -1745,10 +1763,10 @@ var EndGate;
                 this._onDisposed = new EndGate.EventHandler1();
             }
             Object.defineProperty(Collidable.prototype, "OnCollision", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a collision happens.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onCollision;
                 },
                 enumerable: true,
@@ -1756,10 +1774,10 @@ var EndGate;
             });
 
             Object.defineProperty(Collidable.prototype, "OnDisposed", {
-                get: /**
+                /**
                 * Gets an event that is triggered when the Collidable has been disposed.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onDisposed;
                 },
                 enumerable: true,
@@ -1802,12 +1820,14 @@ var EndGate;
     })(EndGate.Collision || (EndGate.Collision = {}));
     var Collision = EndGate.Collision;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Collidable.ts" />
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Bounds/BoundingRectangle.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Collision) {
         (function (Assets) {
-            /* QuadTreeNode.ts */
             (function (_) {
                 var QuadTreeNode = (function (_super) {
                     __extends(QuadTreeNode, _super);
@@ -1876,7 +1896,7 @@ var EndGate;
                     };
 
                     QuadTreeNode.prototype.Partition = function () {
-                        var partitionedSize = new EndGate.Size2d(Math.round((this.Bounds).Size.Width * .5)), boundsPosition = this.Bounds.Position;
+                        var partitionedSize = new EndGate.Size2d(Math.round(this.Bounds.Size.Width * .5)), boundsPosition = this.Bounds.Position;
 
                         this._partitioned = true;
 
@@ -1907,6 +1927,7 @@ var EndGate;
                     };
 
                     QuadTreeNode.prototype.ReverseInsert = function (obj) {
+                        // Check if object has left the bounds of this node then go up another level
                         if (!this.Bounds.Contains(obj.Bounds)) {
                             if (this.Parent != null) {
                                 return this.Parent.ReverseInsert(obj);
@@ -1928,16 +1949,22 @@ var EndGate;
                         for (var i = 0; i < this._children.length; i++) {
                             child = this._children[i];
 
+                            // If child fully contains the query area then we need to
+                            // drill down until we find all of the query items
                             if (child.Bounds.Contains(queryArea)) {
                                 results = results.concat(child.Query(queryArea));
                                 break;
                             }
 
+                            // If the queryArea fully contains the node then everything
+                            // underneath it belongs to the query
                             if (queryArea.Contains(child.Bounds)) {
                                 results = results.concat(child.GetSubTreeContents());
                                 continue;
                             }
 
+                            // If a sub-node intersects partially with the query then we
+                            // need to query its children to find valid nodes
                             if (child.Bounds.Intersects(queryArea)) {
                                 results = results.concat(child.Query(queryArea));
                             }
@@ -1966,7 +1993,7 @@ var EndGate;
                         return results;
                     };
                     return QuadTreeNode;
-                })(Collision.Collidable);
+                })(EndGate.Collision.Collidable);
                 _.QuadTreeNode = QuadTreeNode;
             })(Assets._ || (Assets._ = {}));
             var _ = Assets._;
@@ -1975,12 +2002,18 @@ var EndGate;
     })(EndGate.Collision || (EndGate.Collision = {}));
     var Collision = EndGate.Collision;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Interfaces/IDisposable.ts" />
+/// <reference path="../../Interfaces/IUpdateable.ts" />
+/// <reference path="../../Bounds/BoundingRectangle.ts" />
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../GameTime.ts" />
+/// <reference path="../CollisionConfiguration.ts" />
+/// <reference path="QuadTreeNode.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Collision) {
         (function (Assets) {
-            /* QuadTree.ts */
             (function (_) {
                 var QuadTree = (function () {
                     function QuadTree(configuration) {
@@ -1989,7 +2022,7 @@ var EndGate;
                         this._collidableMap = {};
                         this._updateableCollidableMap = {};
 
-                        this._root = new _.QuadTreeNode(new EndGate.Vector2d(configuration.InitialQuadTreeSize.HalfWidth, configuration.InitialQuadTreeSize.HalfHeight), configuration.InitialQuadTreeSize, configuration.MinQuadTreeNodeSize, null);
+                        this._root = new EndGate.Collision.Assets._.QuadTreeNode(new EndGate.Vector2d(configuration.InitialQuadTreeSize.HalfWidth, configuration.InitialQuadTreeSize.HalfHeight), configuration.InitialQuadTreeSize, configuration.MinQuadTreeNodeSize, null);
                     }
                     QuadTree.prototype.Insert = function (obj, staticPosition) {
                         if (typeof staticPosition === "undefined") { staticPosition = false; }
@@ -2034,22 +2067,22 @@ var EndGate;
                     };
 
                     QuadTree.prototype.Expand = function (cause) {
-                        var rootBounds = (this._root.Bounds), topLeftDistance = rootBounds.TopLeft.Distance(cause.Bounds.Position).Length(), topRightDistance = rootBounds.TopRight.Distance(cause.Bounds.Position).Length(), botLeftDistance = rootBounds.BotLeft.Distance(cause.Bounds.Position).Length(), botRightDistance = rootBounds.BotRight.Distance(cause.Bounds.Position).Length(), closestCornerDistance = Math.min(topLeftDistance, topRightDistance, botLeftDistance, botRightDistance), newSize = rootBounds.Size.Multiply(2), newRoot;
+                        var rootBounds = this._root.Bounds, topLeftDistance = rootBounds.TopLeft.Distance(cause.Bounds.Position).Length(), topRightDistance = rootBounds.TopRight.Distance(cause.Bounds.Position).Length(), botLeftDistance = rootBounds.BotLeft.Distance(cause.Bounds.Position).Length(), botRightDistance = rootBounds.BotRight.Distance(cause.Bounds.Position).Length(), closestCornerDistance = Math.min(topLeftDistance, topRightDistance, botLeftDistance, botRightDistance), newSize = rootBounds.Size.Multiply(2), newRoot;
 
                         if (closestCornerDistance === topLeftDistance) {
-                            newRoot = new _.QuadTreeNode(rootBounds.TopLeft, newSize, this._minNodeSize, null);
+                            newRoot = new EndGate.Collision.Assets._.QuadTreeNode(rootBounds.TopLeft, newSize, this._minNodeSize, null);
                             newRoot.Partition();
                             newRoot.BotRightChild = this._root;
                         } else if (closestCornerDistance === topRightDistance) {
-                            newRoot = new _.QuadTreeNode(rootBounds.TopRight, newSize, this._minNodeSize, null);
+                            newRoot = new EndGate.Collision.Assets._.QuadTreeNode(rootBounds.TopRight, newSize, this._minNodeSize, null);
                             newRoot.Partition();
                             newRoot.BotLeftChild = this._root;
                         } else if (closestCornerDistance === botLeftDistance) {
-                            newRoot = new _.QuadTreeNode(rootBounds.BotLeft, newSize, this._minNodeSize, null);
+                            newRoot = new EndGate.Collision.Assets._.QuadTreeNode(rootBounds.BotLeft, newSize, this._minNodeSize, null);
                             newRoot.Partition();
                             newRoot.TopRightChild = this._root;
                         } else if (closestCornerDistance === botRightDistance) {
-                            newRoot = new _.QuadTreeNode(rootBounds.BotRight, newSize, this._minNodeSize, null);
+                            newRoot = new EndGate.Collision.Assets._.QuadTreeNode(rootBounds.BotRight, newSize, this._minNodeSize, null);
                             newRoot.Partition();
                             newRoot.TopLeftChild = this._root;
                         }
@@ -2068,10 +2101,12 @@ var EndGate;
 
                             node.Remove(collidable);
 
+                            // If one of the collidables has drifted outside the root bounds, expand the quad tree
                             if (!this._root.Bounds.Contains(collidable.Bounds)) {
                                 this.Expand(collidable);
                                 newNode = this._root.Insert(collidable);
                             } else {
+                                // Check if object has left the bounds of this node and is not root
                                 if (!node.Bounds.Contains(collidable.Bounds) && node.Parent != null) {
                                     // We now belong to a parent
                                     newNode = node.Parent.ReverseInsert(collidable);
@@ -2102,8 +2137,8 @@ var EndGate;
     })(EndGate.Collision || (EndGate.Collision = {}));
     var Collision = EndGate.Collision;
 })(EndGate || (EndGate = {}));
-
-/* EventHandler2.ts */
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -2192,10 +2227,17 @@ var EndGate;
     })();
     EndGate.EventHandler2 = EventHandler2;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IUpdateable.ts" />
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
+/// <reference path="Assets/QuadTree.ts" />
+/// <reference path="CollisionConfiguration.ts" />
+/// <reference path="Collidable.ts" />
+/// <reference path="CollisionData.ts" />
+/// <reference path="../Utilities/EventHandler2.ts" />
+/// <reference path="../GameTime.ts" />
 var EndGate;
 (function (EndGate) {
-    /* CollisionManager.ts */
     (function (Collision) {
         /**
         * Defines a manager that will check for collisions between objects that it is monitoring.
@@ -2208,16 +2250,16 @@ var EndGate;
                 this._type = "CollisionManager";
                 this._collidables = [];
                 this._nonStaticCollidables = [];
-                this._quadTree = new Collision.Assets._.QuadTree(configuration);
+                this._quadTree = new EndGate.Collision.Assets._.QuadTree(configuration);
                 this._enabled = false;
                 this._disposed = false;
                 this._onCollision = new EndGate.EventHandler2();
             }
             Object.defineProperty(CollisionManager.prototype, "OnCollision", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a collision happens among two of the monitored objects.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onCollision;
                 },
                 enumerable: true,
@@ -2288,6 +2330,7 @@ var EndGate;
                         candidates = this._quadTree.CollisionCandidates(collidable);
 
                         for (var j = 0; j < candidates.length; j++) {
+                            // If we're colliding with someone else
                             if (collidable._id !== candidates[j]._id && collidable.IsCollidingWith(candidates[j])) {
                                 colliding.push([collidable, candidates[j]]);
                             }
@@ -2300,8 +2343,8 @@ var EndGate;
                         if (!cacheMap[hash]) {
                             cacheMap[hash] = true;
 
-                            colliding[i][0].Collided(new Collision.CollisionData(colliding[i][1]));
-                            colliding[i][1].Collided(new Collision.CollisionData(colliding[i][0]));
+                            colliding[i][0].Collided(new EndGate.Collision.CollisionData(colliding[i][1]));
+                            colliding[i][1].Collided(new EndGate.Collision.CollisionData(colliding[i][0]));
 
                             this.OnCollision.Trigger(colliding[i][0], colliding[i][1]);
                         }
@@ -2338,12 +2381,11 @@ var EndGate;
     })(EndGate.Collision || (EndGate.Collision = {}));
     var Collision = EndGate.Collision;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/ITyped.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Graphics) {
         (function (Assets) {
-            /* Graphic2dState.ts */
             (function (_) {
                 var Graphic2dState = (function () {
                     function Graphic2dState() {
@@ -2529,10 +2571,18 @@ var EndGate;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/ITyped.ts" />
+/// <reference path="../Interfaces/IMoveable.ts" />
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ICloneable.ts" />
+/// <reference path="../Rendering/IRenderable.ts" />
+/// <reference path="../Assets/Sizes/Size2d.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Bounds/Bounds2d.ts" />
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="Graphic2dState.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Graphic2d.ts */
     (function (Graphics) {
         /**
         * Abstract drawable graphic type that is used create the base for graphics.
@@ -2548,7 +2598,7 @@ var EndGate;
                 this.Rotation = 0;
                 this.ZIndex = 0;
                 this.Visible = true;
-                this._State = new Graphics.Assets._.Graphic2dState();
+                this._State = new EndGate.Graphics.Assets._.Graphic2dState();
                 this.Opacity = 1;
                 this._children = [];
                 this._childrenRemovalBindings = [];
@@ -2557,10 +2607,10 @@ var EndGate;
                 this._onDisposed = new EndGate.EventHandler1();
             }
             Object.defineProperty(Graphic2d.prototype, "AbsolutePosition", {
-                get: /**
+                /**
                 * Gets the absolute position of the Graphic2d.  This is used to calculate absolute positions when graphic's have parents.
                 */
-                function () {
+                get: function () {
                     var position = this.Position, node = this;
 
                     while (node = node.Parent) {
@@ -2574,10 +2624,10 @@ var EndGate;
             });
 
             Object.defineProperty(Graphic2d.prototype, "OnDisposed", {
-                get: /**
+                /**
                 * Gets an event that is triggered when the Graphic2d has been disposed.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onDisposed;
                 },
                 enumerable: true,
@@ -2585,10 +2635,10 @@ var EndGate;
             });
 
             Object.defineProperty(Graphic2d.prototype, "Opacity", {
-                get: /**
+                /**
                 * Gets or sets the current opacity.  Value is between 0 and 1.
                 */
-                function () {
+                get: function () {
                     return this._State.GlobalAlpha;
                 },
                 set: function (alpha) {
@@ -2742,10 +2792,11 @@ var EndGate;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Bounds/BoundingRectangle.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Camera2d.ts */
     (function (Rendering) {
         /**
         * Defines a camera that is used to define a viewport.  Should be used in conjunction with a Camera2dRenderer to render graphics as if being viewed through a camera.
@@ -2786,10 +2837,15 @@ var EndGate;
     })(EndGate.Rendering || (EndGate.Rendering = {}));
     var Rendering = EndGate.Rendering;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="IRenderable.ts" />
+/// <reference path="IRenderer.ts" />
+/// <reference path="IRenderable.ts" />
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="../Assets/Sizes/Size2d.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Renderer2d.ts */
     (function (Rendering) {
         /**
         * Defines a 2d renderer that uses a double buffer to draw graphics.
@@ -2812,10 +2868,10 @@ var EndGate;
                 this._disposed = false;
             }
             Object.defineProperty(Renderer2d.prototype, "OnRendererSizeChange", {
-                get: /**
+                /**
                 * Gets an event that is triggered when the renderOnto canvas changes size.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onRendererSizeChange;
                 },
                 enumerable: true,
@@ -2827,6 +2883,7 @@ var EndGate;
             * @param renderables Array of items that are to be rendered, assumes Visible is set to true.
             */
             Renderer2d.prototype.Render = function (renderables) {
+                // Check if our visible canvas has changed size
                 if (this._BufferCanvas.width !== this._visibleCanvas.width || this._BufferCanvas.height !== this._visibleCanvas.height) {
                     this.UpdateBufferSize();
                 }
@@ -2878,11 +2935,12 @@ var EndGate;
     })(EndGate.Rendering || (EndGate.Rendering = {}));
     var Rendering = EndGate.Rendering;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="Camera2d.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Rendering) {
-        /* Camera2dCanvasContextBuilder.ts */
         (function (_) {
             /**
             * Defines a builder that is used to build a camera sensitive CanvasRenderingContext2d so that anything drawn to it becomes relative to the Camera2d.
@@ -2906,7 +2964,7 @@ var EndGate;
                 Camera2dCanvasContextBuilder.prototype.Build = function (context) {
                     var that = this, savedCreateRadialGradient = context.createRadialGradient, savedTranslate = context.translate, savedSave = context.save, savedRestore = context.restore, savedDrawImage1 = this.BuildPositionReplacer(context.drawImage, 1), savedDrawImage2 = this.BuildPositionReplacer(context.drawImage, 5);
 
-                    (context).unModifiedClearRect = context.clearRect;
+                    context.unModifiedClearRect = context.clearRect;
 
                     context.arc = this.BuildPositionReplacer(context.arc);
                     context.arcTo = this.BuildPositionReplacer(context.arcTo, 0, 4);
@@ -3003,10 +3061,12 @@ var EndGate;
     })(EndGate.Rendering || (EndGate.Rendering = {}));
     var Rendering = EndGate.Rendering;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="Camera2d.ts" />
+/// <reference path="../Renderer2d.ts" />
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="Camera2dCanvasContextBuilder.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Camera2dRenderer.ts */
     (function (Rendering) {
         /**
         * Defines a camera rendering object that when used in conjunction with a Camera2d draws all objects in a camera relative position.
@@ -3023,7 +3083,7 @@ var EndGate;
                 _super.call(this, renderOnto);
 
                 this._camera = camera;
-                this._contextBuilder = new Rendering._.Camera2dCanvasContextBuilder(this._camera);
+                this._contextBuilder = new EndGate.Rendering._.Camera2dCanvasContextBuilder(this._camera);
 
                 this.OnRendererSizeChange.Bind(function (newSize) {
                     _this._contextBuilder._UpdateCanvasCenter(newSize);
@@ -3052,7 +3112,7 @@ var EndGate;
 
             Camera2dRenderer.prototype._ClearBuffer = function () {
                 var cameraScale = this._camera._GetDistanceScale();
-                (this._BufferContext).unModifiedClearRect(0, 0, this._BufferCanvas.width * cameraScale, this._BufferCanvas.height * cameraScale);
+                this._BufferContext.unModifiedClearRect(0, 0, this._BufferCanvas.width * cameraScale, this._BufferCanvas.height * cameraScale);
             };
 
             Camera2dRenderer.prototype.GetOnScreenRenderables = function (allRenderables) {
@@ -3072,15 +3132,22 @@ var EndGate;
                 return onscreen;
             };
             return Camera2dRenderer;
-        })(Rendering.Renderer2d);
+        })(EndGate.Rendering.Renderer2d);
         Rendering.Camera2dRenderer = Camera2dRenderer;
     })(EndGate.Rendering || (EndGate.Rendering = {}));
     var Rendering = EndGate.Rendering;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
+/// <reference path="../GameTime.ts" />
+/// <reference path="../Graphics/Graphic2d.ts" />
+/// <reference path="../Assets/Sizes/Size2d.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="Camera/Camera2d.ts" />
+/// <reference path="IRenderer.ts" />
+/// <reference path="Camera/Camera2dRenderer.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Scene2d.ts */
     (function (Rendering) {
         /**
         * Defines a scene object that is used to maintain a list of renderable objects that are rendered onto a joint game area.
@@ -3099,15 +3166,15 @@ var EndGate;
                 this._onDraw = onDraw;
 
                 this._drawArea = drawArea;
-                this._camera = new Rendering.Camera2d(new EndGate.Vector2d(this._drawArea.width / 2, this._drawArea.height / 2), new EndGate.Size2d(this._drawArea.width, this._drawArea.height));
-                this._renderer = new Rendering.Camera2dRenderer(this._drawArea, this._camera);
+                this._camera = new EndGate.Rendering.Camera2d(new EndGate.Vector2d(this._drawArea.width / 2, this._drawArea.height / 2), new EndGate.Size2d(this._drawArea.width, this._drawArea.height));
+                this._renderer = new EndGate.Rendering.Camera2dRenderer(this._drawArea, this._camera);
                 this._disposed = false;
             }
             Object.defineProperty(Scene2d.prototype, "DrawArea", {
-                get: /**
+                /**
                 * Gets the canvas that the Scene2d uses as its game area.
                 */
-                function () {
+                get: function () {
                     return this._drawArea;
                 },
                 enumerable: true,
@@ -3115,10 +3182,10 @@ var EndGate;
             });
 
             Object.defineProperty(Scene2d.prototype, "Camera", {
-                get: /**
+                /**
                 * Gets the game camera.
                 */
-                function () {
+                get: function () {
                     return this._camera;
                 },
                 enumerable: true,
@@ -3203,11 +3270,9 @@ var EndGate;
     })(EndGate.Rendering || (EndGate.Rendering = {}));
     var Rendering = EndGate.Rendering;
 })(EndGate || (EndGate = {}));
-
 var EndGate;
 (function (EndGate) {
     (function (Input) {
-        /* MouseButton.ts */
         (function (_) {
             var MouseButton = (function () {
                 function MouseButton() {
@@ -3223,10 +3288,20 @@ var EndGate;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="IMouseEvent.ts" />
+/// <reference path="MouseButton.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="IMouseEvent.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Utilities/EventHandler1.ts" />
+/// <reference path="../../Interfaces/IDisposable.ts" />
+/// <reference path="MouseButton.ts" />
+/// <reference path="IMouseEvent.ts" />
+/// <reference path="IMouseClickEvent.ts" />
+/// <reference path="IMouseScrollEvent.ts" />
 var EndGate;
 (function (EndGate) {
-    /* MouseHandler.ts */
     (function (Input) {
         /**
         * Defines a handler that will monitor mouse events over a specified area and will execute appropriate functions based on the events.
@@ -3276,10 +3351,10 @@ var EndGate;
                 });
             }
             Object.defineProperty(MouseHandler.prototype, "LeftIsDown", {
-                get: /**
+                /**
                 * Indicates if the left mouse button is down
                 */
-                function () {
+                get: function () {
                     return this._leftIsDown;
                 },
                 enumerable: true,
@@ -3287,10 +3362,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "MiddleIsDown", {
-                get: /**
+                /**
                 * Indicates if the middle mouse button is down
                 */
-                function () {
+                get: function () {
                     return this._middleIsDown;
                 },
                 enumerable: true,
@@ -3298,10 +3373,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "RightIsDown", {
-                get: /**
+                /**
                 * Indicates if the right mouse button is down
                 */
-                function () {
+                get: function () {
                     return this._rightIsDown;
                 },
                 enumerable: true,
@@ -3309,10 +3384,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "IsDown", {
-                get: /**
+                /**
                 * Indicates if any mouse button is down.
                 */
-                function () {
+                get: function () {
                     return this._isDown;
                 },
                 enumerable: true,
@@ -3320,10 +3395,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "OnClick", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a mouse click occurs.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onClick;
                 },
                 enumerable: true,
@@ -3331,10 +3406,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "OnDoubleClick", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a mouse double click occurs.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onDoubleClick;
                 },
                 enumerable: true,
@@ -3342,10 +3417,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "OnDown", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a mouse down event occurs.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onDown;
                 },
                 enumerable: true,
@@ -3353,10 +3428,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "OnUp", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a mouse up event occurs.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onUp;
                 },
                 enumerable: true,
@@ -3364,10 +3439,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "OnMove", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a mouse move event occurs.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onMove;
                 },
                 enumerable: true,
@@ -3375,10 +3450,10 @@ var EndGate;
             });
 
             Object.defineProperty(MouseHandler.prototype, "OnScroll", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a mouse scroll event occurs.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onScroll;
                 },
                 enumerable: true,
@@ -3415,7 +3490,9 @@ var EndGate;
                 this._mouseUpWire = this.BuildEvent(this._onUp, this.BuildMouseClickEvent);
                 this._mouseMoveWire = this.BuildEvent(this._onMove, this.BuildMouseEvent);
 
-                if ((/MSIE/i.test(navigator.userAgent))) {
+                // OnScroll, in order to detect horizontal scrolling need to hack a bit (browser sniffing)
+                // if we were just doing vertical scrolling we could settle with the else statement in this block
+                if ((/MSIE/i.test(navigator.userAgent)) || (/Trident/i.test(navigator.userAgent))) {
                     this._mouseWheelWireName = "wheel";
                     this._mouseWheelWire = this.BuildEvent(this._onScroll, function (e) {
                         e.wheelDeltaX = -e.deltaX;
@@ -3496,24 +3573,22 @@ var EndGate;
                     return MouseHandler.MouseButtonArray[event.which];
                 }
 
-                return Input._.MouseButton.Right;
+                return EndGate.Input._.MouseButton.Right;
             };
 
             MouseHandler.prototype.GetMouseScrollDierction = function (event) {
                 return new EndGate.Vector2d(-Math.max(-1, Math.min(1, event.wheelDeltaX)), -Math.max(-1, Math.min(1, event.wheelDeltaY)));
             };
-            MouseHandler.MouseButtonArray = [null, Input._.MouseButton.Left, Input._.MouseButton.Middle, Input._.MouseButton.Right];
+            MouseHandler.MouseButtonArray = [null, EndGate.Input._.MouseButton.Left, EndGate.Input._.MouseButton.Middle, EndGate.Input._.MouseButton.Right];
             return MouseHandler;
         })();
         Input.MouseHandler = MouseHandler;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
 var EndGate;
 (function (EndGate) {
     (function (_) {
-        /* NoopTripInvoker.ts */
         (function (Utilities) {
             var NoopTripInvoker = (function () {
                 function NoopTripInvoker(action, tripped) {
@@ -3559,11 +3634,10 @@ var EndGate;
     })(EndGate._ || (EndGate._ = {}));
     var _ = EndGate._;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="KeyboardCommand.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Input) {
-        /* KeyboardModifiers.ts */
         (function (Assets) {
             /**
             * Defines an object that is used to represent a keyboard modifier state to determine if Ctrl, Alt, or Shift is being pressed.
@@ -3588,11 +3662,11 @@ var EndGate;
                     return this.Ctrl === modifier.Ctrl && this.Alt === modifier.Alt && this.Shift === modifier.Shift;
                 };
 
-                KeyboardModifiers.BuildFromCommandString = /**
+                /**
                 * Builds a KeyboardModifiers object to represent the state of an expected keyCommand
                 * @param keyCommand The command to analyze.
                 */
-                function (keyCommand) {
+                KeyboardModifiers.BuildFromCommandString = function (keyCommand) {
                     var ctrl = (keyCommand.toLowerCase().indexOf("ctrl+") >= 0) ? true : false, alt = (keyCommand.toLowerCase().indexOf("alt+") >= 0) ? true : false, shift = (keyCommand.toLowerCase().indexOf("shift+") >= 0) ? true : false;
 
                     return new KeyboardModifiers(ctrl, alt, shift);
@@ -3605,10 +3679,73 @@ var EndGate;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
 var EndGate;
 (function (EndGate) {
-    /* KeyboardCommandEvent.ts */
+    (function (Input) {
+        /**
+        * HtmlElement that triggered a KeyboardEvent.
+        */
+        var KeyboardEventTarget = (function () {
+            function KeyboardEventTarget(target) {
+                this._element = target;
+                this._id = this._element.id;
+                this._classes = Array.prototype.slice.call(this._element.classList);
+                this._tag = this._element.tagName;
+            }
+            Object.defineProperty(KeyboardEventTarget.prototype, "Id", {
+                /**
+                * Gets the id of the target element.
+                */
+                get: function () {
+                    return this._id;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(KeyboardEventTarget.prototype, "Classes", {
+                /**
+                * Gets a list of classes on the target element.
+                */
+                get: function () {
+                    return this._classes;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(KeyboardEventTarget.prototype, "Element", {
+                /**
+                * Gets the element that caused the keyboard event.
+                */
+                get: function () {
+                    return this._element;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(KeyboardEventTarget.prototype, "Tag", {
+                /**
+                * Gets the type of tag of the target element.
+                */
+                get: function () {
+                    return this._tag;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return KeyboardEventTarget;
+        })();
+        Input.KeyboardEventTarget = KeyboardEventTarget;
+    })(EndGate.Input || (EndGate.Input = {}));
+    var Input = EndGate.Input;
+})(EndGate || (EndGate = {}));
+/// <reference path="KeyboardModifiers.ts" />
+/// <reference path="KeyboardCommand.ts" />
+/// <reference path="KeyboardEventTarget.ts" />
+var EndGate;
+(function (EndGate) {
     (function (Input) {
         var shiftValues = {
             "~": "`",
@@ -3632,11 +3769,9 @@ var EndGate;
             "|": "\\"
         }, specialKeys = {
             "27": "esc",
-            "27": "escape",
             "9": "tab",
             "32": "space",
             "13": "return",
-            "13": "enter",
             "8": "backspace",
             "45": "insert",
             "36": "home",
@@ -3671,7 +3806,7 @@ var EndGate;
             function KeyboardCommandEvent(keyEvent) {
                 var code, character;
 
-                this.Modifiers = new Input.Assets.KeyboardModifiers(keyEvent.ctrlKey, keyEvent.altKey, keyEvent.shiftKey);
+                this.Modifiers = new EndGate.Input.Assets.KeyboardModifiers(keyEvent.ctrlKey, keyEvent.altKey, keyEvent.shiftKey);
 
                 if (keyEvent.keyCode) {
                     code = keyEvent.keyCode;
@@ -3690,6 +3825,7 @@ var EndGate;
                 }
 
                 this.Key = character;
+                this.Target = new EndGate.Input.KeyboardEventTarget(keyEvent.target);
             }
             /**
             * Determines if the KeyboardCommand matches the KeyboardCommandEvent
@@ -3704,11 +3840,11 @@ var EndGate;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="KeyboardCommand.ts" />
+/// <reference path="KeyboardCommandEvent.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Input) {
-        /* KeyboardCommandHelper.ts */
         (function (_) {
             var KeyboardCommandHelper = (function () {
                 function KeyboardCommandHelper() {
@@ -3730,11 +3866,14 @@ var EndGate;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Interfaces/IDisposable.ts" />
+/// <reference path="../../Utilities/EventHandler.ts" />
+/// <reference path="../../Utilities/NoopTripInvoker.ts" />
+/// <reference path="KeyboardCommandHelper.ts" />
+/// <reference path="KeyboardModifiers.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Input) {
-        /* KeyboardCommand.ts */
         (function (Assets) {
             /**
             * Defines a class that is used to represent a keyboard command.
@@ -3748,8 +3887,8 @@ var EndGate;
                 function KeyboardCommand(command, action) {
                     var _this = this;
                     this.Action = action;
-                    this.Modifiers = Input.Assets.KeyboardModifiers.BuildFromCommandString(command);
-                    this.Key = Input._.KeyboardCommandHelper.ParseKey(command);
+                    this.Modifiers = EndGate.Input.Assets.KeyboardModifiers.BuildFromCommandString(command);
+                    this.Key = EndGate.Input._.KeyboardCommandHelper.ParseKey(command);
 
                     this._onDisposed = new EndGate.EventHandler();
                     this._onDisposeInvoker = new EndGate._.Utilities.NoopTripInvoker(function () {
@@ -3757,10 +3896,10 @@ var EndGate;
                     }, true);
                 }
                 Object.defineProperty(KeyboardCommand.prototype, "OnDispose", {
-                    get: /**
+                    /**
                     * Gets an event that is triggered when a KeyboardCommand has been disposed.  If this KeyboardCommand is used with a KeyboardHandler it will no longer trigger the Action function.  Functions can be bound or unbound to this event to be executed when the event triggers.
                     */
-                    function () {
+                    get: function () {
                         return this._onDisposed;
                     },
                     enumerable: true,
@@ -3781,10 +3920,12 @@ var EndGate;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="KeyboardCommand.ts" />
+/// <reference path="KeyboardCommandEvent.ts" />
+/// <reference path="../../Interfaces/IDisposable.ts" />
+/// <reference path="../../Utilities/EventHandler1.ts" />
 var EndGate;
 (function (EndGate) {
-    /* KeyboardHandler.ts */
     (function (Input) {
         /**
         * Defines a handler that will check for keyboard commands and execute appropriate functions.
@@ -3794,9 +3935,9 @@ var EndGate;
             * Creates a new instance of the KeyboardHandler object.
             */
             function KeyboardHandler() {
-                this._onPressCommands = ({});
-                this._onDownCommands = ({});
-                this._onUpCommands = ({});
+                this._onPressCommands = {};
+                this._onDownCommands = {};
+                this._onUpCommands = {};
 
                 this._onKeyPress = new EndGate.EventHandler1();
                 this._onKeyDown = new EndGate.EventHandler1();
@@ -3807,10 +3948,10 @@ var EndGate;
                 this.Wire();
             }
             Object.defineProperty(KeyboardHandler.prototype, "OnKeyPress", {
-                get: /**
+                /**
                 * Gets an event that is triggered when any key press occurs.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onKeyPress;
                 },
                 enumerable: true,
@@ -3818,10 +3959,10 @@ var EndGate;
             });
 
             Object.defineProperty(KeyboardHandler.prototype, "OnKeyDown", {
-                get: /**
+                /**
                 *Gets an event that is triggered when any key goes down.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onKeyDown;
                 },
                 enumerable: true,
@@ -3829,10 +3970,10 @@ var EndGate;
             });
 
             Object.defineProperty(KeyboardHandler.prototype, "OnKeyUp", {
-                get: /**
+                /**
                 * Gets an event that is triggered when any key comes up.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onKeyUp;
                 },
                 enumerable: true,
@@ -3902,7 +4043,7 @@ var EndGate;
             };
 
             KeyboardHandler.prototype.UpdateCache = function (keyCommand, action, store) {
-                var command = new Input.Assets.KeyboardCommand(keyCommand, action), commandId = KeyboardHandler._keyboardCommandIds++;
+                var command = new EndGate.Input.Assets.KeyboardCommand(keyCommand, action), commandId = KeyboardHandler._keyboardCommandIds++;
 
                 command.OnDispose.Bind(function () {
                     delete store[commandId];
@@ -3931,36 +4072,11 @@ var EndGate;
                 document.removeEventListener("keyup", this._keyUpWire, false);
             };
 
-            KeyboardHandler.prototype.FocusingTextArea = function (ke) {
-                var element;
-
-                if (ke.target) {
-                    element = ke.target;
-                } else if (ke.srcElement) {
-                    element = ke.srcElement;
-                }
-
-                if (element.nodeType === 3) {
-                    element = element.parentNode;
-                }
-
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    return true;
-                }
-
-                return false;
-            };
-
             KeyboardHandler.prototype.BuildKeyEvent = function (store, eventHandler) {
-                var _this = this;
                 return function (ke) {
                     var keyboardCommandEvent, propogate = true;
 
-                    if (_this.FocusingTextArea(ke)) {
-                        return;
-                    }
-
-                    keyboardCommandEvent = new Input.KeyboardCommandEvent(ke);
+                    keyboardCommandEvent = new EndGate.Input.KeyboardCommandEvent(ke);
 
                     eventHandler.Trigger(keyboardCommandEvent);
 
@@ -3982,10 +4098,11 @@ var EndGate;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="Mouse/MouseHandler.ts" />
+/// <reference path="Keyboard/KeyboardHandler.ts" />
 var EndGate;
 (function (EndGate) {
-    /* InputManager.ts */
     (function (Input) {
         /**
         * Defines an all around Input handler which manages mouse and keyboard events.
@@ -3997,8 +4114,8 @@ var EndGate;
             */
             function InputManager(target) {
                 this._disposed = false;
-                this.Mouse = new Input.MouseHandler(target);
-                this.Keyboard = new Input.KeyboardHandler();
+                this.Mouse = new EndGate.Input.MouseHandler(target);
+                this.Keyboard = new EndGate.Input.KeyboardHandler();
             }
             /**
             * Disposes the MouseHandler and unbinds all bound events.
@@ -4019,10 +4136,13 @@ var EndGate;
     })(EndGate.Input || (EndGate.Input = {}));
     var Input = EndGate.Input;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ICloneable.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Assets/Sizes/Size2d.ts" />
+/// <reference path="../Utilities/EventHandler1.ts" />
 var EndGate;
 (function (EndGate) {
-    /* ImageSource.ts */
     (function (Graphics) {
         /**
         * Defines an image resource that can be used within Sprite's, SpriteAnimation's and other drawable graphics.
@@ -4062,7 +4182,7 @@ var EndGate;
                         this.ClipLocation = new EndGate.Vector2d(clipX, clipY);
                         this.ClipSize = new EndGate.Size2d(clipWidth, clipHeight);
                     } else {
-                        this.ClipSize = null;
+                        this.ClipSize = null; // Waiting for the image source OnLoad to set it
                     }
                 } else {
                     clipWidth = clipX;
@@ -4101,10 +4221,10 @@ var EndGate;
                 }
             }
             Object.defineProperty(ImageSource.prototype, "OnLoaded", {
-                get: /**
+                /**
                 * Gets an event that is triggered when the base image is finished loading.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onLoaded;
                 },
                 enumerable: true,
@@ -4112,10 +4232,10 @@ var EndGate;
             });
 
             Object.defineProperty(ImageSource.prototype, "Size", {
-                get: /**
+                /**
                 * Returns the base Size of the image source.
                 */
-                function () {
+                get: function () {
                     return this._size.Clone();
                 },
                 enumerable: true,
@@ -4165,10 +4285,9 @@ var EndGate;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/ICloneable.ts" />
 var EndGate;
 (function (EndGate) {
-    /* AudioSettings.ts */
     (function (Sound) {
         /**
         * Defines a set of settings that are used to play AudioClip's a custom way.
@@ -4197,10 +4316,11 @@ var EndGate;
     })(EndGate.Sound || (EndGate.Sound = {}));
     var Sound = EndGate.Sound;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="AudioSettings.ts" />
 var EndGate;
 (function (EndGate) {
-    /* AudioClip.ts */
     (function (Sound) {
         var supportedAudioTypes = {
             mp3: 'audio/mpeg',
@@ -4215,7 +4335,7 @@ var EndGate;
         */
         var AudioClip = (function () {
             function AudioClip(source, settings) {
-                if (typeof settings === "undefined") { settings = Sound.AudioSettings.Default; }
+                if (typeof settings === "undefined") { settings = EndGate.Sound.AudioSettings.Default; }
                 this._disposed = false;
                 this._settings = settings.Clone();
                 this._canPlayWires = [];
@@ -4232,10 +4352,10 @@ var EndGate;
                 this._onComplete = new EndGate.EventHandler1();
             }
             Object.defineProperty(AudioClip.prototype, "OnComplete", {
-                get: /**
+                /**
                 * Gets an event that is triggered when the audio clip has completed, will not trigger if the audio clip is repeating.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onComplete;
                 },
                 enumerable: true,
@@ -4243,10 +4363,10 @@ var EndGate;
             });
 
             Object.defineProperty(AudioClip.prototype, "Volume", {
-                get: /**
+                /**
                 * Gets or sets the audio clip volume.
                 */
-                function () {
+                get: function () {
                     return this._settings.Volume;
                 },
                 set: function (percent) {
@@ -4348,6 +4468,7 @@ var EndGate;
             AudioClip.prototype.SetAudioSource = function (source) {
                 var sourceHolder, sourceType;
 
+                // If we've passed in a list of sources
                 if (!(source instanceof Array)) {
                     source = [source];
                 }
@@ -4385,10 +4506,10 @@ var EndGate;
     })(EndGate.Sound || (EndGate.Sound = {}));
     var Sound = EndGate.Sound;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="AudioClip.ts" />
+/// <reference path="AudioSettings.ts" />
 var EndGate;
 (function (EndGate) {
-    /* AudioPlayer.ts */
     (function (Sound) {
         /**
         * Defines an AudioPlayer that is mapped to a specific source.  Ultimately used to play the same sound simultaneously.
@@ -4403,13 +4524,13 @@ var EndGate;
                 }
             }
             AudioPlayer.prototype.BuildClip = function (settings) {
-                if (typeof settings === "undefined") { settings = Sound.AudioSettings.Default; }
-                return new Sound.AudioClip(this._source, settings);
+                if (typeof settings === "undefined") { settings = EndGate.Sound.AudioSettings.Default; }
+                return new EndGate.Sound.AudioClip(this._source, settings);
             };
 
             AudioPlayer.prototype.Play = function (settings) {
-                if (typeof settings === "undefined") { settings = Sound.AudioSettings.Default; }
-                var clip = new Sound.AudioClip(this._source, settings);
+                if (typeof settings === "undefined") { settings = EndGate.Sound.AudioSettings.Default; }
+                var clip = new EndGate.Sound.AudioClip(this._source, settings);
 
                 clip.Play();
 
@@ -4421,10 +4542,10 @@ var EndGate;
     })(EndGate.Sound || (EndGate.Sound = {}));
     var Sound = EndGate.Sound;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Graphics/ImageSource.ts" />
+/// <reference path="../Sound/AudioPlayer.ts" />
 var EndGate;
 (function (EndGate) {
-    /* ContentManager.ts */
     (function (Content) {
         /**
         * Defines a content manager that is used to preload AudioClip's and ImageSource's so that they can be used throughout a game.
@@ -4506,8 +4627,16 @@ var EndGate;
     })(EndGate.Content || (EndGate.Content = {}));
     var Content = EndGate.Content;
 })(EndGate || (EndGate = {}));
-
-/* Game.ts */
+/// <reference path="Interfaces/IDisposable.ts" />
+/// <reference path="Interfaces/ITyped.ts" />
+/// <reference path="Interfaces/IUpdateable.ts" />
+/// <reference path="Rendering/IRenderable.ts" />
+/// <reference path="GameRunner.ts" />
+/// <reference path="GameConfiguration.ts" />
+/// <reference path="Collision/CollisionManager.ts" />
+/// <reference path="Rendering/Scene2d.ts" />
+/// <reference path="Input/InputManager.ts" />
+/// <reference path="Content/ContentManager.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -4601,286 +4730,295 @@ var EndGate;
     })();
     EndGate.Game = Game;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/TimeSpan.ts" />
+/// <reference path="Functions/ITweeningFunction.ts" />
+/// <reference path="../Assets/TimeSpan.ts" />
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ICloneable.ts" />
+/// <reference path="../Interfaces/IUpdateable.ts" />
+/// <reference path="../GameTime.ts" />
 var EndGate;
 (function (EndGate) {
-    (function (MovementControllers) {
-        /* LinearDirections.ts */
-        (function (Assets) {
+    (function (Tweening) {
+        /**
+        * Defines a base Tween class that is used to move a value from a start value to an end value.
+        */
+        var Tween = (function () {
             /**
-            * Defines a direction management object that represents directional state.
+            * Creates a new instance of the Tween object.  This should only ever be called from derived classes via a super constructor call.
+            * @param from Start value.
+            * @param to End value.
+            * @param duration How fast to move the current value from start to end.
+            * @param tweeningFunction The function to use to translate the current value from start to end.  Different functions result in different translation behavior.
             */
-            var LinearDirections = (function () {
+            function Tween(from, to, duration, tweeningFunction) {
+                this._from = from.Clone();
+                this._to = to.Clone();
+                this._current = this._from.Clone();
+                this._duration = duration;
+                this._elapsed = EndGate.TimeSpan.Zero;
+                this._playing = false;
+                this._onChange = new EndGate.EventHandler1();
+                this._onComplete = new EndGate.EventHandler1();
+                this._tweeningFunction = tweeningFunction;
+            }
+            Object.defineProperty(Tween.prototype, "OnChange", {
                 /**
-                * Creates a new instance of the LinearDirection object with all directions= indicators initially set to false.
+                * Gets an event that is triggered when the tween has changed its Current value, occurs directly after a tween update.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function LinearDirections() {
-                    this.Left = false;
-                    this.Right = false;
-                    this.Up = false;
-                    this.Down = false;
+                get: function () {
+                    return this._onChange;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Tween.prototype, "OnComplete", {
+                /**
+                * Gets an event that is triggered when the tween has completed transitioning the Current value, once triggered Elapsed will be equivalent to Duration and Current will be equivalent to To.  Functions can be bound or unbound to this event to be executed when the event triggers.
+                */
+                get: function () {
+                    return this._onComplete;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Tween.prototype, "From", {
+                /**
+                * Gets or sets the From component of the tween.
+                */
+                get: function () {
+                    return this._from;
+                },
+                set: function (from) {
+                    this._from = from;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Tween.prototype, "To", {
+                /**
+                * Gets or sets the To component of the tween.
+                */
+                get: function () {
+                    return this._to;
+                },
+                set: function (to) {
+                    this._to = to;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Tween.prototype, "Current", {
+                /**
+                * Gets or sets the Current component of the tween.  The Current is the current value of the tween, the final value of Current will be equivalent to To when the tween has completed.
+                */
+                get: function () {
+                    return this._current;
+                },
+                set: function (current) {
+                    this._current = current;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Tween.prototype, "Duration", {
+                /**
+                * Gets or sets the Duration component of the tween.  The Duration is how long the tween will take to go From -> To.
+                */
+                get: function () {
+                    return this._duration;
+                },
+                set: function (duration) {
+                    this._duration = duration;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Tween.prototype, "Elapsed", {
+                /**
+                * Gets or the Elapsed component of the tween.  Elapsed represents how far along the tween is.  When Elapsed equals Duration the tween is completed.
+                */
+                get: function () {
+                    return this._elapsed.Clone();
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Tween.prototype, "TweeningFunction", {
+                /**
+                * Gets or sets the TweeningFunction of the tween.  The TweeningFunction controls how the tween translates the Current value to the To value.
+                */
+                get: function () {
+                    return this._tweeningFunction;
+                },
+                set: function (fn) {
+                    this._tweeningFunction = fn;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            /**
+            * Determines if the tween is playing.
+            */
+            Tween.prototype.IsPlaying = function () {
+                return this._playing;
+            };
+
+            /**
+            * Starts playing the tween.  The tween will only start translating the value if Update is called.
+            */
+            Tween.prototype.Play = function () {
+                this._playing = true;
+            };
+
+            /**
+            * Pauses the tween.  Calls to update will not translate the tween when paused.
+            */
+            Tween.prototype.Pause = function () {
+                this._playing = false;
+            };
+
+            /**
+            * Resets the tween to the To location and resets the Elapsed time.  This does not stop or start the tween.
+            */
+            Tween.prototype.Reset = function () {
+                this._elapsed.Milliseconds = 0;
+                this._current = this._from.Clone();
+            };
+
+            /**
+            * Stops the tween from playing.  This also resets the tween to its To value.
+            */
+            Tween.prototype.Stop = function () {
+                this._playing = false;
+                this.Reset();
+            };
+
+            /**
+            * Restarts the tween.  Essentially calls Reset and then Play.
+            */
+            Tween.prototype.Restart = function () {
+                this.Reset();
+                this.Play();
+            };
+
+            /**
+            * Reverses the tween from the Current value back to the From value.  This changes the To component to equal the From value and the From value to equal the Current value.
+            */
+            Tween.prototype.Reverse = function () {
+                this._elapsed = EndGate.TimeSpan.Zero;
+                this._to = this._from;
+                this._from = this.Current.Clone();
+            };
+
+            /**
+            * Updates the tweens Current and Elapsed component if the tween is playing.
+            * @param gameTime The global game time object.  Used to represent total time running and used to track update interval elapsed speeds.
+            */
+            Tween.prototype.Update = function (gameTime) {
+                if (!this._playing) {
+                    return;
                 }
-                return LinearDirections;
+
+                this._elapsed = this._elapsed.Add(gameTime.Elapsed);
+
+                if (this._elapsed.Milliseconds >= this._duration.Milliseconds) {
+                    this._elapsed = this._duration.Clone();
+
+                    this._current = this._to.Clone();
+                    this._playing = false;
+
+                    this._onChange.Trigger(this._current.Clone());
+                    this._onComplete.Trigger(this);
+                } else {
+                    this._UpdateTween();
+                    this._onChange.Trigger(this._current.Clone());
+                }
+            };
+
+            /**
+            * Stops and unbinds all events from the tween.
+            */
+            Tween.prototype.Dispose = function () {
+                this.Stop();
+                this._onChange.Dispose();
+                this._onComplete.Dispose();
+            };
+
+            Tween.prototype._UpdateTween = function () {
+                // This should be overridden
+            };
+            return Tween;
+        })();
+        Tweening.Tween = Tween;
+    })(EndGate.Tweening || (EndGate.Tweening = {}));
+    var Tweening = EndGate.Tweening;
+})(EndGate || (EndGate = {}));
+/// <reference path="ITweeningFunction.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Tweening) {
+        (function (Functions) {
+            /**
+            * Defines a Linear tweening function that has an EaseNone function that can be used with Tween's.
+            */
+            var Linear = (function () {
+                function Linear() {
+                }
+                Object.defineProperty(Linear, "EaseNone", {
+                    /**
+                    * Gets the Linear EaseNone function.
+                    */
+                    get: function () {
+                        return Linear._easeNone;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Linear._easeNone = function (from, to, elapsed, duration) {
+                    var change = to - from;
+
+                    return change * elapsed.Milliseconds / duration.Milliseconds + from;
+                };
+                return Linear;
             })();
-            Assets.LinearDirections = LinearDirections;
-        })(MovementControllers.Assets || (MovementControllers.Assets = {}));
-        var Assets = MovementControllers.Assets;
-    })(EndGate.MovementControllers || (EndGate.MovementControllers = {}));
-    var MovementControllers = EndGate.MovementControllers;
+            Functions.Linear = Linear;
+        })(Tweening.Functions || (Tweening.Functions = {}));
+        var Functions = Tweening.Functions;
+    })(EndGate.Tweening || (EndGate.Tweening = {}));
+    var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
+/// <reference path="../Interfaces/ICloneable.ts" />
 
+Number.prototype.Clone = function () {
+    return this;
+};
+function asyncLoop(action, count, onComplete) {
+    (function loop(index) {
+        if (index < count) {
+            action(function () {
+                loop(index + 1);
+            }, index);
+        } else if (onComplete) {
+            onComplete();
+        }
+    }(0));
+}
 var EndGate;
 (function (EndGate) {
-    /* MovementController.ts */
-    (function (MovementControllers) {
-        /**
-        * Abstract class that holds moveable objects and synchronizes positions across them.
-        */
-        var MovementController = (function () {
-            /**
-            * Should only ever be called by derived classes.
-            * @param moveables Moveable objects to synchronize.
-            */
-            function MovementController(moveables) {
-                this.Position = moveables.length > 0 ? moveables[0].Position : EndGate.Vector2d.Zero;
-                this.Velocity = EndGate.Vector2d.Zero;
-                this.Rotation = 0;
-                this._frozen = false;
-
-                this._moveables = moveables;
-            }
-            /**
-            * Prevents the MovementController from updating object locations.
-            */
-            MovementController.prototype.Freeze = function () {
-                this._frozen = true;
-            };
-
-            /**
-            * Used to re-enable movement within the MovementController.
-            */
-            MovementController.prototype.Thaw = function () {
-                this._frozen = false;
-            };
-
-            /**
-            * Determines if the MovementController is moving.  Frozen MovementControllers are not considered moving.
-            */
-            MovementController.prototype.IsMoving = function () {
-                return !this._frozen && !this.Velocity.IsZero();
-            };
-
-            /**
-            * Synchronizes the current position with all tracked moveable objects.  MovementController's must be updated in order to move.
-            * @param gameTime The current game time object.
-            */
-            MovementController.prototype.Update = function (gameTime) {
-                for (var i = 0; i < this._moveables.length; i++) {
-                    this._moveables[i].Position = this.Position;
-                    this._moveables[i].Rotation = this.Rotation;
-                }
-            };
-            return MovementController;
-        })();
-        MovementControllers.MovementController = MovementController;
-    })(EndGate.MovementControllers || (EndGate.MovementControllers = {}));
-    var MovementControllers = EndGate.MovementControllers;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* LinearMovementController.ts */
-    (function (MovementControllers) {
-        /**
-        * Defines a LinearMovementController that can move objects Up, Right, Left, Down or a combination.
-        */
-        var LinearMovementController = (function (_super) {
-            __extends(LinearMovementController, _super);
-            function LinearMovementController(movables, moveSpeed, rotateWithMovements, multiDirectional) {
-                if (typeof rotateWithMovements === "undefined") { rotateWithMovements = true; }
-                if (typeof multiDirectional === "undefined") { multiDirectional = true; }
-                var _this = this;
-                _super.call(this, movables);
-
-                this._moveSpeed = moveSpeed;
-                this._moving = new MovementControllers.Assets.LinearDirections();
-                this.OnMove = new EndGate.EventHandler1();
-                this._rotationUpdater = new EndGate._.Utilities.NoopTripInvoker(function () {
-                    _this.UpdateRotation();
-                }, rotateWithMovements);
-
-                if (multiDirectional) {
-                    this._velocityUpdater = this.UpdateVelocityWithMultiDirection;
-                } else {
-                    this._velocityUpdater = this.UpdateVelocityNoMultiDirection;
-                }
-            }
-            /**
-            * Determines if the movement controller is moving in the provided direction.
-            * @param direction The direction to check.
-            */
-            LinearMovementController.prototype.IsMovingInDirection = function (direction) {
-                return this._moving[direction] || false;
-            };
-
-            /**
-            * Starts moving the movement controller in the specified direction.
-            * @param direction The direction to start moving.
-            */
-            LinearMovementController.prototype.StartMoving = function (direction) {
-                this.Move(direction, true);
-            };
-
-            /**
-            * Stops the movement controller from moving in the specified direction.
-            * @param direction The direction to stop moving.
-            */
-            LinearMovementController.prototype.StopMoving = function (direction) {
-                this.Move(direction, false);
-            };
-
-            LinearMovementController.prototype.MoveSpeed = function (speed) {
-                if (typeof speed !== "undefined") {
-                    this._moveSpeed = speed;
-                    this._velocityUpdater();
-                }
-
-                return this._moveSpeed;
-            };
-
-            /**
-            * Moves the LinearMovementController in the currently active directions.  MovementController's must be updated in order to move.
-            * @param gameTime The current game time object.
-            */
-            LinearMovementController.prototype.Update = function (gameTime) {
-                if (!this._frozen) {
-                    this.Position = this.Position.Add(this.Velocity.Multiply(gameTime.Elapsed.Seconds));
-
-                    _super.prototype.Update.call(this, gameTime);
-                }
-            };
-
-            /**
-            * Triggers a move event on the MovementController.
-            * @param direction The direction to start or stop moving.
-            * @param startMoving Whether the movement is starting or stopping.
-            */
-            LinearMovementController.prototype.Move = function (direction, startMoving) {
-                if (typeof this._moving[direction] !== "undefined") {
-                    this._moving[direction] = startMoving;
-                    this._velocityUpdater();
-                    this._rotationUpdater.Invoke();
-                    this.OnMove.Trigger({
-                        Direction: direction,
-                        StartMoving: startMoving
-                    });
-                } else {
-                    throw new Error(direction + " is an unknown direction.");
-                }
-            };
-
-            LinearMovementController.prototype.UpdateVelocityNoMultiDirection = function () {
-                var velocity = EndGate.Vector2d.Zero;
-
-                if (velocity.IsZero()) {
-                    if (this._moving.Up) {
-                        velocity.Y -= this._moveSpeed;
-                    }
-                    if (this._moving.Down) {
-                        velocity.Y += this._moveSpeed;
-                    }
-
-                    if (velocity.Y === 0) {
-                        if (this._moving.Left) {
-                            velocity.X -= this._moveSpeed;
-                        }
-                        if (this._moving.Right) {
-                            velocity.X += this._moveSpeed;
-                        }
-                    }
-                }
-
-                this.Velocity = velocity;
-            };
-
-            LinearMovementController.prototype.UpdateVelocityWithMultiDirection = function () {
-                var velocity = EndGate.Vector2d.Zero;
-
-                if (this._moving.Up) {
-                    velocity.Y -= this._moveSpeed;
-                }
-                if (this._moving.Down) {
-                    velocity.Y += this._moveSpeed;
-                }
-                if (this._moving.Left) {
-                    velocity.X -= this._moveSpeed;
-                }
-                if (this._moving.Right) {
-                    velocity.X += this._moveSpeed;
-                }
-
-                this.Velocity = velocity;
-            };
-
-            LinearMovementController.prototype.UpdateRotation = function () {
-                if (!this.Velocity.IsZero()) {
-                    this.Rotation = Math.atan2(this.Velocity.Y, this.Velocity.X);
-                }
-            };
-            return LinearMovementController;
-        })(MovementControllers.MovementController);
-        MovementControllers.LinearMovementController = LinearMovementController;
-    })(EndGate.MovementControllers || (EndGate.MovementControllers = {}));
-    var MovementControllers = EndGate.MovementControllers;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* DirectionalInputController.ts */
-    (function (InputControllers) {
-        /**
-        * Defines a DirectionalInputController that will monitor Up, Right, Left, and Down movement attempts.
-        */
-        var DirectionalInputController = (function () {
-            function DirectionalInputController(keyboard, onMove, upKeys, rightKeys, downKeys, leftKeys) {
-                if (typeof upKeys === "undefined") { upKeys = ["w", "Up"]; }
-                if (typeof rightKeys === "undefined") { rightKeys = ["d", "Right"]; }
-                if (typeof downKeys === "undefined") { downKeys = ["s", "Down"]; }
-                if (typeof leftKeys === "undefined") { leftKeys = ["a", "Left"]; }
-                this._keyboard = keyboard;
-                this._onMove = onMove;
-                this._directions = new EndGate.MovementControllers.Assets.LinearDirections();
-
-                this.BindKeys(upKeys, "OnCommandDown", "Up", true);
-                this.BindKeys(rightKeys, "OnCommandDown", "Right", true);
-                this.BindKeys(downKeys, "OnCommandDown", "Down", true);
-                this.BindKeys(leftKeys, "OnCommandDown", "Left", true);
-                this.BindKeys(upKeys, "OnCommandUp", "Up", false);
-                this.BindKeys(rightKeys, "OnCommandUp", "Right", false);
-                this.BindKeys(downKeys, "OnCommandUp", "Down", false);
-                this.BindKeys(leftKeys, "OnCommandUp", "Left", false);
-            }
-            DirectionalInputController.prototype.BindKeys = function (keyList, bindingAction, direction, startMoving) {
-                var _this = this;
-                for (var i = 0; i < keyList.length; i++) {
-                    this._keyboard[bindingAction](keyList[i], function () {
-                        if (_this._directions[direction] != startMoving) {
-                            _this._directions[direction] = startMoving;
-                            _this._onMove(direction, startMoving);
-                        }
-                    });
-                }
-            };
-            return DirectionalInputController;
-        })();
-        InputControllers.DirectionalInputController = DirectionalInputController;
-    })(EndGate.InputControllers || (EndGate.InputControllers = {}));
-    var InputControllers = EndGate.InputControllers;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* Color.ts */
+    /// <reference path="../Interfaces/ITyped.ts" />
+    /// <reference path="../Interfaces/ICloneable.ts" />
+    /// <reference path="../Interfaces/IDisposable.ts" />
+    /// <reference path="../Utilities/EventHandler1.ts" />
     (function (Graphics) {
         /**
         * Color class used to pass around colors in a typed manner.
@@ -4902,10 +5040,10 @@ var EndGate;
                 }
             }
             Object.defineProperty(Color.prototype, "OnChange", {
-                get: /**
+                /**
                 * Gets an EventHandler that is triggered when the R, G, B, or A values of this Color change.
                 */
-                function () {
+                get: function () {
                     return this._onChange;
                 },
                 enumerable: true,
@@ -4913,10 +5051,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color.prototype, "R", {
-                get: /**
+                /**
                 * Gets or sets the current red channel. Value must be an integer between 0 and 255 inclusive.
                 */
-                function () {
+                get: function () {
                     return this._r;
                 },
                 set: function (r) {
@@ -4929,10 +5067,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color.prototype, "G", {
-                get: /**
+                /**
                 * Gets or sets the current green channel. Value must be an integer between 0 and 255 inclusive.
                 */
-                function () {
+                get: function () {
                     return this._g;
                 },
                 set: function (g) {
@@ -4945,10 +5083,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color.prototype, "B", {
-                get: /**
+                /**
                 * Gets or sets the current blue channel. Value must be an integer between 0 and 255 inclusive.
                 */
-                function () {
+                get: function () {
                     return this._b;
                 },
                 set: function (b) {
@@ -4961,10 +5099,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color.prototype, "A", {
-                get: /**
+                /**
                 * Gets or sets the current alpha channel. Value must be between 0 and 1 inclusive.
                 */
-                function () {
+                get: function () {
                     return this._a;
                 },
                 set: function (a) {
@@ -4976,57 +5114,57 @@ var EndGate;
                 configurable: true
             });
 
-            Color.FromRGB = /**
+            /**
             * Creates a new Color object with the specified RGB values.
             * @param r The red channel. Must be between 0 and 255 inclusive.
             * @param g The green channel. Must be between 0 and 255 inclusive.
             * @param b The blue channel. Must be between 0 and 255 inclusive.
             */
-            function (r, g, b) {
+            Color.FromRGB = function (r, g, b) {
                 return new Color(r, g, b);
             };
 
-            Color.FromRGBA = /**
+            /**
             * Creates a new Color object with the specified RGBA values.
             * @param r The red channel. Must be between 0 and 255 inclusive.
             * @param g The green channel. Must be between 0 and 255 inclusive.
             * @param b The blue channel. Must be between 0 and 255 inclusive.
             * @param a The alpha channel. Must be between 0 and 1 inclusive.
             */
-            function (r, g, b, a) {
+            Color.FromRGBA = function (r, g, b, a) {
                 return new Color(r, g, b, a);
             };
 
-            Color.FromARGB = /**
+            /**
             * Creates a new Color object with the specified ARGB values.
             * @param a The alpha channel. Must be between 0 and 1 inclusive.
             * @param r The red channel. Must be between 0 and 255 inclusive.
             * @param g The green channel. Must be between 0 and 255 inclusive.
             * @param b The blue channel. Must be between 0 and 255 inclusive.
             */
-            function (a, r, g, b) {
+            Color.FromARGB = function (a, r, g, b) {
                 return new Color(r, g, b, a);
             };
 
-            Color.FromHex = /**
+            /**
             * Creates a new Color object from the specified hex assignment.
             * @param hex The hex based color code.
             */
-            function (hex) {
+            Color.FromHex = function (hex) {
                 return new Color(hex);
             };
 
-            Color.FromName = /**
+            /**
             * Creates a new Color object form the HTML5 named colors.
             * @param name The name of the HTML5 color to use.
             */
-            function (name) {
+            Color.FromName = function (name) {
                 return new Color(name);
             };
 
-            Color.ConvertShortHexToLong = //Converts a short hex string e.g. fff or cccc to the long version
+            //Converts a short hex string e.g. fff or cccc to the long version
             //e.g. ffffffff the alpha channel.
-            function (hex) {
+            Color.ConvertShortHexToLong = function (hex) {
                 if (hex.length === 3) {
                     //append the alpha channel default which is fully opaque
                     hex = hex + 'f';
@@ -5064,6 +5202,7 @@ var EndGate;
 
             //Creates a color object from the string provided
             Color.prototype.CreateColorObjectFromString = function (hex) {
+                //we're not interested in the pound sign
                 if (hex.charAt(0) === '#') {
                     hex = hex.substr(1);
                 }
@@ -5071,10 +5210,13 @@ var EndGate;
                 //convert short hexes to long hexes
                 hex = Color.ConvertShortHexToLong(hex);
 
+                //ensure we have an alpha channel
                 if (hex.length === 6) {
                     hex = hex + 'ff';
                 }
 
+                //if it's exactly 8 characters long then it's
+                //a hex and we build the Color object from this
                 if (hex.length === 8) {
                     return this.ParseAlphaHex(hex);
                 }
@@ -5143,10 +5285,10 @@ var EndGate;
             };
 
             Object.defineProperty(Color, "Transparent", {
-                get: /**
+                /**
                 * Returns a transparent Color object.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.transparent.Clone();
                 },
                 enumerable: true,
@@ -5154,10 +5296,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "AliceBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color AliceBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.aliceblue.Clone();
                 },
                 enumerable: true,
@@ -5165,10 +5307,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "AntiqueWhite", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color AntiqueWhite.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.antiquewhite.Clone();
                 },
                 enumerable: true,
@@ -5176,10 +5318,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Aqua", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Aqua.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.aqua.Clone();
                 },
                 enumerable: true,
@@ -5187,10 +5329,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Aquamarine", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Aquamarine.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.aquamarine.Clone();
                 },
                 enumerable: true,
@@ -5198,10 +5340,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Azure", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Azure.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.azure.Clone();
                 },
                 enumerable: true,
@@ -5209,10 +5351,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Beige", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Beige.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.beige.Clone();
                 },
                 enumerable: true,
@@ -5220,10 +5362,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Bisque", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Bisque.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.bisque.Clone();
                 },
                 enumerable: true,
@@ -5231,10 +5373,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Black", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Black.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.black.Clone();
                 },
                 enumerable: true,
@@ -5242,10 +5384,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "BlanchedAlmond", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color BlanchedAlmond.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.blanchedalmond.Clone();
                 },
                 enumerable: true,
@@ -5253,10 +5395,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Blue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Blue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.blue.Clone();
                 },
                 enumerable: true,
@@ -5264,10 +5406,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "BlueViolet", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color BlueViolet.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.blueviolet.Clone();
                 },
                 enumerable: true,
@@ -5275,10 +5417,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Brown", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Brown.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.brown.Clone();
                 },
                 enumerable: true,
@@ -5286,10 +5428,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "BurlyWood", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color BurlyWood.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.burlywood.Clone();
                 },
                 enumerable: true,
@@ -5297,10 +5439,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "CadetBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color CadetBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.cadetblue.Clone();
                 },
                 enumerable: true,
@@ -5308,10 +5450,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Chartreuse", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Chartreuse.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.chartreuse.Clone();
                 },
                 enumerable: true,
@@ -5319,10 +5461,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Chocolate", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Chocolate.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.chocolate.Clone();
                 },
                 enumerable: true,
@@ -5330,10 +5472,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Coral", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Coral.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.coral.Clone();
                 },
                 enumerable: true,
@@ -5341,10 +5483,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "CornflowerBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color CornflowerBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.cornflowerblue.Clone();
                 },
                 enumerable: true,
@@ -5352,10 +5494,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Cornsilk", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Cornsilk.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.cornsilk.Clone();
                 },
                 enumerable: true,
@@ -5363,10 +5505,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Crimson", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Crimson.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.crimson.Clone();
                 },
                 enumerable: true,
@@ -5374,10 +5516,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Cyan", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Cyan.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.cyan.Clone();
                 },
                 enumerable: true,
@@ -5385,10 +5527,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkblue.Clone();
                 },
                 enumerable: true,
@@ -5396,10 +5538,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkCyan", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkCyan.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkcyan.Clone();
                 },
                 enumerable: true,
@@ -5407,10 +5549,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkGoldenRod", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkGoldenRod.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkgoldenrod.Clone();
                 },
                 enumerable: true,
@@ -5418,10 +5560,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkGray", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkGray.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkgray.Clone();
                 },
                 enumerable: true,
@@ -5429,10 +5571,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkgreen.Clone();
                 },
                 enumerable: true,
@@ -5440,10 +5582,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkKhaki", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkKhaki.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkkhaki.Clone();
                 },
                 enumerable: true,
@@ -5451,10 +5593,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkMagenta", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkMagenta.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkmagenta.Clone();
                 },
                 enumerable: true,
@@ -5462,10 +5604,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkOliveGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkOliveGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkolivegreen.Clone();
                 },
                 enumerable: true,
@@ -5473,10 +5615,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkOrange", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkOrange.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkorange.Clone();
                 },
                 enumerable: true,
@@ -5484,10 +5626,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkOrchid", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkOrchid.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkorchid.Clone();
                 },
                 enumerable: true,
@@ -5495,10 +5637,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkRed", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkRed.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkred.Clone();
                 },
                 enumerable: true,
@@ -5506,10 +5648,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkSalmon", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkSalmon.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darksalmon.Clone();
                 },
                 enumerable: true,
@@ -5517,10 +5659,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkSeaGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkSeaGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkseagreen.Clone();
                 },
                 enumerable: true,
@@ -5528,10 +5670,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkSlateBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkSlateBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkslateblue.Clone();
                 },
                 enumerable: true,
@@ -5539,10 +5681,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkSlateGray", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkSlateGray.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkslategray.Clone();
                 },
                 enumerable: true,
@@ -5550,10 +5692,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkTurquoise", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkTurquoise.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkturquoise.Clone();
                 },
                 enumerable: true,
@@ -5561,10 +5703,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DarkViolet", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DarkViolet.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.darkviolet.Clone();
                 },
                 enumerable: true,
@@ -5572,10 +5714,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DeepPink", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DeepPink.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.deeppink.Clone();
                 },
                 enumerable: true,
@@ -5583,10 +5725,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DeepSkyBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DeepSkyBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.deepskyblue.Clone();
                 },
                 enumerable: true,
@@ -5594,10 +5736,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DimGray", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DimGray.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.dimgray.Clone();
                 },
                 enumerable: true,
@@ -5605,10 +5747,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "DodgerBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color DodgerBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.dodgerblue.Clone();
                 },
                 enumerable: true,
@@ -5616,10 +5758,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "FireBrick", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color FireBrick.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.firebrick.Clone();
                 },
                 enumerable: true,
@@ -5627,10 +5769,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "FloralWhite", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color FloralWhite.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.floralwhite.Clone();
                 },
                 enumerable: true,
@@ -5638,10 +5780,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "ForestGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color ForestGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.forestgreen.Clone();
                 },
                 enumerable: true,
@@ -5649,10 +5791,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Fuchsia", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Fuchsia.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.fuchsia.Clone();
                 },
                 enumerable: true,
@@ -5660,10 +5802,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Gainsboro", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Gainsboro.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.gainsboro.Clone();
                 },
                 enumerable: true,
@@ -5671,10 +5813,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "GhostWhite", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color GhostWhite.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.ghostwhite.Clone();
                 },
                 enumerable: true,
@@ -5682,10 +5824,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Gold", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Gold.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.gold.Clone();
                 },
                 enumerable: true,
@@ -5693,10 +5835,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "GoldenRod", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color GoldenRod.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.goldenrod.Clone();
                 },
                 enumerable: true,
@@ -5704,10 +5846,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Gray", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Gray.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.gray.Clone();
                 },
                 enumerable: true,
@@ -5715,10 +5857,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Green", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Green.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.green.Clone();
                 },
                 enumerable: true,
@@ -5726,10 +5868,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "GreenYellow", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color GreenYellow.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.greenyellow.Clone();
                 },
                 enumerable: true,
@@ -5737,10 +5879,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "HoneyDew", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color HoneyDew.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.honeydew.Clone();
                 },
                 enumerable: true,
@@ -5748,10 +5890,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "HotPink", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color HotPink.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.hotpink.Clone();
                 },
                 enumerable: true,
@@ -5759,10 +5901,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "IndianRed", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color IndianRed.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.indianred.Clone();
                 },
                 enumerable: true,
@@ -5770,10 +5912,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Indigo", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Indigo.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.indigo.Clone();
                 },
                 enumerable: true,
@@ -5781,10 +5923,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Ivory", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Ivory.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.ivory.Clone();
                 },
                 enumerable: true,
@@ -5792,10 +5934,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Khaki", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Khaki.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.khaki.Clone();
                 },
                 enumerable: true,
@@ -5803,10 +5945,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Lavender", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Lavender.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lavender.Clone();
                 },
                 enumerable: true,
@@ -5814,10 +5956,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LavenderBlush", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LavenderBlush.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lavenderblush.Clone();
                 },
                 enumerable: true,
@@ -5825,10 +5967,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LawnGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LawnGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lawngreen.Clone();
                 },
                 enumerable: true,
@@ -5836,10 +5978,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LemonChiffon", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LemonChiffon.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lemonchiffon.Clone();
                 },
                 enumerable: true,
@@ -5847,10 +5989,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightblue.Clone();
                 },
                 enumerable: true,
@@ -5858,10 +6000,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightCoral", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightCoral.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightcoral.Clone();
                 },
                 enumerable: true,
@@ -5869,10 +6011,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightCyan", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightCyan.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightcyan.Clone();
                 },
                 enumerable: true,
@@ -5880,10 +6022,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightGoldenRodYellow", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightGoldenRodYellow.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightgoldenrodyellow.Clone();
                 },
                 enumerable: true,
@@ -5891,10 +6033,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightGray", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightGray.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightgray.Clone();
                 },
                 enumerable: true,
@@ -5902,10 +6044,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightGrey", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightGrey.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightgrey.Clone();
                 },
                 enumerable: true,
@@ -5913,10 +6055,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightgreen.Clone();
                 },
                 enumerable: true,
@@ -5924,10 +6066,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightPink", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightPink.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightpink.Clone();
                 },
                 enumerable: true,
@@ -5935,10 +6077,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightSalmon", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightSalmon.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightsalmon.Clone();
                 },
                 enumerable: true,
@@ -5946,10 +6088,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightSeaGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightSeaGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightseagreen.Clone();
                 },
                 enumerable: true,
@@ -5957,10 +6099,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightSkyBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightSkyBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightskyblue.Clone();
                 },
                 enumerable: true,
@@ -5968,10 +6110,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightSlateGray", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightSlateGray.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightslategray.Clone();
                 },
                 enumerable: true,
@@ -5979,10 +6121,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightSteelBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightSteelBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightsteelblue.Clone();
                 },
                 enumerable: true,
@@ -5990,10 +6132,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LightYellow", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LightYellow.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lightyellow.Clone();
                 },
                 enumerable: true,
@@ -6001,10 +6143,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Lime", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Lime.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.lime.Clone();
                 },
                 enumerable: true,
@@ -6012,10 +6154,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "LimeGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color LimeGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.limegreen.Clone();
                 },
                 enumerable: true,
@@ -6023,10 +6165,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Linen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Linen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.linen.Clone();
                 },
                 enumerable: true,
@@ -6034,10 +6176,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Magenta", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Magenta.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.magenta.Clone();
                 },
                 enumerable: true,
@@ -6045,10 +6187,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Maroon", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Maroon.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.maroon.Clone();
                 },
                 enumerable: true,
@@ -6056,10 +6198,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumAquaMarine", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumAquaMarine.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumaquamarine.Clone();
                 },
                 enumerable: true,
@@ -6067,10 +6209,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumblue.Clone();
                 },
                 enumerable: true,
@@ -6078,10 +6220,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumOrchid", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumOrchid.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumorchid.Clone();
                 },
                 enumerable: true,
@@ -6089,10 +6231,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumPurple", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumPurple.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumpurple.Clone();
                 },
                 enumerable: true,
@@ -6100,10 +6242,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumSeaGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumSeaGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumseagreen.Clone();
                 },
                 enumerable: true,
@@ -6111,10 +6253,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumSlateBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumSlateBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumslateblue.Clone();
                 },
                 enumerable: true,
@@ -6122,10 +6264,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumSpringGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumSpringGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumspringgreen.Clone();
                 },
                 enumerable: true,
@@ -6133,10 +6275,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumTurquoise", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumTurquoise.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumturquoise.Clone();
                 },
                 enumerable: true,
@@ -6144,10 +6286,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MediumVioletRed", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MediumVioletRed.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mediumvioletred.Clone();
                 },
                 enumerable: true,
@@ -6155,10 +6297,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MidnightBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MidnightBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.midnightblue.Clone();
                 },
                 enumerable: true,
@@ -6166,10 +6308,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MintCream", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MintCream.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mintcream.Clone();
                 },
                 enumerable: true,
@@ -6177,10 +6319,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "MistyRose", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color MistyRose.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.mistyrose.Clone();
                 },
                 enumerable: true,
@@ -6188,10 +6330,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Moccasin", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Moccasin.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.moccasin.Clone();
                 },
                 enumerable: true,
@@ -6199,10 +6341,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "NavajoWhite", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color NavajoWhite.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.navajowhite.Clone();
                 },
                 enumerable: true,
@@ -6210,10 +6352,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Navy", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Navy.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.navy.Clone();
                 },
                 enumerable: true,
@@ -6221,10 +6363,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "OldLace", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color OldLace.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.oldlace.Clone();
                 },
                 enumerable: true,
@@ -6232,10 +6374,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Olive", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Olive.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.olive.Clone();
                 },
                 enumerable: true,
@@ -6243,10 +6385,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "OliveDrab", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color OliveDrab.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.olivedrab.Clone();
                 },
                 enumerable: true,
@@ -6254,10 +6396,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Orange", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Orange.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.orange.Clone();
                 },
                 enumerable: true,
@@ -6265,10 +6407,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "OrangeRed", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color OrangeRed.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.orangered.Clone();
                 },
                 enumerable: true,
@@ -6276,10 +6418,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Orchid", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Orchid.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.orchid.Clone();
                 },
                 enumerable: true,
@@ -6287,10 +6429,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "PaleGoldenRod", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color PaleGoldenRod.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.palegoldenrod.Clone();
                 },
                 enumerable: true,
@@ -6298,10 +6440,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "PaleGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color PaleGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.palegreen.Clone();
                 },
                 enumerable: true,
@@ -6309,10 +6451,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "PaleTurquoise", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color PaleTurquoise.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.paleturquoise.Clone();
                 },
                 enumerable: true,
@@ -6320,10 +6462,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "PaleVioletRed", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color PaleVioletRed.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.palevioletred.Clone();
                 },
                 enumerable: true,
@@ -6331,10 +6473,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "PapayaWhip", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color PapayaWhip.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.papayawhip.Clone();
                 },
                 enumerable: true,
@@ -6342,10 +6484,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "PeachPuff", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color PeachPuff.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.peachpuff.Clone();
                 },
                 enumerable: true,
@@ -6353,10 +6495,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Peru", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Peru.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.peru.Clone();
                 },
                 enumerable: true,
@@ -6364,10 +6506,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Pink", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Pink.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.pink.Clone();
                 },
                 enumerable: true,
@@ -6375,10 +6517,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Plum", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Plum.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.plum.Clone();
                 },
                 enumerable: true,
@@ -6386,10 +6528,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "PowderBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color PowderBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.powderblue.Clone();
                 },
                 enumerable: true,
@@ -6397,10 +6539,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Purple", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Purple.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.purple.Clone();
                 },
                 enumerable: true,
@@ -6408,10 +6550,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Red", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Red.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.red.Clone();
                 },
                 enumerable: true,
@@ -6419,10 +6561,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "RosyBrown", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color RosyBrown.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.rosybrown.Clone();
                 },
                 enumerable: true,
@@ -6430,10 +6572,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "RoyalBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color RoyalBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.royalblue.Clone();
                 },
                 enumerable: true,
@@ -6441,10 +6583,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SaddleBrown", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SaddleBrown.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.saddlebrown.Clone();
                 },
                 enumerable: true,
@@ -6452,10 +6594,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Salmon", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Salmon.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.salmon.Clone();
                 },
                 enumerable: true,
@@ -6463,10 +6605,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SandyBrown", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SandyBrown.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.sandybrown.Clone();
                 },
                 enumerable: true,
@@ -6474,10 +6616,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SeaGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SeaGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.seagreen.Clone();
                 },
                 enumerable: true,
@@ -6485,10 +6627,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SeaShell", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SeaShell.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.seashell.Clone();
                 },
                 enumerable: true,
@@ -6496,10 +6638,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Sienna", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Sienna.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.sienna.Clone();
                 },
                 enumerable: true,
@@ -6507,10 +6649,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Silver", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Silver.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.silver.Clone();
                 },
                 enumerable: true,
@@ -6518,10 +6660,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SkyBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SkyBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.skyblue.Clone();
                 },
                 enumerable: true,
@@ -6529,10 +6671,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SlateBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SlateBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.slateblue.Clone();
                 },
                 enumerable: true,
@@ -6540,10 +6682,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SlateGray", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SlateGray.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.slategray.Clone();
                 },
                 enumerable: true,
@@ -6551,10 +6693,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Snow", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Snow.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.snow.Clone();
                 },
                 enumerable: true,
@@ -6562,10 +6704,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SpringGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SpringGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.springgreen.Clone();
                 },
                 enumerable: true,
@@ -6573,10 +6715,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "SteelBlue", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color SteelBlue.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.steelblue.Clone();
                 },
                 enumerable: true,
@@ -6584,10 +6726,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Tan", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Tan.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.tan.Clone();
                 },
                 enumerable: true,
@@ -6595,10 +6737,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Teal", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Teal.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.teal.Clone();
                 },
                 enumerable: true,
@@ -6606,10 +6748,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Thistle", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Thistle.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.thistle.Clone();
                 },
                 enumerable: true,
@@ -6617,10 +6759,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Tomato", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Tomato.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.tomato.Clone();
                 },
                 enumerable: true,
@@ -6628,10 +6770,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Turquoise", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Turquoise.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.turquoise.Clone();
                 },
                 enumerable: true,
@@ -6639,10 +6781,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Violet", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Violet.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.violet.Clone();
                 },
                 enumerable: true,
@@ -6650,10 +6792,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Wheat", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Wheat.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.wheat.Clone();
                 },
                 enumerable: true,
@@ -6661,10 +6803,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "White", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color White.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.white.Clone();
                 },
                 enumerable: true,
@@ -6672,10 +6814,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "WhiteSmoke", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color WhiteSmoke.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.whitesmoke.Clone();
                 },
                 enumerable: true,
@@ -6683,10 +6825,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "Yellow", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color Yellow.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.yellow.Clone();
                 },
                 enumerable: true,
@@ -6694,10 +6836,10 @@ var EndGate;
             });
 
             Object.defineProperty(Color, "YellowGreen", {
-                get: /**
+                /**
                 * Returns a Color object set to the color named color YellowGreen.
                 */
-                function () {
+                get: function () {
                     return Color._namedColors.yellowgreen.Clone();
                 },
                 enumerable: true,
@@ -6883,627 +7025,95 @@ var EndGate;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Shape.ts */
-    (function (Graphics) {
-        /**
-        * Abstract drawable shape type that is used create customizable drawable graphics.
-        */
-        var Shape = (function (_super) {
-            __extends(Shape, _super);
-            function Shape(position, color) {
-                var _this = this;
-                _super.call(this, position);
-                this._type = "Shape";
-
-                this._fillChangeWire = function (color) {
-                    _this._State.FillStyle = color.toString();
-                };
-
-                this._strokeChangeWire = function (color) {
-                    _this._State.StrokeStyle = color.toString();
-                };
-
-                this._shadowChangeWire = function (color) {
-                    _this._State.ShadowColor = color.toString();
-                };
-
-                this.ShadowColor = this._shadowColor = Graphics.Color.Black;
-                this.BorderColor = this._strokeStyle = Graphics.Color.Black;
-
-                if (typeof color !== "undefined") {
-                    if (typeof color === "string") {
-                        color = new Graphics.Color(color);
-                    }
-
-                    this.Color = this._fillStyle = color;
-                } else {
-                    this.Color = this._fillStyle = Graphics.Color.Black;
+    (function (Tweening) {
+        (function (Functions) {
+            /**
+            * Defines a Back tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
+            */
+            var Back = (function () {
+                function Back() {
                 }
-            }
-            Object.defineProperty(Shape.prototype, "Color", {
-                get: /**
-                * Gets or sets the current shape color.  Valid colors are strings like "red" or "rgb(255,0,0)".
-                */
-                function () {
-                    return this._fillStyle;
-                },
-                set: function (color) {
-                    if (typeof color === "string") {
-                        color = new Graphics.Color(color);
-                    }
-
-                    // Unbind old
-                    this._fillStyle.OnChange.Unbind(this._fillChangeWire);
-                    this._fillStyle = color;
-
-                    // Bind new
-                    this._fillStyle.OnChange.Bind(this._fillChangeWire);
-
-                    // Update state
-                    this._fillChangeWire(color);
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Shape.prototype, "BorderThickness", {
-                get: /**
-                * Gets or sets the current border thickness.
-                */
-                function () {
-                    return this._State.LineWidth;
-                },
-                set: function (thickness) {
-                    this._State.LineWidth = thickness;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Shape.prototype, "BorderColor", {
-                get: /**
-                * Gets or sets the current border color.  Valid colors are strings like "red" or "rgb(255,0,0)".
-                */
-                function () {
-                    return this._strokeStyle;
-                },
-                set: function (color) {
-                    if (typeof color === "string") {
-                        color = new Graphics.Color(color);
-                    }
-
-                    // Unbind old
-                    this._strokeStyle.OnChange.Unbind(this._strokeChangeWire);
-                    this._strokeStyle = color;
-
-                    // Bind new
-                    this._strokeStyle.OnChange.Bind(this._strokeChangeWire);
-
-                    // Update state
-                    this._strokeChangeWire(color);
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Shape.prototype, "ShadowColor", {
-                get: /**
-                * Gets or sets the current shadow color.  Valid colors are strings like "red" or "rgb(255,0,0)".
-                */
-                function () {
-                    return this._shadowColor;
-                },
-                set: function (color) {
-                    if (typeof color === "string") {
-                        color = new Graphics.Color(color);
-                    }
-
-                    // Unbind old
-                    this._shadowColor.OnChange.Unbind(this._shadowChangeWire);
-                    this._shadowColor = color;
-
-                    // Bind new
-                    this._shadowColor.OnChange.Bind(this._shadowChangeWire);
-
-                    // Update state
-                    this._shadowChangeWire(color);
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Shape.prototype, "ShadowX", {
-                get: /**
-                * Gets or sets the current horizontal shadow position.
-                */
-                function () {
-                    return this._State.ShadowOffsetX;
-                },
-                set: function (x) {
-                    this._State.ShadowOffsetX = x;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Shape.prototype, "ShadowY", {
-                get: /**
-                * Gets or sets the current vertical shadow position.
-                */
-                function () {
-                    return this._State.ShadowOffsetY;
-                },
-                set: function (y) {
-                    this._State.ShadowOffsetY = y;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Shape.prototype, "ShadowBlur", {
-                get: /**
-                * Gets or sets the current shadow blur.
-                */
-                function () {
-                    return this._State.ShadowBlur;
-                },
-                set: function (blur) {
-                    this._State.ShadowBlur = blur;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Shape.prototype.Border = function (thickness, color) {
-                this.BorderThickness = thickness;
-                this.BorderColor = color;
-            };
-
-            Shape.prototype.Shadow = function (x, y, color, blur) {
-                this.ShadowX = x;
-                this.ShadowY = y;
-                this.ShadowColor = color;
-                this.ShadowBlur = blur;
-            };
-
-            Shape.prototype._StartDraw = function (context) {
-                _super.prototype._StartDraw.call(this, context);
-                context.beginPath();
-            };
-
-            Shape.prototype._EndDraw = function (context) {
-                context.fill();
-
-                if (this._State.LineWidth > 0) {
-                    context.stroke();
-                } else {
-                    context.closePath();
-                }
-
-                _super.prototype._EndDraw.call(this, context);
-            };
-
-            // This should be overridden if you want to build a proper shape
-            Shape.prototype._BuildPath = function (context) {
-            };
-
-            /**
-            * Draws the shape onto the given context.  If this shape is part of a scene the Draw function will be called automatically.
-            * @param context The canvas context to draw the shape onto.
-            */
-            Shape.prototype.Draw = function (context) {
-                this._StartDraw(context);
-                this._BuildPath(context);
-                this._EndDraw(context);
-            };
-
-            Shape.prototype.Dispose = function () {
-                _super.prototype.Dispose.call(this);
-
-                this._fillStyle.OnChange.Unbind(this._fillChangeWire);
-                this._strokeStyle.OnChange.Unbind(this._strokeChangeWire);
-                this._shadowColor.OnChange.Unbind(this._shadowChangeWire);
-            };
-
-            Shape.prototype._Clone = function (graphic) {
-                graphic.Border(this.BorderThickness, this.BorderColor.Clone());
-                graphic.Shadow(this.ShadowX, this.ShadowY, this.ShadowColor.Clone(), this.ShadowBlur);
-
-                _super.prototype._Clone.call(this, graphic);
-            };
-            return Shape;
-        })(Graphics.Graphic2d);
-        Graphics.Shape = Shape;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    (function (Graphics) {
-        /* FontFamily.ts */
-        (function (Assets) {
-            /**
-            * Defines valid FontFamilies that can be used to display Text2d's differently.
-            */
-            (function (FontFamily) {
-                FontFamily[FontFamily["Antiqua"] = 0] = "Antiqua";
-                FontFamily[FontFamily["Arial"] = 1] = "Arial";
-                FontFamily[FontFamily["Avqest"] = 2] = "Avqest";
-                FontFamily[FontFamily["Blackletter"] = 3] = "Blackletter";
-                FontFamily[FontFamily["Calibri"] = 4] = "Calibri";
-                FontFamily[FontFamily["ComicSans"] = 5] = "ComicSans";
-                FontFamily[FontFamily["Courier"] = 6] = "Courier";
-                FontFamily[FontFamily["Decorative"] = 7] = "Decorative";
-                FontFamily[FontFamily["Fraktur"] = 8] = "Fraktur";
-                FontFamily[FontFamily["Frosty"] = 9] = "Frosty";
-                FontFamily[FontFamily["Garamond"] = 10] = "Garamond";
-                FontFamily[FontFamily["Georgia"] = 11] = "Georgia";
-                FontFamily[FontFamily["Helvetica"] = 12] = "Helvetica";
-                FontFamily[FontFamily["Impact"] = 13] = "Impact";
-                FontFamily[FontFamily["Minion"] = 14] = "Minion";
-                FontFamily[FontFamily["Modern"] = 15] = "Modern";
-                FontFamily[FontFamily["Monospace"] = 16] = "Monospace";
-                FontFamily[FontFamily["Palatino"] = 17] = "Palatino";
-                FontFamily[FontFamily["Roman"] = 18] = "Roman";
-                FontFamily[FontFamily["Script"] = 19] = "Script";
-                FontFamily[FontFamily["Swiss"] = 20] = "Swiss";
-                FontFamily[FontFamily["TimesNewRoman"] = 21] = "TimesNewRoman";
-                FontFamily[FontFamily["Verdana"] = 22] = "Verdana";
-            })(Assets.FontFamily || (Assets.FontFamily = {}));
-            var FontFamily = Assets.FontFamily;
-            ;
-        })(Graphics.Assets || (Graphics.Assets = {}));
-        var Assets = Graphics.Assets;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    (function (Graphics) {
-        /* FontVariant.ts */
-        (function (Assets) {
-            /**
-            * Defines valid FontVariant's that can be used to change the appearance of Text2d's.
-            */
-            (function (FontVariant) {
-                FontVariant[FontVariant["Normal"] = 0] = "Normal";
-                FontVariant[FontVariant["SmallCaps"] = 1] = "SmallCaps";
-            })(Assets.FontVariant || (Assets.FontVariant = {}));
-            var FontVariant = Assets.FontVariant;
-            ;
-        })(Graphics.Assets || (Graphics.Assets = {}));
-        var Assets = Graphics.Assets;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    (function (Graphics) {
-        /* FontStyle.ts */
-        (function (Assets) {
-            /**
-            * Defines valid FontStyles that can be used to modify the font's style for Text2d's.
-            */
-            (function (FontStyle) {
-                FontStyle[FontStyle["Normal"] = 0] = "Normal";
-                FontStyle[FontStyle["Italic"] = 1] = "Italic";
-                FontStyle[FontStyle["Oblique"] = 2] = "Oblique";
-            })(Assets.FontStyle || (Assets.FontStyle = {}));
-            var FontStyle = Assets.FontStyle;
-        })(Graphics.Assets || (Graphics.Assets = {}));
-        var Assets = Graphics.Assets;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    (function (Graphics) {
-        /* FontSettings.ts */
-        (function (Assets) {
-            /**
-            * Defines a set of font settings that are used to modify the appearance of text that is drawn via Text2d's.
-            */
-            var FontSettings = (function () {
-                /**
-                * Creates a new instance of the FontSettings object with the following default values.
-                * FontSize: 10px
-                * FontFamily: Times New Roman
-                */
-                function FontSettings() {
-                    this._cachedState = {
-                        fontSize: "10px",
-                        fontFamily: Assets.FontFamily.TimesNewRoman,
-                        fontVariant: Assets.FontVariant.Normal,
-                        fontWeight: "",
-                        fontStyle: Assets.FontStyle.Normal
-                    };
-
-                    this._refreshCache = true;
-                    this._BuildFont();
-                }
-                Object.defineProperty(FontSettings.prototype, "FontSize", {
-                    get: /**
-                    * Gets or sets the current font size.  Values can be things such as 20px.
+                Object.defineProperty(Back, "EaseIn", {
+                    /**
+                    * Gets the Back EaseIn function.
                     */
-                    function () {
-                        return this._cachedState["fontSize"];
-                    },
-                    set: function (size) {
-                        this._refreshCache = true;
-                        this._cachedState["fontSize"] = size;
+                    get: function () {
+                        return Back._easeIn;
                     },
                     enumerable: true,
                     configurable: true
                 });
 
-                Object.defineProperty(FontSettings.prototype, "FontFamily", {
-                    get: /**
-                    * Gets or sets the font family.
+                Object.defineProperty(Back, "EaseOut", {
+                    /**
+                    * Gets the Back EaseOut function.
                     */
-                    function () {
-                        return this._cachedState["fontFamily"];
-                    },
-                    set: function (family) {
-                        this._refreshCache = true;
-                        this._cachedState["fontFamily"] = family;
+                    get: function () {
+                        return Back._easeOut;
                     },
                     enumerable: true,
                     configurable: true
                 });
 
-                Object.defineProperty(FontSettings.prototype, "FontVariant", {
-                    get: /**
-                    * Gets or sets the font variant.
+                Object.defineProperty(Back, "EaseInOut", {
+                    /**
+                    * Gets the Back EaseInOut function.
                     */
-                    function () {
-                        return this._cachedState["fontVariant"];
-                    },
-                    set: function (variant) {
-                        this._refreshCache = true;
-                        this._cachedState["fontVariant"] = variant;
+                    get: function () {
+                        return Back._easeInOut;
                     },
                     enumerable: true,
                     configurable: true
                 });
+                Back._easeIn = function (from, to, elapsed, duration) {
+                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
 
-                Object.defineProperty(FontSettings.prototype, "FontWeight", {
-                    get: /**
-                    * Gets or sets the current font weight.
-                    */
-                    function () {
-                        return this._cachedState["fontWeight"];
-                    },
-                    set: function (weight) {
-                        this._refreshCache = true;
-                        this._cachedState["fontWeight"] = weight;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-
-                Object.defineProperty(FontSettings.prototype, "FontStyle", {
-                    get: /**
-                    * Gets or sets the current font style.
-                    */
-                    function () {
-                        return this._cachedState["fontStyle"];
-                    },
-                    set: function (style) {
-                        this._refreshCache = true;
-                        this._cachedState["fontStyle"] = style;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-
-                FontSettings.prototype._BuildFont = function () {
-                    var font;
-
-                    if (this._refreshCache) {
-                        font = this._cachedState["fontWeight"] + " " + Assets.FontStyle[this._cachedState["fontStyle"]].replace("Normal", "") + " " + Assets.FontVariant[this._cachedState["fontVariant"]].replace("Normal", "") + " " + this._cachedState["fontSize"];
-
-                        if (this._cachedState["fontFamily"] !== undefined) {
-                            font += " " + Assets.FontFamily[this._cachedState["fontFamily"]];
-                        }
-
-                        this._cachedFont = font.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-                        this._refreshCache = false;
-                    }
-
-                    return this._cachedFont;
+                    return change * (elapsedMilliseconds /= duration.Milliseconds) * elapsedMilliseconds * ((1.70158 + 1) * elapsedMilliseconds - 1.70158) + from;
                 };
-                return FontSettings;
+                Back._easeOut = function (from, to, elapsed, duration) {
+                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
+
+                    return change * ((elapsedMilliseconds = elapsedMilliseconds / duration.Milliseconds - 1) * elapsedMilliseconds * ((1.70158 + 1) * elapsedMilliseconds + 1.70158) + 1) + from;
+                };
+                Back._easeInOut = function (from, to, elapsed, duration) {
+                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds, constant = 1.70158;
+
+                    if ((elapsedMilliseconds /= duration.Milliseconds / 2) < 1) {
+                        return change / 2 * (elapsedMilliseconds * elapsedMilliseconds * (((constant *= (1.525)) + 1) * elapsedMilliseconds - constant)) + from;
+                    }
+                    return change / 2 * ((elapsedMilliseconds -= 2) * elapsedMilliseconds * (((constant *= (1.525)) + 1) * elapsedMilliseconds + constant) + 2) + from;
+                };
+                return Back;
             })();
-            Assets.FontSettings = FontSettings;
-        })(Graphics.Assets || (Graphics.Assets = {}));
-        var Assets = Graphics.Assets;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
+            Functions.Back = Back;
+        })(Tweening.Functions || (Tweening.Functions = {}));
+        var Functions = Tweening.Functions;
+    })(EndGate.Tweening || (EndGate.Tweening = {}));
+    var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
 var EndGate;
 (function (EndGate) {
-    /* Text2d.ts */
-    (function (Graphics) {
+    (function (MapLoaders) {
         /**
-        * Defines a drawable text element.
+        * Defines supported JSON formats for map loading.
         */
-        var Text2d = (function (_super) {
-            __extends(Text2d, _super);
-            function Text2d(x, y, text, color) {
-                if (typeof color === "undefined") { color = Graphics.Color.Black; }
-                _super.call(this, new EndGate.Vector2d(x, y), color);
-                this._type = "Text2d";
-
-                this._text = text;
-
-                this._drawBounds = new EndGate.Bounds.BoundingRectangle(this.Position, EndGate.Size2d.One);
-                this._recalculateBoundsSize = true;
-
-                this._fontSettings = new Graphics.Assets.FontSettings();
-                this.Align = "center";
-                this.Baseline = "middle";
-            }
-            Object.defineProperty(Text2d.prototype, "Align", {
-                get: /**
-                * Gets or sets the text alignment of the Text2d.  Values can be "start", "end", "left", "center", or "right".
-                */
-                function () {
-                    return this._State.TextAlign;
-                },
-                set: function (alignment) {
-                    this._State.TextAlign = alignment;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Text2d.prototype, "Baseline", {
-                get: /**
-                * Gets or sets the text baseline of the Text2d.  Values can be "top", "hanging", "middle", "alphabetic", "ideographic", and "bottom".
-                */
-                function () {
-                    return this._State.TextBaseline;
-                },
-                set: function (baseline) {
-                    this._State.TextBaseline = baseline;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Text2d.prototype, "FontSettings", {
-                get: /**
-                * Gets the Text2d's FontSetting's.
-                */
-                function () {
-                    this._recalculateBoundsSize = true;
-
-                    return this._fontSettings;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Text2d.prototype, "Text", {
-                get: /**
-                * Gets or sets the current Text2d's text.
-                */
-                function () {
-                    return this._text;
-                },
-                set: function (text) {
-                    this._recalculateBoundsSize = true;
-                    this._text = text;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Text2d.prototype._StartDraw = function (context) {
-                context.save();
-                this._State.SetContextState(context);
-
-                context.translate(this.Position.X, this.Position.Y);
-
-                if (this.Rotation !== 0) {
-                    context.rotate(this.Rotation);
-                }
-            };
-
-            Text2d.prototype._EndDraw = function (context) {
-                var children = this.GetChildren();
-
-                for (var i = 0; i < children.length; i++) {
-                    if (children[i].Visible) {
-                        children[i].Draw(context);
-                    }
-                }
-
-                context.restore();
-            };
-
-            /**
-            * Draws the text onto the given context.  If this Text2d is part of a scene the Draw function will be called automatically.
-            * @param context The canvas context to draw the text onto.
-            */
-            Text2d.prototype.Draw = function (context) {
-                var textSize;
-
-                this._State.Font = this._fontSettings._BuildFont();
-
-                this._StartDraw(context);
-
-                context.fillText(this._text, 0, 0);
-                if (this._State.LineWidth > 0) {
-                    context.strokeText(this._text, 0, 0);
-                }
-
-                if (this._recalculateBoundsSize) {
-                    this._recalculateBoundsSize = false;
-                    textSize = context.measureText(this._text);
-                    this._drawBounds.Size.Width = textSize.width;
-                    this._drawBounds.Size.Height = parseInt(this._fontSettings.FontSize) * 1.5;
-                }
-
-                this._EndDraw(context);
-            };
-
-            /**
-            * The bounding area that represents where the Text2d will draw.
-            */
-            Text2d.prototype.GetDrawBounds = function () {
-                this._drawBounds.Rotation = this.Rotation;
-                this._drawBounds.Position = this.Position;
-
-                return this._drawBounds;
-            };
-
-            /**
-            * Scale's the fonts FontSize.
-            * @param scale The value to multiply the graphic's size by.
-            */
-            Text2d.prototype.Scale = function (scale) {
-                var size = parseInt(this.FontSettings.FontSize);
-
-                this.FontSettings.FontSize = this.FontSettings.FontSize.replace(size.toString(), (size * scale).toString());
-            };
-
-            /**
-            * Returns a nearly identical copy of this Text2d.  If this Text2d belongs to a parent, the cloned Text2d will not. If this Text2d has children, all children will be cloned as well.  Lastly, the cloned Text2d will not have the same event bindings as this one does.
-            */
-            Text2d.prototype.Clone = function () {
-                var graphic = new Text2d(this.Position.X, this.Position.Y, this.Text, this.Color.Clone());
-
-                graphic.Align = this.Align;
-                graphic.Baseline = this.Baseline;
-                graphic.FontSettings.FontFamily = this.FontSettings.FontFamily;
-                graphic.FontSettings.FontSize = this.FontSettings.FontSize;
-                graphic.FontSettings.FontStyle = this.FontSettings.FontStyle;
-                graphic.FontSettings.FontVariant = this.FontSettings.FontVariant;
-                graphic.FontSettings.FontWeight = this.FontSettings.FontWeight;
-
-                _super.prototype._Clone.call(this, graphic);
-
-                return graphic;
-            };
-            return Text2d;
-        })(Graphics.Shape);
-        Graphics.Text2d = Text2d;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
+        (function (JSONFormat) {
+            JSONFormat[JSONFormat["TMX"] = 0] = "TMX";
+        })(MapLoaders.JSONFormat || (MapLoaders.JSONFormat = {}));
+        var JSONFormat = MapLoaders.JSONFormat;
+    })(EndGate.MapLoaders || (EndGate.MapLoaders = {}));
+    var MapLoaders = EndGate.MapLoaders;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../Graphic2d.ts" />
+/// <reference path="../ImageSource.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Sprite2d.ts */
     (function (Graphics) {
         /**
         * Defines a drawable sprite.  Sprites are used to draw images to the game screen.
@@ -7562,301 +7172,62 @@ var EndGate;
                 return graphic;
             };
             return Sprite2d;
-        })(Graphics.Graphic2d);
+        })(EndGate.Graphics.Graphic2d);
         Graphics.Sprite2d = Sprite2d;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Graphics/Graphic2d.ts" />
+/// <reference path="../../Graphics/ImageSource.ts" />
 var EndGate;
 (function (EndGate) {
-    /* SpriteAnimation.ts */
     (function (Graphics) {
         /**
-        * Defines an animation that can be drawn to the screen.
+        * Defines an abstract class TileMap that takes an array of resources to be mapped to tiles.
         */
-        var SpriteAnimation = (function () {
-            function SpriteAnimation(imageSource, fps, frameSize, frameCount, startOffset) {
-                if (typeof startOffset === "undefined") { startOffset = EndGate.Vector2d.Zero; }
-                var _this = this;
-                this._imageSource = imageSource;
-                this._frameSize = frameSize;
-                this._frameCount = frameCount;
-                this._startOffset = startOffset;
-                this._playing = false;
-                this._repeating = false;
-                this._currentFrame = 0;
-                this._lastStepAt = 0;
+        var TileMap = (function (_super) {
+            __extends(TileMap, _super);
+            /**
+            * Creates a new instance of the TileMap object.
+            * @param x Initial horizontal location of the tile map.
+            * @param y Initial vertical location of the tile map.
+            * @param resources A one dimensional array of image resources that make up the tile map (this cannot change after construction).
+            */
+            function TileMap(x, y, resources) {
+                _super.call(this, new EndGate.Vector2d(x, y));
 
-                this._onComplete = new EndGate.EventHandler();
-
-                this.Fps = fps;
-
-                if (imageSource.ClipSize !== null || imageSource.IsLoaded()) {
-                    this._framesPerRow = Math.min(Math.floor((imageSource.Size.Width - startOffset.X) / frameSize.Width), frameCount);
-                    this.UpdateImageSource();
-                } else {
-                    imageSource.OnLoaded.BindFor(function (image) {
-                        _this._framesPerRow = Math.min(Math.floor((imageSource.Size.Width - startOffset.X) / frameSize.Width), frameCount);
-                        _this.UpdateImageSource();
-                    }, 1);
-
-                    this._framesPerRow = 1;
-                }
+                this._Resources = resources;
             }
-            Object.defineProperty(SpriteAnimation.prototype, "OnComplete", {
-                get: /**
-                * Gets an event that is triggered when the animation has completed, will not trigger if the animation is repeating.  Functions can be bound or unbound to this event to be executed when the event triggers.
-                */
-                function () {
-                    return this._onComplete;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(SpriteAnimation.prototype, "Fps", {
-                get: /**
-                * Gets or sets the current frames per second.
-                */
-                function () {
-                    return this._fps;
-                },
-                set: function (newFps) {
-                    this._fps = newFps;
-                    this._stepEvery = 1000 / this._fps;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
             /**
-            * Determines if the animation is currently playing.
+            * Scale is not implemented.
             */
-            SpriteAnimation.prototype.IsPlaying = function () {
-                return this._playing;
+            TileMap.prototype.Scale = function (scale) {
+                throw new Error("Scale is not implemented for TileMaps.");
             };
-
-            /**
-            * Determines if the animation can play.  This is essentially checking if the underlying image source is loaded.
-            */
-            SpriteAnimation.prototype.CanPlay = function () {
-                return this._imageSource.IsLoaded();
-            };
-
-            SpriteAnimation.prototype.Play = function (repeat) {
-                if (typeof repeat === "undefined") { repeat = false; }
-                if (!this._imageSource.ClipSize) {
-                    throw new Error("Image source not loaded yet.");
-                }
-
-                this._lastStepAt = new Date().getTime();
-                this._repeating = repeat;
-                this._playing = true;
-                this.UpdateImageSource();
-            };
-
-            /**
-            * Pauses the animation.
-            */
-            SpriteAnimation.prototype.Pause = function () {
-                this._playing = false;
-            };
-
-            SpriteAnimation.prototype.Step = function (count) {
-                if (typeof count === "undefined") { count = 1; }
-                this._currentFrame += count;
-
-                if (this._currentFrame >= this._frameCount) {
-                    if (this._repeating) {
-                        this._currentFrame %= this._frameCount;
-                    } else {
-                        this._currentFrame = this._frameCount - 1;
-                        this.OnComplete.Trigger();
-                        this.Stop(false);
-                    }
-                }
-
-                if (count !== 0) {
-                    this.UpdateImageSource();
-                }
-            };
-
-            SpriteAnimation.prototype.Stop = function (resetFrame) {
-                if (typeof resetFrame === "undefined") { resetFrame = true; }
-                this._playing = false;
-                if (resetFrame) {
-                    this.Reset();
-                }
-            };
-
-            /**
-            * Resets the current animation frame to 0.
-            */
-            SpriteAnimation.prototype.Reset = function () {
-                this._currentFrame = 0;
-                this.UpdateImageSource();
-            };
-
-            /**
-            * Updates the animations current frame.  Needs to be updated in order to play the animation.
-            * @param gameTime The current game time object.
-            */
-            SpriteAnimation.prototype.Update = function (gameTime) {
-                var timeSinceStep = gameTime.Now.getTime() - this._lastStepAt, stepCount = 0;
-
-                if (this._playing) {
-                    stepCount = Math.floor(timeSinceStep / this._stepEvery);
-                    if (stepCount > 0) {
-                        this._lastStepAt = gameTime.Now.getTime();
-                        this.Step(stepCount);
-                    }
-                }
-            };
-
-            /**
-            * Unbinds all events.  Does not dispose the underlying image source.
-            */
-            SpriteAnimation.prototype.Dispose = function () {
-                this._onComplete.Dispose();
-            };
-
-            SpriteAnimation.prototype.UpdateImageSource = function () {
-                var row = this.GetFrameRow(), column = this.GetFrameColumn();
-
-                this._imageSource.ClipLocation.X = this._startOffset.X + column * this._frameSize.Width;
-                this._imageSource.ClipLocation.Y = this._startOffset.Y + row * this._frameSize.Height;
-                this._imageSource.ClipSize = this._frameSize;
-            };
-
-            SpriteAnimation.prototype.GetFrameRow = function () {
-                return Math.floor(this._currentFrame / this._framesPerRow);
-            };
-
-            SpriteAnimation.prototype.GetFrameColumn = function () {
-                return Math.ceil(this._currentFrame % this._framesPerRow);
-            };
-            return SpriteAnimation;
-        })();
-        Graphics.SpriteAnimation = SpriteAnimation;
+            return TileMap;
+        })(EndGate.Graphics.Graphic2d);
+        Graphics.TileMap = TileMap;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Graphics/Sprites/Sprite2d.ts" />
+/// <reference path="TileMap.ts" />
+/// <reference path="../Graphics/TileMaps/ITileDetails.ts" />
+/// <reference path="IHookFunction.ts" />
+/// <reference path="IMapPreloadInfo.ts" />
+/// <reference path="IPropertyHooks.ts" />
+/// <reference path="../Graphics/TileMaps/TileMap.ts" />
+/// <reference path="ITMXLayer.ts" />
+/// <reference path="ITMXTileset.ts" />
+/// <reference path="../Assets/Sizes/Size2d.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Bounds/BoundingRectangle.ts" />
+/// <reference path="Graphic2d.ts" />
+/// <reference path="Color.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Circle.ts */
-    (function (Graphics) {
-        /**
-        * Defines a drawable circle.
-        */
-        var Circle = (function (_super) {
-            __extends(Circle, _super);
-            function Circle(x, y, radius, color) {
-                _super.call(this, new EndGate.Vector2d(x, y), color);
-                this._type = "Circle";
-
-                this.Radius = radius;
-            }
-            /**
-            * The bounding area that represents where the Circle will draw.
-            */
-            Circle.prototype.GetDrawBounds = function () {
-                var bounds = new EndGate.Bounds.BoundingCircle(this.Position, this.Radius);
-
-                bounds.Rotation = this.Rotation;
-
-                return bounds;
-            };
-
-            /**
-            * Scale's the circle graphic.
-            * @param scale The value to multiply the graphic's size by.
-            */
-            Circle.prototype.Scale = function (scale) {
-                this.Radius *= scale;
-            };
-
-            /**
-            * Returns a nearly identical copy of this Circle.  If this Circle belongs to a parent, the cloned Circle will not. If this Circle has children, all children will be cloned as well.  Lastly, the cloned Circle will not have the same event bindings as this one does.
-            */
-            Circle.prototype.Clone = function () {
-                var graphic = new Circle(this.Position.X, this.Position.Y, this.Radius, this.Color.Clone());
-
-                _super.prototype._Clone.call(this, graphic);
-
-                return graphic;
-            };
-
-            Circle.prototype._BuildPath = function (context) {
-                context.arc(0, 0, this.Radius, 0, (Math).twoPI);
-            };
-            return Circle;
-        })(Graphics.Shape);
-        Graphics.Circle = Circle;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* Rectangle.ts */
-    (function (Graphics) {
-        /**
-        * Defines a drawable rectangle.
-        */
-        var Rectangle = (function (_super) {
-            __extends(Rectangle, _super);
-            function Rectangle(x, y, width, height, color) {
-                _super.call(this, new EndGate.Vector2d(x, y), color);
-                this._type = "Rectangle";
-
-                this.Size = new EndGate.Size2d(width, height);
-            }
-            /**
-            * The bounding area that represents where the Rectangle will draw.
-            */
-            Rectangle.prototype.GetDrawBounds = function () {
-                var bounds = new EndGate.Bounds.BoundingRectangle(this.Position, this.Size);
-
-                bounds.Rotation = this.Rotation;
-
-                return bounds;
-            };
-
-            /**
-            * Scale's the rectangle graphic.
-            * @param scale The value to multiply the graphic's size by.
-            */
-            Rectangle.prototype.Scale = function (scale) {
-                this.Size.Width *= scale;
-                this.Size.Height *= scale;
-            };
-
-            /**
-            * Returns a nearly identical copy of this Rectangle.  If this Rectangle belongs to a parent, the cloned Rectangle will not. If this Rectangle has children, all children will be cloned as well.  Lastly, the cloned Rectangle will not have the same event bindings as this one does.
-            */
-            Rectangle.prototype.Clone = function () {
-                var graphic = new Rectangle(this.Position.X, this.Position.Y, this.Size.Width, this.Size.Height, this.Color.Clone());
-
-                _super.prototype._Clone.call(this, graphic);
-
-                return graphic;
-            };
-
-            Rectangle.prototype._BuildPath = function (context) {
-                context.rect(-this.Size.HalfWidth, -this.Size.HalfHeight, this.Size.Width, this.Size.Height);
-            };
-            return Rectangle;
-        })(Graphics.Shape);
-        Graphics.Rectangle = Rectangle;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* Line2d.ts */
     (function (Graphics) {
         /**
         * Defines a drawable 2d line element.
@@ -7866,7 +7237,7 @@ var EndGate;
             function Line2d(fromX, fromY, toX, toY, lineWidth, color) {
                 if (typeof lineWidth === "undefined") { lineWidth = 1; }
                 var _this = this;
-                _super.call(this, EndGate.Vector2d.Zero);
+                _super.call(this, EndGate.Vector2d.Zero); // Set to zero here then updated in the rest of the constructor (use same logic)
                 this._type = "Line2d";
 
                 this._from = new EndGate.Vector2d(fromX, fromY);
@@ -7880,18 +7251,18 @@ var EndGate;
 
                 if (typeof color !== "undefined") {
                     if (typeof color === "string") {
-                        color = new Graphics.Color(color);
+                        color = new EndGate.Graphics.Color(color);
                     }
                     this.Color = this._strokeStyle = color;
                 } else {
-                    this.Color = this._strokeStyle = Graphics.Color.Black;
+                    this.Color = this._strokeStyle = EndGate.Graphics.Color.Black;
                 }
             }
             Object.defineProperty(Line2d.prototype, "From", {
-                get: /**
+                /**
                 * Gets or sets the From location of the Line2d.
                 */
-                function () {
+                get: function () {
                     return this._from;
                 },
                 set: function (newPosition) {
@@ -7903,10 +7274,10 @@ var EndGate;
             });
 
             Object.defineProperty(Line2d.prototype, "To", {
-                get: /**
+                /**
                 * Gets or sets the To location of the Line2d.
                 */
-                function () {
+                get: function () {
                     return this._to;
                 },
                 set: function (newPosition) {
@@ -7918,15 +7289,15 @@ var EndGate;
             });
 
             Object.defineProperty(Line2d.prototype, "Color", {
-                get: /**
+                /**
                 * Gets or sets the line color.  Valid colors are strings like "red" or "rgb(255,0,0)".
                 */
-                function () {
+                get: function () {
                     return this._strokeStyle;
                 },
                 set: function (color) {
                     if (typeof color === "string") {
-                        color = new Graphics.Color(color);
+                        color = new EndGate.Graphics.Color(color);
                     }
 
                     // Unbind old
@@ -7944,10 +7315,10 @@ var EndGate;
             });
 
             Object.defineProperty(Line2d.prototype, "LineWidth", {
-                get: /**
+                /**
                 * Gets or sets the line width.
                 */
-                function () {
+                get: function () {
                     return this._State.LineWidth;
                 },
                 set: function (width) {
@@ -7958,10 +7329,10 @@ var EndGate;
             });
 
             Object.defineProperty(Line2d.prototype, "LineCap", {
-                get: /**
+                /**
                 * Gets or sets the line cap.  Values can be "butt", "round", "square".
                 */
-                function () {
+                get: function () {
                     return this._State.LineCap;
                 },
                 set: function (cap) {
@@ -7976,12 +7347,15 @@ var EndGate;
             * @param context The canvas context to draw the line onto.
             */
             Line2d.prototype.Draw = function (context) {
+                // Need to check to ensure that the colors still match up so if people are performing direct color manipulation
+                // such as color.R = 131.
                 if (this._strokeStyle.toString() !== this._State.StrokeStyle) {
                     this._State.StrokeStyle = this._strokeStyle.toString();
                 }
 
                 _super.prototype._StartDraw.call(this, context);
 
+                // Check if the user has modified the position directly, if so we need to translate the from and to positions accordingly
                 if (!this._cachedPosition.Equivalent(this.Position)) {
                     this.RefreshCache();
                 }
@@ -8050,15 +7424,18 @@ var EndGate;
                 this._cachedPosition = this.Position.Clone();
             };
             return Line2d;
-        })(Graphics.Graphic2d);
+        })(EndGate.Graphics.Graphic2d);
         Graphics.Line2d = Line2d;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../Graphic2d.ts" />
+/// <reference path="../Color.ts" />
+/// <reference path="../Line2d.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Grid.ts */
     (function (Graphics) {
         /**
         * Defines a drawable grid that can be used to store other graphics in a grid like structure.
@@ -8067,7 +7444,7 @@ var EndGate;
             __extends(Grid, _super);
             function Grid(x, y, rows, columns, tileWidth, tileHeight, drawGridLines, gridLineColor) {
                 if (typeof drawGridLines === "undefined") { drawGridLines = false; }
-                if (typeof gridLineColor === "undefined") { gridLineColor = new Graphics.Color("gray"); }
+                if (typeof gridLineColor === "undefined") { gridLineColor = new EndGate.Graphics.Color("gray"); }
                 _super.call(this, new EndGate.Vector2d(x, y));
                 this._type = "Grid";
 
@@ -8089,10 +7466,10 @@ var EndGate;
                 }
             }
             Object.defineProperty(Grid.prototype, "DrawGridLines", {
-                get: /**
+                /**
                 * Gets or sets the DrawGridLines property.  Indicates whether the grids column and row lines will be drawn.
                 */
-                function () {
+                get: function () {
                     return this._drawGridLines;
                 },
                 set: function (shouldDraw) {
@@ -8107,15 +7484,15 @@ var EndGate;
             });
 
             Object.defineProperty(Grid.prototype, "GridLineColor", {
-                get: /**
+                /**
                 * Gets or sets the current grid line color.  Grid lines are only drawn of DrawGridLines is set to true.  Valid colors are strings like "red" or "rgb(255,0,0)".
                 */
-                function () {
+                get: function () {
                     return this._gridLineColor;
                 },
                 set: function (color) {
                     if (typeof color === "string") {
-                        color = new Graphics.Color(color);
+                        color = new EndGate.Graphics.Color(color);
                     }
                     this._gridLineColor = color;
 
@@ -8128,10 +7505,10 @@ var EndGate;
             });
 
             Object.defineProperty(Grid.prototype, "Size", {
-                get: /**
+                /**
                 * Gets the size of the grid.
                 */
-                function () {
+                get: function () {
                     return this._size.Clone();
                 },
                 enumerable: true,
@@ -8139,10 +7516,10 @@ var EndGate;
             });
 
             Object.defineProperty(Grid.prototype, "TileSize", {
-                get: /**
+                /**
                 * Gets the size of the tiles.
                 */
-                function () {
+                get: function () {
                     return this._tileSize.Clone();
                 },
                 enumerable: true,
@@ -8150,10 +7527,10 @@ var EndGate;
             });
 
             Object.defineProperty(Grid.prototype, "Rows", {
-                get: /**
+                /**
                 * Gets the number of rows.
                 */
-                function () {
+                get: function () {
                     return this._rows;
                 },
                 enumerable: true,
@@ -8161,10 +7538,10 @@ var EndGate;
             });
 
             Object.defineProperty(Grid.prototype, "Columns", {
-                get: /**
+                /**
                 * Gets the number of columns.
                 */
-                function () {
+                get: function () {
                     return this._columns;
                 },
                 enumerable: true,
@@ -8450,17 +7827,17 @@ var EndGate;
                 var halfSize = this._size.Multiply(.5), topLeft = new EndGate.Vector2d(-halfSize.Width, -halfSize.Height), bottomRight = new EndGate.Vector2d(halfSize.Width, halfSize.Height);
 
                 for (var i = 0; i < this._rows; i++) {
-                    this._gridLines.push(new Graphics.Line2d(topLeft.X, topLeft.Y + i * this._tileSize.Height, bottomRight.X, topLeft.Y + i * this._tileSize.Height, 1, this._gridLineColor));
+                    this._gridLines.push(new EndGate.Graphics.Line2d(topLeft.X, topLeft.Y + i * this._tileSize.Height, bottomRight.X, topLeft.Y + i * this._tileSize.Height, 1, this._gridLineColor));
 
                     if (i === 0) {
                         for (var j = 0; j < this._columns; j++) {
-                            this._gridLines.push(new Graphics.Line2d(topLeft.X + j * this._tileSize.Width, topLeft.Y, topLeft.X + j * this._tileSize.Width, bottomRight.Y, 1, this._gridLineColor));
+                            this._gridLines.push(new EndGate.Graphics.Line2d(topLeft.X + j * this._tileSize.Width, topLeft.Y, topLeft.X + j * this._tileSize.Width, bottomRight.Y, 1, this._gridLineColor));
                         }
                     }
                 }
 
-                this._gridLines.push(new Graphics.Line2d(topLeft.X, bottomRight.Y, bottomRight.X, bottomRight.Y, 1));
-                this._gridLines.push(new Graphics.Line2d(bottomRight.X, topLeft.Y, bottomRight.X, bottomRight.Y, 1));
+                this._gridLines.push(new EndGate.Graphics.Line2d(topLeft.X, bottomRight.Y, bottomRight.X, bottomRight.Y, 1));
+                this._gridLines.push(new EndGate.Graphics.Line2d(bottomRight.X, topLeft.Y, bottomRight.X, bottomRight.Y, 1));
             };
 
             Grid.prototype.GetInsideGridPosition = function (row, column) {
@@ -8475,235 +7852,16 @@ var EndGate;
                 return column >= 0 && column < this._columns;
             };
             return Grid;
-        })(Graphics.Graphic2d);
+        })(EndGate.Graphics.Graphic2d);
         Graphics.Grid = Grid;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
-/* Matrix2x2.ts */
-var EndGate;
-(function (EndGate) {
-    /**
-    * Defines a matrix with 2 columns and 2 rows (2x2).
-    */
-    var Matrix2x2 = (function () {
-        function Matrix2x2(topLeft, topRight, botLeft, botRight) {
-            if (typeof topLeft === "undefined") { topLeft = 0; }
-            if (typeof topRight === "undefined") { topRight = 0; }
-            if (typeof botLeft === "undefined") { botLeft = 0; }
-            if (typeof botRight === "undefined") { botRight = 0; }
-            this._type = "Matrix2x2";
-            this.Values = [
-                [topLeft, topRight],
-                [botLeft, botRight]
-            ];
-        }
-        Object.defineProperty(Matrix2x2, "Zero", {
-            get: /**
-            * Creates a Matrix2x2 with all its rows and columns initialized to 0.
-            */
-            function () {
-                return new Matrix2x2();
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-        Object.defineProperty(Matrix2x2, "Identity", {
-            get: /**
-            * Returns the identity matrix for a 2x2.
-            */
-            function () {
-                return new Matrix2x2(1, 0, 0, 1);
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-        /**
-        * Executes the action with each row and column item of this Matrix2x2 and modifies their values.
-        * @param action The function used to modify each row and column items.
-        */
-        Matrix2x2.prototype.Apply = function (action) {
-            this.Values[0][0] = action(this.Values[0][0]);
-            this.Values[0][1] = action(this.Values[0][1]);
-            this.Values[1][0] = action(this.Values[1][0]);
-            this.Values[1][1] = action(this.Values[1][1]);
-        };
-
-        /**
-        * Executes the action with each row and column item of this Matrix2x2.
-        * @param action The function to pass the row column item to.
-        */
-        Matrix2x2.prototype.Trigger = function (action) {
-            action(this.Values[0][0]);
-            action(this.Values[0][1]);
-            action(this.Values[1][0]);
-            action(this.Values[1][1]);
-        };
-
-        Matrix2x2.prototype.Add = function (val) {
-            if (val._type === "Matrix2x2") {
-                return new Matrix2x2(this.Values[0][0] + val.Values[0][0], this.Values[0][1] + val.Values[0][1], this.Values[1][0] + val.Values[1][0], this.Values[1][1] + val.Values[1][1]);
-            } else {
-                return new Matrix2x2(this.Values[0][0] + val, this.Values[0][1] + val, this.Values[1][0] + val, this.Values[1][1] + val);
-            }
-        };
-
-        Matrix2x2.prototype.Multiply = function (val) {
-            if (val._type === "Matrix2x2") {
-                return new Matrix2x2(this.Values[0][0] * val.Values[0][0] + this.Values[0][1] * val.Values[1][0], this.Values[0][0] * val.Values[0][1] + this.Values[0][1] * val.Values[1][1], this.Values[1][0] * val.Values[0][0] + this.Values[1][1] * val.Values[1][0], this.Values[1][0] * val.Values[0][1] + this.Values[1][1] * val.Values[1][1]);
-            } else {
-                return new Matrix2x2(this.Values[0][0] * val, this.Values[0][1] * val, this.Values[1][0] * val, this.Values[1][1] * val);
-            }
-        };
-
-        Matrix2x2.prototype.Subtract = function (val) {
-            if (val._type === "Matrix2x2") {
-                return new Matrix2x2(this.Values[0][0] - val.Values[0][0], this.Values[0][1] - val.Values[0][1], this.Values[1][0] - val.Values[1][0], this.Values[1][1] - val.Values[1][1]);
-            } else {
-                return new Matrix2x2(this.Values[0][0] - val, this.Values[0][1] - val, this.Values[1][0] - val, this.Values[1][1] - val);
-            }
-        };
-
-        Matrix2x2.prototype.SubtractFrom = function (val) {
-            if (val._type === "Matrix2x2") {
-                return new Matrix2x2(val.Values[0][0] - this.Values[0][0], val.Values[0][1] - this.Values[0][1], val.Values[1][0] - this.Values[1][0], val.Values[1][1] - this.Values[1][1]);
-            } else {
-                return new Matrix2x2(val - this.Values[0][0], val - this.Values[0][1], val - this.Values[1][0], val - this.Values[1][1]);
-            }
-        };
-
-        Matrix2x2.prototype.Divide = function (val) {
-            if (val._type === "Matrix2x2") {
-                return new Matrix2x2(this.Values[0][0] / val.Values[0][0], this.Values[0][1] / val.Values[0][1], this.Values[1][0] / val.Values[1][0], this.Values[1][1] / val.Values[1][1]);
-            } else {
-                return new Matrix2x2(this.Values[0][0] / val, this.Values[0][1] / val, this.Values[1][0] / val, this.Values[1][1] / val);
-            }
-        };
-
-        Matrix2x2.prototype.DivideFrom = function (val) {
-            if (val._type === "Matrix2x2") {
-                return new Matrix2x2(val.Values[0][0] / this.Values[0][0], val.Values[0][1] / this.Values[0][1], val.Values[1][0] / this.Values[1][0], val.Values[1][1] / this.Values[1][1]);
-            } else {
-                return new Matrix2x2(val / this.Values[0][0], val / this.Values[0][1], val / this.Values[1][0], val / this.Values[1][1]);
-            }
-        };
-
-        /**
-        * Returns a Vector2d that has been transformed by the current Matrix2x2.
-        * @param vector The vector to transform.
-        */
-        Matrix2x2.prototype.Transform = function (vector) {
-            return new EndGate.Vector2d(this.Values[0][0] * vector.X + this.Values[0][1] * vector.Y, this.Values[1][0] * vector.X + this.Values[1][1] * vector.Y);
-        };
-
-        /**
-        * Returns the transpose of the current Matrix2x2.
-        */
-        Matrix2x2.prototype.Transpose = function () {
-            return new Matrix2x2(this.Values[0][0], this.Values[1][0], this.Values[0][1], this.Values[1][1]);
-        };
-
-        /**
-        * Returns the determinant of the current Matrix2x2.
-        */
-        Matrix2x2.prototype.Determinant = function () {
-            return this.Values[0][0] * this.Values[1][1] - this.Values[0][1] * this.Values[1][0];
-        };
-
-        /**
-        * Returns the inverse of the current Matrix2x2.
-        */
-        Matrix2x2.prototype.Inverse = function () {
-            return new Matrix2x2(this.Values[1][1], -this.Values[0][1], -this.Values[1][0], this.Values[0][0]).Multiply(1 / this.Determinant());
-        };
-
-        /**
-        * Returns a Matrix2x2 that has identical rows and columns as the current Matrix2x2.
-        */
-        Matrix2x2.prototype.Clone = function () {
-            return new Matrix2x2(this.Values[0][0], this.Values[0][1], this.Values[1][0], this.Values[1][1]);
-        };
-
-        /**
-        * Determines whether this Matrix2x2 has the same row and column values as the provided Matrix2x2.
-        * @param matrix The Matrix2x2 to compare the current Matrix2x2 to.
-        */
-        Matrix2x2.prototype.Equivalent = function (matrix) {
-            return this.Values[0][0] === matrix.Values[0][0] && this.Values[0][1] === matrix.Values[0][1] && this.Values[1][0] === matrix.Values[1][0] && this.Values[1][1] === matrix.Values[1][1];
-        };
-
-        /**
-        * Overridden toString method to display Matrix2x2 in easy to read format: "[topLeft, topRight] [botLeft, botRight]"
-        */
-        Matrix2x2.prototype.toString = function () {
-            return this.Values[0].toString() + " " + this.Values[1].toString();
-        };
-
-        Matrix2x2.Scale = /**
-        * Creates a scaling matrix based off the provided Vector2d.
-        * @param vector The vector used to determine the X and Y scaling values.
-        */
-        function (vector) {
-            return new Matrix2x2(vector.X, 0, 0, vector.Y);
-        };
-        return Matrix2x2;
-    })();
-    EndGate.Matrix2x2 = Matrix2x2;
-})(EndGate || (EndGate = {}));
-
-/* Helpers.ts */
-function asyncLoop(action, count, onComplete) {
-    ((function loop(index) {
-        if (index < count) {
-            action(function () {
-                loop(index + 1);
-            }, index);
-        } else if (onComplete) {
-            onComplete();
-        }
-    })(0));
-}
-
-var EndGate;
-(function (EndGate) {
-    /* TileMap.ts */
-    (function (Graphics) {
-        /**
-        * Defines an abstract class TileMap that takes an array of resources to be mapped to tiles.
-        */
-        var TileMap = (function (_super) {
-            __extends(TileMap, _super);
-            /**
-            * Creates a new instance of the TileMap object.
-            * @param x Initial horizontal location of the tile map.
-            * @param y Initial vertical location of the tile map.
-            * @param resources A one dimensional array of image resources that make up the tile map (this cannot change after construction).
-            */
-            function TileMap(x, y, resources) {
-                _super.call(this, new EndGate.Vector2d(x, y));
-
-                this._Resources = resources;
-            }
-            /**
-            * Scale is not implemented.
-            */
-            TileMap.prototype.Scale = function (scale) {
-                throw new Error("Scale is not implemented for TileMaps.");
-            };
-            return TileMap;
-        })(EndGate.Graphics.Graphic2d);
-        Graphics.TileMap = TileMap;
-    })(EndGate.Graphics || (EndGate.Graphics = {}));
-    var Graphics = EndGate.Graphics;
-})(EndGate || (EndGate = {}));
-
+/// <reference path="../../Graphics/ImageSource.ts" />
+/// <reference path="../../Graphics/Sprites/Sprite2d.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Graphics) {
-        /* SquareTile.ts */
         (function (Assets) {
             /**
             * Defines a SquareTile that is used by the SquareTileMap.  Represents one tile within the tile map.
@@ -8717,7 +7875,7 @@ var EndGate;
                 * @param height The height of the tile.
                 */
                 function SquareTile(image, width, height) {
-                    _super.call(this, 0, 0, image, width, height);
+                    _super.call(this, 0, 0, image, width, height); // Set position to 0 because the tile gets updated when it gets added to the tile map
                 }
                 return SquareTile;
             })(EndGate.Graphics.Sprite2d);
@@ -8727,10 +7885,18 @@ var EndGate;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../../Assets/TimeSpan.ts" />
+/// <reference path="../../Graphics/ImageSource.ts" />
+/// <reference path="../../Graphics/Grid/Grid.ts" />
+/// <reference path="../../Utilities/EventHandler2.ts" />
+/// <reference path="../../Utilities/EventHandler.ts" />
+/// <reference path="../../Extensions/Helpers.ts" />
+/// <reference path="ITileDetails.ts" />
+/// <reference path="TileMap.ts" />
+/// <reference path="SquareTile.ts" />
 var EndGate;
 (function (EndGate) {
-    /* SquareTileMap.ts */
     (function (Graphics) {
         /**
         * Defines a structure that is proficient at creating diverse tile maps based off of a resource image.  Best drawn via a SceneryHandler.
@@ -8767,10 +7933,10 @@ var EndGate;
                 }, 0);
             }
             Object.defineProperty(SquareTileMap.prototype, "OnTileLoad", {
-                get: /**
+                /**
                 * Gets an event that is triggered when a tile has been loaded, first argument is the tile details for the loaded tile, second is the percent complete.  Once this SquareTileMap has been created and all tiles loaded this event will no longer be triggered. Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onTileLoad;
                 },
                 enumerable: true,
@@ -8778,23 +7944,23 @@ var EndGate;
             });
 
             Object.defineProperty(SquareTileMap.prototype, "OnLoaded", {
-                get: /**
+                /**
                 * Gets an event that is triggered when the square tile map has been loaded.  Once this SquareTileMap has been created and all tiles loaded this event will no longer be triggered. Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onLoaded;
                 },
                 enumerable: true,
                 configurable: true
             });
 
-            SquareTileMap.ExtractTiles = /**
+            /**
             * Helper function used to take a SpriteSheet image and create a one dimensional resource tile array.
             * @param imageSource The sprite sheet to extract the tile resources from.
             * @param tileWidth The width of the sprite sheet tiles.
             * @param tileHeight The height of the sprite sheet tiles.
             */
-            function (imageSource, tileWidth, tileHeight) {
+            SquareTileMap.ExtractTiles = function (imageSource, tileWidth, tileHeight) {
                 var resources = [], framesPerRow = Math.floor(imageSource.ClipSize.Width / tileWidth), rows = Math.floor(imageSource.ClipSize.Height / tileHeight);
 
                 for (var i = 0; i < rows; i++) {
@@ -8898,7 +8064,7 @@ var EndGate;
                 var action = function () {
                     var tile, tileGraphic = _this._Resources[resourceIndex];
 
-                    tile = new Graphics.Assets.SquareTile(tileGraphic, _this._grid.TileSize.Width, _this._grid.TileSize.Height);
+                    tile = new EndGate.Graphics.Assets.SquareTile(tileGraphic, _this._grid.TileSize.Width, _this._grid.TileSize.Height);
 
                     _this._grid.Fill(row, column, tile);
 
@@ -8944,41 +8110,27 @@ var EndGate;
                 }, this.RowLoadDelay.Milliseconds);
             };
             return SquareTileMap;
-        })(Graphics.TileMap);
+        })(EndGate.Graphics.TileMap);
         Graphics.SquareTileMap = SquareTileMap;
     })(EndGate.Graphics || (EndGate.Graphics = {}));
     var Graphics = EndGate.Graphics;
 })(EndGate || (EndGate = {}));
-
-/* EndGateAPI.ts */
-// When this file is compiled into a declaration file it does not include this line,
-// therefore in the build.ps1 we have to append this aliasing module.
-var eg = EndGate;
-
-Number.prototype.Clone = function () {
-    return this;
-};
-
-var EndGate;
-(function (EndGate) {
-    /* JSONFormat.ts */
-    (function (MapLoaders) {
-        /**
-        * Defines supported JSON formats for map loading.
-        */
-        (function (JSONFormat) {
-            JSONFormat[JSONFormat["TMX"] = 0] = "TMX";
-        })(MapLoaders.JSONFormat || (MapLoaders.JSONFormat = {}));
-        var JSONFormat = MapLoaders.JSONFormat;
-    })(EndGate.MapLoaders || (EndGate.MapLoaders = {}));
-    var MapLoaders = EndGate.MapLoaders;
-})(EndGate || (EndGate = {}));
-
+/// <reference path="../../../Graphics/ImageSource.ts" />
+/// <reference path="../../IMapLoader.ts" />
+/// <reference path="../../IMapLoadedResult.ts" />
+/// <reference path="../../IMapPreloadInfo.ts" />
+/// <reference path="../../IHookFunction.ts" />
+/// <reference path="../../../Graphics/TileMaps/SquareTileMap.ts" />
+/// <reference path="../../../Graphics/TileMaps/ITileDetails.ts" />
+/// <reference path="../../../Assets/TimeSpan.ts" />
+/// <reference path="../../../Extensions/Helpers.ts" />
+/// <reference path="../../../Utilities/EventHandler1.ts" />
+/// <reference path="ITMX.ts" />
+/// <reference path="ITMXTileset.ts" />
 var EndGate;
 (function (EndGate) {
     (function (MapLoaders) {
         (function (_) {
-            /* OrthogonalLoader.ts */
             (function (TMX) {
                 var OrthogonalLoader = (function () {
                     function OrthogonalLoader() {
@@ -9040,6 +8192,7 @@ var EndGate;
                         var tilesetSources = {}, loadedCount = 0, onLoaded = function (source) {
                             onTilesetLoad(source);
 
+                            // If everything has loaded
                             if (++loadedCount === tilesets.length) {
                                 onComplete(tilesetSources);
                             }
@@ -9168,17 +8321,20 @@ var EndGate;
     })(EndGate.MapLoaders || (EndGate.MapLoaders = {}));
     var MapLoaders = EndGate.MapLoaders;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../../IMapLoader.ts" />
+/// <reference path="../../IMapLoadedResult.ts" />
+/// <reference path="../../IMapPreloadInfo.ts" />
+/// <reference path="ITMX.ts" />
+/// <reference path="OrthogonalLoader.ts" />
 var EndGate;
 (function (EndGate) {
     (function (MapLoaders) {
         (function (_) {
-            /* TMXLoader.ts */
             (function (TMX) {
                 var TMXLoader = (function () {
                     function TMXLoader() {
                         this._orientationLoaders = {
-                            orthogonal: new TMX.OrthogonalLoader()
+                            orthogonal: new EndGate.MapLoaders._.TMX.OrthogonalLoader()
                         };
                     }
                     TMXLoader.prototype.Load = function (data, propertyHooks, onComplete) {
@@ -9198,10 +8354,14 @@ var EndGate;
     })(EndGate.MapLoaders || (EndGate.MapLoaders = {}));
     var MapLoaders = EndGate.MapLoaders;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="JSONFormat.ts" />
+/// <reference path="TMX/TMXLoader.ts" />
+/// <reference path="../IMapLoader.ts" />
+/// <reference path="../IMapPreloadInfo.ts" />
+/// <reference path="../IMapLoadedResult.ts" />
+/// <reference path="../IPropertyHooks.ts" />
 var EndGate;
 (function (EndGate) {
-    /* JSONLoader.ts */
     (function (MapLoaders) {
         /**
         * Defines a JSON loader that is used to load maps.
@@ -9210,7 +8370,7 @@ var EndGate;
             function JSONLoader() {
             }
             JSONLoader.Load = function (json, onComplete, propertyHooks, format) {
-                if (typeof format === "undefined") { format = MapLoaders.JSONFormat.TMX; }
+                if (typeof format === "undefined") { format = 0 /* TMX */; }
                 if (!propertyHooks) {
                     // Defaults
                     propertyHooks = {
@@ -9220,10 +8380,10 @@ var EndGate;
                     };
                 }
 
-                return JSONLoader._loaders[MapLoaders.JSONFormat[format]].Load(json, propertyHooks, onComplete);
+                return JSONLoader._loaders[EndGate.MapLoaders.JSONFormat[format]].Load(json, propertyHooks, onComplete);
             };
             JSONLoader._loaders = {
-                TMX: new MapLoaders._.TMX.TMXLoader()
+                TMX: new EndGate.MapLoaders._.TMX.TMXLoader()
             };
             return JSONLoader;
         })();
@@ -9231,10 +8391,10 @@ var EndGate;
     })(EndGate.MapLoaders || (EndGate.MapLoaders = {}));
     var MapLoaders = EndGate.MapLoaders;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/ICloneable.ts" />
+/// <reference path="../Assets/TimeSpan.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Range.ts */
     (function (Particles) {
         /**
         * Defines a range that is used to describe a range of values.
@@ -9252,19 +8412,19 @@ var EndGate;
                 return new Range(this.Min, this.Max);
             };
 
-            Range.RandomNumber = /**
+            /**
             * Returns a random number between range.Min and range.Max.
             * @param range The range used to bound the number value.
             */
-            function (range) {
+            Range.RandomNumber = function (range) {
                 return Math.random() * (range.Max - range.Min) + range.Min;
             };
 
-            Range.RandomTimeSpan = /**
+            /**
             * Returns a random TimeSpan between range.Min and range.Max.
             * @param range The range used to bound the TimeSpan value.
             */
-            function (range) {
+            Range.RandomTimeSpan = function (range) {
                 return EndGate.TimeSpan.FromMilliseconds(Math.floor(Math.random() * (range.Max.Milliseconds - range.Min.Milliseconds + 1) + range.Min.Milliseconds));
             };
             return Range;
@@ -9273,272 +8433,10 @@ var EndGate;
     })(EndGate.Particles || (EndGate.Particles = {}));
     var Particles = EndGate.Particles;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="Tween.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
 var EndGate;
 (function (EndGate) {
-    (function (Tweening) {
-        /* Linear.ts */
-        (function (Functions) {
-            /**
-            * Defines a Linear tweening function that has an EaseNone function that can be used with Tween's.
-            */
-            var Linear = (function () {
-                function Linear() {
-                }
-                Object.defineProperty(Linear, "EaseNone", {
-                    get: /**
-                    * Gets the Linear EaseNone function.
-                    */
-                    function () {
-                        return Linear._easeNone;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-                Linear._easeNone = function (from, to, elapsed, duration) {
-                    var change = to - from;
-
-                    return change * elapsed.Milliseconds / duration.Milliseconds + from;
-                };
-                return Linear;
-            })();
-            Functions.Linear = Linear;
-        })(Tweening.Functions || (Tweening.Functions = {}));
-        var Functions = Tweening.Functions;
-    })(EndGate.Tweening || (EndGate.Tweening = {}));
-    var Tweening = EndGate.Tweening;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* Tween.ts */
-    (function (Tweening) {
-        /**
-        * Defines a base Tween class that is used to move a value from a start value to an end value.
-        */
-        var Tween = (function () {
-            /**
-            * Creates a new instance of the Tween object.  This should only ever be called from derived classes via a super constructor call.
-            * @param from Start value.
-            * @param to End value.
-            * @param duration How fast to move the current value from start to end.
-            * @param tweeningFunction The function to use to translate the current value from start to end.  Different functions result in different translation behavior.
-            */
-            function Tween(from, to, duration, tweeningFunction) {
-                this._from = from.Clone();
-                this._to = to.Clone();
-                this._current = this._from.Clone();
-                this._duration = duration;
-                this._elapsed = EndGate.TimeSpan.Zero;
-                this._playing = false;
-                this._onChange = new EndGate.EventHandler1();
-                this._onComplete = new EndGate.EventHandler1();
-                this._tweeningFunction = tweeningFunction;
-            }
-            Object.defineProperty(Tween.prototype, "OnChange", {
-                get: /**
-                * Gets an event that is triggered when the tween has changed its Current value, occurs directly after a tween update.  Functions can be bound or unbound to this event to be executed when the event triggers.
-                */
-                function () {
-                    return this._onChange;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Tween.prototype, "OnComplete", {
-                get: /**
-                * Gets an event that is triggered when the tween has completed transitioning the Current value, once triggered Elapsed will be equivalent to Duration and Current will be equivalent to To.  Functions can be bound or unbound to this event to be executed when the event triggers.
-                */
-                function () {
-                    return this._onComplete;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Tween.prototype, "From", {
-                get: /**
-                * Gets or sets the From component of the tween.
-                */
-                function () {
-                    return this._from;
-                },
-                set: function (from) {
-                    this._from = from;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Tween.prototype, "To", {
-                get: /**
-                * Gets or sets the To component of the tween.
-                */
-                function () {
-                    return this._to;
-                },
-                set: function (to) {
-                    this._to = to;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Tween.prototype, "Current", {
-                get: /**
-                * Gets or sets the Current component of the tween.  The Current is the current value of the tween, the final value of Current will be equivalent to To when the tween has completed.
-                */
-                function () {
-                    return this._current;
-                },
-                set: function (current) {
-                    this._current = current;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Tween.prototype, "Duration", {
-                get: /**
-                * Gets or sets the Duration component of the tween.  The Duration is how long the tween will take to go From -> To.
-                */
-                function () {
-                    return this._duration;
-                },
-                set: function (duration) {
-                    this._duration = duration;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Tween.prototype, "Elapsed", {
-                get: /**
-                * Gets or the Elapsed component of the tween.  Elapsed represents how far along the tween is.  When Elapsed equals Duration the tween is completed.
-                */
-                function () {
-                    return this._elapsed.Clone();
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(Tween.prototype, "TweeningFunction", {
-                get: /**
-                * Gets or sets the TweeningFunction of the tween.  The TweeningFunction controls how the tween translates the Current value to the To value.
-                */
-                function () {
-                    return this._tweeningFunction;
-                },
-                set: function (fn) {
-                    this._tweeningFunction = fn;
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            /**
-            * Determines if the tween is playing.
-            */
-            Tween.prototype.IsPlaying = function () {
-                return this._playing;
-            };
-
-            /**
-            * Starts playing the tween.  The tween will only start translating the value if Update is called.
-            */
-            Tween.prototype.Play = function () {
-                this._playing = true;
-            };
-
-            /**
-            * Pauses the tween.  Calls to update will not translate the tween when paused.
-            */
-            Tween.prototype.Pause = function () {
-                this._playing = false;
-            };
-
-            /**
-            * Resets the tween to the To location and resets the Elapsed time.  This does not stop or start the tween.
-            */
-            Tween.prototype.Reset = function () {
-                this._elapsed.Milliseconds = 0;
-                this._current = this._from.Clone();
-            };
-
-            /**
-            * Stops the tween from playing.  This also resets the tween to its To value.
-            */
-            Tween.prototype.Stop = function () {
-                this._playing = false;
-                this.Reset();
-            };
-
-            /**
-            * Restarts the tween.  Essentially calls Reset and then Play.
-            */
-            Tween.prototype.Restart = function () {
-                this.Reset();
-                this.Play();
-            };
-
-            /**
-            * Reverses the tween from the Current value back to the From value.  This changes the To component to equal the From value and the From value to equal the Current value.
-            */
-            Tween.prototype.Reverse = function () {
-                this._elapsed = EndGate.TimeSpan.Zero;
-                this._to = this._from;
-                this._from = this.Current.Clone();
-            };
-
-            /**
-            * Updates the tweens Current and Elapsed component if the tween is playing.
-            * @param gameTime The global game time object.  Used to represent total time running and used to track update interval elapsed speeds.
-            */
-            Tween.prototype.Update = function (gameTime) {
-                if (!this._playing) {
-                    return;
-                }
-
-                this._elapsed = this._elapsed.Add(gameTime.Elapsed);
-
-                if (this._elapsed.Milliseconds >= this._duration.Milliseconds) {
-                    this._elapsed = this._duration.Clone();
-
-                    this._current = this._to.Clone();
-                    this._playing = false;
-
-                    this._onChange.Trigger(this._current.Clone());
-                    this._onComplete.Trigger(this);
-                } else {
-                    this._UpdateTween();
-                    this._onChange.Trigger(this._current.Clone());
-                }
-            };
-
-            /**
-            * Stops and unbinds all events from the tween.
-            */
-            Tween.prototype.Dispose = function () {
-                this.Stop();
-                this._onChange.Dispose();
-                this._onComplete.Dispose();
-            };
-
-            Tween.prototype._UpdateTween = function () {
-                // This should be overridden
-            };
-            return Tween;
-        })();
-        Tweening.Tween = Tween;
-    })(EndGate.Tweening || (EndGate.Tweening = {}));
-    var Tweening = EndGate.Tweening;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* Vector2dTween.ts */
     (function (Tweening) {
         /**
         * Defines a Vector2dTween class that is used to move a Vector2d from a start value to an end value.
@@ -9559,15 +8457,15 @@ var EndGate;
                 this.Current = new EndGate.Vector2d(this.TweeningFunction(this.From.X, this.To.X, this.Elapsed, this.Duration), this.TweeningFunction(this.From.Y, this.To.Y, this.Elapsed, this.Duration));
             };
             return Vector2dTween;
-        })(Tweening.Tween);
+        })(EndGate.Tweening.Tween);
         Tweening.Vector2dTween = Vector2dTween;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="Tween.ts" />
+/// <reference path="../Extensions/NumberExtensions.ts" />
 var EndGate;
 (function (EndGate) {
-    /* NumberTween.ts */
     (function (Tweening) {
         /**
         * Defines a NumberTween class that is used to move a number from a start value to an end value.
@@ -9588,15 +8486,23 @@ var EndGate;
                 this.Current = this.TweeningFunction(this.From, this.To, this.Elapsed, this.Duration);
             };
             return NumberTween;
-        })(Tweening.Tween);
+        })(EndGate.Tweening.Tween);
         Tweening.NumberTween = NumberTween;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="../Interfaces/IUpdateable.ts" />
+/// <reference path="../Graphics/Graphic2d.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Assets/TimeSpan.ts" />
+/// <reference path="../Tweening/Functions/ITweeningFunction.ts" />
+/// <reference path="../Tweening/Functions/Linear.ts" />
+/// <reference path="../Tweening/Vector2dTween.ts" />
+/// <reference path="../Tweening/NumberTween.ts" />
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="../GameTime.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Particle.ts */
     (function (Particles) {
         /**
         * Defines a particle that abides by several configured values.
@@ -9638,10 +8544,10 @@ var EndGate;
                 this._fadeTween.Play();
             }
             Object.defineProperty(Particle.prototype, "Texture", {
-                get: /**
+                /**
                 * Gets the particles texture.
                 */
-                function () {
+                get: function () {
                     return this._texture;
                 },
                 enumerable: true,
@@ -9649,10 +8555,10 @@ var EndGate;
             });
 
             Object.defineProperty(Particle.prototype, "OnDeath", {
-                get: /**
+                /**
                 * Gets an event that is triggered when the particle dies.  Functions can be bound or unbound to this event to be executed when the event triggers.
                 */
-                function () {
+                get: function () {
                     return this._onDeath;
                 },
                 enumerable: true,
@@ -9703,10 +8609,17 @@ var EndGate;
     })(EndGate.Particles || (EndGate.Particles = {}));
     var Particles = EndGate.Particles;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="Range.ts" />
+/// <reference path="Particle.ts" />
+/// <reference path="../Graphics/Graphic2d.ts" />
+/// <reference path="../Assets/TimeSpan.ts" />
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Extensions/MathExtensions.ts" />
+/// <reference path="../Interfaces/IUpdateable.ts" />
+/// <reference path="../Interfaces/ICloneable.ts" />
+/// <reference path="../Tweening/Functions/ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
-    /* Emitter.ts */
     (function (Particles) {
         /**
         * Defines a particle emitter that can emit particles based on various configurations.
@@ -9725,47 +8638,47 @@ var EndGate;
                 /**
                 * Gets or sets the EmissionInterval.  The EmissionInterval is used to control how often particles are emitted.
                 */
-                this.EmissionInterval = new Particles.Range(EndGate.TimeSpan.FromMilliseconds(30));
+                this.EmissionInterval = new EndGate.Particles.Range(EndGate.TimeSpan.FromMilliseconds(30));
                 /**
                 * Gets or sets the EmissionDirection.  The EmissionDirection is used to control the angle of particle emissions.  This angle value should be in radians.
                 */
-                this.EmissionDirection = new Particles.Range(0, Math.PI * 2);
+                this.EmissionDirection = new EndGate.Particles.Range(0, Math.PI * 2);
                 /**
                 * Gets or sets the EmissionOutput.  The EmissionOutput is used to control how many particles should be emitted per emission.
                 */
-                this.EmissionOutput = new Particles.Range(1);
+                this.EmissionOutput = new EndGate.Particles.Range(1);
                 /**
                 * Gets or sets the ParticleLifetime.  The ParticleLifetime is used to control how long particles live before dying out.
                 */
-                this.ParticleLifetime = new Particles.Range(EndGate.TimeSpan.FromSeconds(1), EndGate.TimeSpan.FromSeconds(3));
+                this.ParticleLifetime = new EndGate.Particles.Range(EndGate.TimeSpan.FromSeconds(1), EndGate.TimeSpan.FromSeconds(3));
                 /**
                 * Gets or sets the ParticleSpeed.  The ParticleSpeed is used to control the average speed that emitted particles will move at during their lifetime.
                 */
-                this.ParticleSpeed = new Particles.Range(30, 100);
+                this.ParticleSpeed = new EndGate.Particles.Range(30, 100);
                 /**
                 * Gets or sets the ParticleScale.  The ParticleScale is used to control each particles size.  Values are percentages of particles base sizes.
                 */
-                this.ParticleScale = new Particles.Range(.75, 1.5);
+                this.ParticleScale = new EndGate.Particles.Range(.75, 1.5);
                 /**
                 * Gets or sets the ParticleRotation.  The ParticleRotation is used to control the initial rotation of emitted particles.
                 */
-                this.ParticleRotation = new Particles.Range(0, Math.PI * 2);
+                this.ParticleRotation = new EndGate.Particles.Range(0, Math.PI * 2);
                 /**
                 * Gets or sets the ParticleRotationSpeed.  The ParticleRotationSpeed is used to control how quickly emitted particles rotate.  Values should indicate X number of radians per second.
                 */
-                this.ParticleRotationSpeed = new Particles.Range(0, Math.PI);
+                this.ParticleRotationSpeed = new EndGate.Particles.Range(0, Math.PI);
                 /**
                 * Gets or sets the ParticleOpacity.  The ParticleOpacity is used to control emitted particles opacity.  Values should be between 0 and 1.
                 */
-                this.ParticleOpacity = new Particles.Range(1);
+                this.ParticleOpacity = new EndGate.Particles.Range(1);
                 /**
                 * Gets or sets the ParticleFadeInDuration.  The ParticleFadeInDuration is used to control how long particles take to fade in.
                 */
-                this.ParticleFadeInDuration = new Particles.Range(EndGate.TimeSpan.FromSeconds(.5));
+                this.ParticleFadeInDuration = new EndGate.Particles.Range(EndGate.TimeSpan.FromSeconds(.5));
                 /**
                 * Gets or sets the ParticleFadeOutDuration.  The ParticleFadeOutDuration is used to control how long particles take to fade out.
                 */
-                this.ParticleFadeOutDuration = new Particles.Range(EndGate.TimeSpan.FromSeconds(.5), EndGate.TimeSpan.FromSeconds(1));
+                this.ParticleFadeOutDuration = new EndGate.Particles.Range(EndGate.TimeSpan.FromSeconds(.5), EndGate.TimeSpan.FromSeconds(1));
 
                 this._texturePool = new Array();
                 this._particlePool = {};
@@ -9828,15 +8741,15 @@ var EndGate;
             * To allow for complex particle manipulation this method can be overridden by derived Emitter classes.
             */
             Emitter.prototype.Emit = function () {
-                var particleCount = Particles.Range.RandomNumber(this.EmissionOutput), endLocation, emissionDirection, particleSpeed, particleLifeTime, particle, particles = new Array();
+                var particleCount = EndGate.Particles.Range.RandomNumber(this.EmissionOutput), endLocation, emissionDirection, particleSpeed, particleLifeTime, particle, particles = new Array();
 
                 for (var i = 0; i < particleCount; i++) {
-                    particleLifeTime = Particles.Range.RandomTimeSpan(this.ParticleLifetime);
-                    particleSpeed = Particles.Range.RandomNumber(this.ParticleSpeed);
-                    emissionDirection = Particles.Range.RandomNumber(this.EmissionDirection);
+                    particleLifeTime = EndGate.Particles.Range.RandomTimeSpan(this.ParticleLifetime);
+                    particleSpeed = EndGate.Particles.Range.RandomNumber(this.ParticleSpeed);
+                    emissionDirection = EndGate.Particles.Range.RandomNumber(this.EmissionDirection);
                     endLocation = new EndGate.Vector2d(particleLifeTime.Seconds * particleSpeed, 0).RotateAround(EndGate.Vector2d.Zero, emissionDirection);
 
-                    particle = new Particles.Particle(this.BuildTextureFromPool(), EndGate.Vector2d.Zero, endLocation, Particles.Range.RandomNumber(this.ParticleScale), Particles.Range.RandomNumber(this.ParticleOpacity), Particles.Range.RandomNumber(this.ParticleRotation), Particles.Range.RandomNumber(this.ParticleRotationSpeed), particleLifeTime, Particles.Range.RandomTimeSpan(this.ParticleFadeInDuration), Particles.Range.RandomTimeSpan(this.ParticleFadeOutDuration), this.EmissionFunction);
+                    particle = new EndGate.Particles.Particle(this.BuildTextureFromPool(), EndGate.Vector2d.Zero, endLocation, EndGate.Particles.Range.RandomNumber(this.ParticleScale), EndGate.Particles.Range.RandomNumber(this.ParticleOpacity), EndGate.Particles.Range.RandomNumber(this.ParticleRotation), EndGate.Particles.Range.RandomNumber(this.ParticleRotationSpeed), particleLifeTime, EndGate.Particles.Range.RandomTimeSpan(this.ParticleFadeInDuration), EndGate.Particles.Range.RandomTimeSpan(this.ParticleFadeOutDuration), this.EmissionFunction);
 
                     particle._id = this._particleId++;
 
@@ -9876,7 +8789,7 @@ var EndGate;
                 var timeSinceEmit, emitCount, emissionRate;
 
                 if (this._emitting) {
-                    emissionRate = Particles.Range.RandomTimeSpan(this.EmissionInterval).Milliseconds;
+                    emissionRate = EndGate.Particles.Range.RandomTimeSpan(this.EmissionInterval).Milliseconds;
                     if (emissionRate > 0) {
                         timeSinceEmit = gameTime.Now.getTime() - this._lastEmit;
                         emitCount = Math.floor(timeSinceEmit / emissionRate);
@@ -9946,10 +8859,10 @@ var EndGate;
     })(EndGate.Particles || (EndGate.Particles = {}));
     var Particles = EndGate.Particles;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="Tween.ts" />
+/// <reference path="../Graphics/Color.ts" />
 var EndGate;
 (function (EndGate) {
-    /* ColorTween.ts */
     (function (Tweening) {
         /**
         * Defines a ColorTween class that is used to move a number from a start value to an end value.
@@ -9972,115 +8885,153 @@ var EndGate;
                 this.Current.B = this.TweeningFunction(this.From.B, this.To.B, this.Elapsed, this.Duration);
             };
             return ColorTween;
-        })(Tweening.Tween);
+        })(EndGate.Tweening.Tween);
         Tweening.ColorTween = ColorTween;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    /* Size2dTween.ts */
-    (function (Tweening) {
-        /**
-        * Defines a Size2dTween class that is used to move a Size2d from a start value to an end value.
-        */
-        var Size2dTween = (function (_super) {
-            __extends(Size2dTween, _super);
-            /**
-            * Creates a new instance of the Size2dTween object.
-            * @param from Start Size2d.
-            * @param to End Size2d.
-            * @param duration How fast to move the current Size2d from start to end.
-            * @param tweeningFunction The function to use to translate the current Size2d from start to end.  Different functions result in different translation behavior.
-            */
-            function Size2dTween(from, to, duration, tweeningFunction) {
-                _super.call(this, from, to, duration, tweeningFunction);
-            }
-            Size2dTween.prototype._UpdateTween = function () {
-                this.Current = new EndGate.Size2d(this.TweeningFunction(this.From.Width, this.To.Width, this.Elapsed, this.Duration), this.TweeningFunction(this.From.Height, this.To.Height, this.Elapsed, this.Duration));
-            };
-            return Size2dTween;
-        })(Tweening.Tween);
-        Tweening.Size2dTween = Size2dTween;
-    })(EndGate.Tweening || (EndGate.Tweening = {}));
-    var Tweening = EndGate.Tweening;
-})(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Back.ts */
         (function (Functions) {
             /**
-            * Defines a Back tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
+            * Defines a Cubic tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
             */
-            var Back = (function () {
-                function Back() {
+            var Cubic = (function () {
+                function Cubic() {
                 }
-                Object.defineProperty(Back, "EaseIn", {
-                    get: /**
-                    * Gets the Back EaseIn function.
+                Object.defineProperty(Cubic, "EaseIn", {
+                    /**
+                    * Gets the Cubic EaseIn function.
                     */
-                    function () {
-                        return Back._easeIn;
+                    get: function () {
+                        return Cubic._easeIn;
                     },
                     enumerable: true,
                     configurable: true
                 });
 
-                Object.defineProperty(Back, "EaseOut", {
-                    get: /**
-                    * Gets the Back EaseOut function.
+                Object.defineProperty(Cubic, "EaseOut", {
+                    /**
+                    * Gets the Cubic EaseOut function.
                     */
-                    function () {
-                        return Back._easeOut;
+                    get: function () {
+                        return Cubic._easeOut;
                     },
                     enumerable: true,
                     configurable: true
                 });
 
-                Object.defineProperty(Back, "EaseInOut", {
-                    get: /**
-                    * Gets the Back EaseInOut function.
+                Object.defineProperty(Cubic, "EaseInOut", {
+                    /**
+                    * Gets the Cubic EaseInOut function.
                     */
-                    function () {
-                        return Back._easeInOut;
+                    get: function () {
+                        return Cubic._easeInOut;
                     },
                     enumerable: true,
                     configurable: true
                 });
-                Back._easeIn = function (from, to, elapsed, duration) {
+                Cubic._easeIn = function (from, to, elapsed, duration) {
                     var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
 
-                    return change * (elapsedMilliseconds /= duration.Milliseconds) * elapsedMilliseconds * ((1.70158 + 1) * elapsedMilliseconds - 1.70158) + from;
+                    return change * (elapsedMilliseconds /= duration.Milliseconds) * elapsedMilliseconds * elapsedMilliseconds + from;
                 };
-                Back._easeOut = function (from, to, elapsed, duration) {
+                Cubic._easeOut = function (from, to, elapsed, duration) {
                     var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
 
-                    return change * ((elapsedMilliseconds = elapsedMilliseconds / duration.Milliseconds - 1) * elapsedMilliseconds * ((1.70158 + 1) * elapsedMilliseconds + 1.70158) + 1) + from;
+                    return change * ((elapsedMilliseconds = elapsedMilliseconds / duration.Milliseconds - 1) * elapsedMilliseconds * elapsedMilliseconds + 1) + from;
                 };
-                Back._easeInOut = function (from, to, elapsed, duration) {
-                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds, constant = 1.70158;
+                Cubic._easeInOut = function (from, to, elapsed, duration) {
+                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
 
                     if ((elapsedMilliseconds /= duration.Milliseconds / 2) < 1) {
-                        return change / 2 * (elapsedMilliseconds * elapsedMilliseconds * (((constant *= (1.525)) + 1) * elapsedMilliseconds - constant)) + from;
+                        return change / 2 * elapsedMilliseconds * elapsedMilliseconds * elapsedMilliseconds + from;
                     }
-                    return change / 2 * ((elapsedMilliseconds -= 2) * elapsedMilliseconds * (((constant *= (1.525)) + 1) * elapsedMilliseconds + constant) + 2) + from;
+                    return change / 2 * ((elapsedMilliseconds -= 2) * elapsedMilliseconds * elapsedMilliseconds + 2) + from;
                 };
-                return Back;
+                return Cubic;
             })();
-            Functions.Back = Back;
+            Functions.Cubic = Cubic;
         })(Tweening.Functions || (Tweening.Functions = {}));
         var Functions = Tweening.Functions;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Bounce.ts */
+        (function (Functions) {
+            /**
+            * Defines a Circular tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
+            */
+            var Circular = (function () {
+                function Circular() {
+                }
+                Object.defineProperty(Circular, "EaseIn", {
+                    /**
+                    * Gets the Circular EaseIn function.
+                    */
+                    get: function () {
+                        return Circular._easeIn;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
+                Object.defineProperty(Circular, "EaseOut", {
+                    /**
+                    * Gets the Circular EaseOut function.
+                    */
+                    get: function () {
+                        return Circular._easeOut;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
+                Object.defineProperty(Circular, "EaseInOut", {
+                    /**
+                    * Gets the Circular EaseInOut function.
+                    */
+                    get: function () {
+                        return Circular._easeInOut;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Circular._easeIn = function (from, to, elapsed, duration) {
+                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
+
+                    return -change * (Math.sqrt(1 - (elapsedMilliseconds /= duration.Milliseconds) * elapsedMilliseconds) - 1) + from;
+                };
+                Circular._easeOut = function (from, to, elapsed, duration) {
+                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
+
+                    return change * Math.sqrt(1 - (elapsedMilliseconds = elapsedMilliseconds / duration.Milliseconds - 1) * elapsedMilliseconds) + from;
+                };
+                Circular._easeInOut = function (from, to, elapsed, duration) {
+                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
+
+                    if ((elapsedMilliseconds /= duration.Milliseconds / 2) < 1) {
+                        return -change / 2 * (Math.sqrt(1 - elapsedMilliseconds * elapsedMilliseconds) - 1) + from;
+                    }
+                    return change / 2 * (Math.sqrt(1 - (elapsedMilliseconds -= 2) * elapsedMilliseconds) + 1) + from;
+                };
+                return Circular;
+            })();
+            Functions.Circular = Circular;
+        })(Tweening.Functions || (Tweening.Functions = {}));
+        var Functions = Tweening.Functions;
+    })(EndGate.Tweening || (EndGate.Tweening = {}));
+    var Tweening = EndGate.Tweening;
+})(EndGate || (EndGate = {}));
+/// <reference path="ITweeningFunction.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Tweening) {
         (function (Functions) {
             /**
             * Defines a Bounce tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
@@ -10089,10 +9040,10 @@ var EndGate;
                 function Bounce() {
                 }
                 Object.defineProperty(Bounce, "EaseIn", {
-                    get: /**
+                    /**
                     * Gets the Bounce EaseIn function.
                     */
-                    function () {
+                    get: function () {
                         return Bounce._easeIn;
                     },
                     enumerable: true,
@@ -10100,10 +9051,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Bounce, "EaseOut", {
-                    get: /**
+                    /**
                     * Gets the Bounce EaseOut function.
                     */
-                    function () {
+                    get: function () {
                         return Bounce._easeOut;
                     },
                     enumerable: true,
@@ -10111,10 +9062,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Bounce, "EaseInOut", {
-                    get: /**
+                    /**
                     * Gets the Bounce EaseInOut function.
                     */
-                    function () {
+                    get: function () {
                         return Bounce._easeInOut;
                     },
                     enumerable: true,
@@ -10155,151 +9106,85 @@ var EndGate;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Circular.ts */
         (function (Functions) {
             /**
-            * Defines a Circular tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
+            * Defines an Exponential tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
             */
-            var Circular = (function () {
-                function Circular() {
+            var Exponential = (function () {
+                function Exponential() {
                 }
-                Object.defineProperty(Circular, "EaseIn", {
-                    get: /**
-                    * Gets the Circular EaseIn function.
+                Object.defineProperty(Exponential, "EaseIn", {
+                    /**
+                    * Gets the Exponential EaseIn function.
                     */
-                    function () {
-                        return Circular._easeIn;
+                    get: function () {
+                        return Exponential._easeIn;
                     },
                     enumerable: true,
                     configurable: true
                 });
 
-                Object.defineProperty(Circular, "EaseOut", {
-                    get: /**
-                    * Gets the Circular EaseOut function.
+                Object.defineProperty(Exponential, "EaseOut", {
+                    /**
+                    * Gets the Exponential EaseOut function.
                     */
-                    function () {
-                        return Circular._easeOut;
+                    get: function () {
+                        return Exponential._easeOut;
                     },
                     enumerable: true,
                     configurable: true
                 });
 
-                Object.defineProperty(Circular, "EaseInOut", {
-                    get: /**
-                    * Gets the Circular EaseInOut function.
+                Object.defineProperty(Exponential, "EaseInOut", {
+                    /**
+                    * Gets the Exponential EaseInOut function.
                     */
-                    function () {
-                        return Circular._easeInOut;
+                    get: function () {
+                        return Exponential._easeInOut;
                     },
                     enumerable: true,
                     configurable: true
                 });
-                Circular._easeIn = function (from, to, elapsed, duration) {
+                Exponential._easeIn = function (from, to, elapsed, duration) {
                     var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
 
-                    return -change * (Math.sqrt(1 - (elapsedMilliseconds /= duration.Milliseconds) * elapsedMilliseconds) - 1) + from;
+                    return (elapsedMilliseconds == 0) ? from : change * Math.pow(2, 10 * (elapsedMilliseconds / duration.Milliseconds - 1)) + from;
                 };
-                Circular._easeOut = function (from, to, elapsed, duration) {
+                Exponential._easeOut = function (from, to, elapsed, duration) {
                     var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
 
-                    return change * Math.sqrt(1 - (elapsedMilliseconds = elapsedMilliseconds / duration.Milliseconds - 1) * elapsedMilliseconds) + from;
+                    return (elapsedMilliseconds == duration.Milliseconds) ? from + change : change * (-Math.pow(2, -10 * elapsedMilliseconds / duration.Milliseconds) + 1) + from;
                 };
-                Circular._easeInOut = function (from, to, elapsed, duration) {
+                Exponential._easeInOut = function (from, to, elapsed, duration) {
                     var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
 
-                    if ((elapsedMilliseconds /= duration.Milliseconds / 2) < 1) {
-                        return -change / 2 * (Math.sqrt(1 - elapsedMilliseconds * elapsedMilliseconds) - 1) + from;
+                    if (elapsedMilliseconds == 0) {
+                        return from;
                     }
-                    return change / 2 * (Math.sqrt(1 - (elapsedMilliseconds -= 2) * elapsedMilliseconds) + 1) + from;
+                    if (elapsedMilliseconds == duration.Milliseconds) {
+                        return from + change;
+                    }
+                    if ((elapsedMilliseconds /= duration.Milliseconds / 2) < 1) {
+                        return change / 2 * Math.pow(2, 10 * (elapsedMilliseconds - 1)) + from;
+                    }
+                    return change / 2 * (-Math.pow(2, -10 * --elapsedMilliseconds) + 2) + from;
                 };
-                return Circular;
+                return Exponential;
             })();
-            Functions.Circular = Circular;
+            Functions.Exponential = Exponential;
         })(Tweening.Functions || (Tweening.Functions = {}));
         var Functions = Tweening.Functions;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Cubic.ts */
-        (function (Functions) {
-            /**
-            * Defines a Cubic tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
-            */
-            var Cubic = (function () {
-                function Cubic() {
-                }
-                Object.defineProperty(Cubic, "EaseIn", {
-                    get: /**
-                    * Gets the Cubic EaseIn function.
-                    */
-                    function () {
-                        return Cubic._easeIn;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-
-                Object.defineProperty(Cubic, "EaseOut", {
-                    get: /**
-                    * Gets the Cubic EaseOut function.
-                    */
-                    function () {
-                        return Cubic._easeOut;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-
-                Object.defineProperty(Cubic, "EaseInOut", {
-                    get: /**
-                    * Gets the Cubic EaseInOut function.
-                    */
-                    function () {
-                        return Cubic._easeInOut;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-                Cubic._easeIn = function (from, to, elapsed, duration) {
-                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
-
-                    return change * (elapsedMilliseconds /= duration.Milliseconds) * elapsedMilliseconds * elapsedMilliseconds + from;
-                };
-                Cubic._easeOut = function (from, to, elapsed, duration) {
-                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
-
-                    return change * ((elapsedMilliseconds = elapsedMilliseconds / duration.Milliseconds - 1) * elapsedMilliseconds * elapsedMilliseconds + 1) + from;
-                };
-                Cubic._easeInOut = function (from, to, elapsed, duration) {
-                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
-
-                    if ((elapsedMilliseconds /= duration.Milliseconds / 2) < 1) {
-                        return change / 2 * elapsedMilliseconds * elapsedMilliseconds * elapsedMilliseconds + from;
-                    }
-                    return change / 2 * ((elapsedMilliseconds -= 2) * elapsedMilliseconds * elapsedMilliseconds + 2) + from;
-                };
-                return Cubic;
-            })();
-            Functions.Cubic = Cubic;
-        })(Tweening.Functions || (Tweening.Functions = {}));
-        var Functions = Tweening.Functions;
-    })(EndGate.Tweening || (EndGate.Tweening = {}));
-    var Tweening = EndGate.Tweening;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    (function (Tweening) {
-        /* Elastic.ts */
         (function (Functions) {
             /**
             * Defines an Elastic tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
@@ -10308,10 +9193,10 @@ var EndGate;
                 function Elastic() {
                 }
                 Object.defineProperty(Elastic, "EaseIn", {
-                    get: /**
+                    /**
                     * Gets the Elastic EaseIn function.
                     */
-                    function () {
+                    get: function () {
                         return Elastic._easeIn;
                     },
                     enumerable: true,
@@ -10319,10 +9204,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Elastic, "EaseOut", {
-                    get: /**
+                    /**
                     * Gets the Elastic EaseOut function.
                     */
-                    function () {
+                    get: function () {
                         return Elastic._easeOut;
                     },
                     enumerable: true,
@@ -10330,10 +9215,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Elastic, "EaseInOut", {
-                    get: /**
+                    /**
                     * Gets the Elastic EaseInOut function.
                     */
-                    function () {
+                    get: function () {
                         return Elastic._easeInOut;
                     },
                     enumerable: true,
@@ -10397,87 +9282,10 @@ var EndGate;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Exponential.ts */
-        (function (Functions) {
-            /**
-            * Defines an Exponential tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
-            */
-            var Exponential = (function () {
-                function Exponential() {
-                }
-                Object.defineProperty(Exponential, "EaseIn", {
-                    get: /**
-                    * Gets the Exponential EaseIn function.
-                    */
-                    function () {
-                        return Exponential._easeIn;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-
-                Object.defineProperty(Exponential, "EaseOut", {
-                    get: /**
-                    * Gets the Exponential EaseOut function.
-                    */
-                    function () {
-                        return Exponential._easeOut;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-
-                Object.defineProperty(Exponential, "EaseInOut", {
-                    get: /**
-                    * Gets the Exponential EaseInOut function.
-                    */
-                    function () {
-                        return Exponential._easeInOut;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-                Exponential._easeIn = function (from, to, elapsed, duration) {
-                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
-
-                    return (elapsedMilliseconds == 0) ? from : change * Math.pow(2, 10 * (elapsedMilliseconds / duration.Milliseconds - 1)) + from;
-                };
-                Exponential._easeOut = function (from, to, elapsed, duration) {
-                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
-
-                    return (elapsedMilliseconds == duration.Milliseconds) ? from + change : change * (-Math.pow(2, -10 * elapsedMilliseconds / duration.Milliseconds) + 1) + from;
-                };
-                Exponential._easeInOut = function (from, to, elapsed, duration) {
-                    var change = to - from, elapsedMilliseconds = elapsed.Milliseconds;
-
-                    if (elapsedMilliseconds == 0) {
-                        return from;
-                    }
-                    if (elapsedMilliseconds == duration.Milliseconds) {
-                        return from + change;
-                    }
-                    if ((elapsedMilliseconds /= duration.Milliseconds / 2) < 1) {
-                        return change / 2 * Math.pow(2, 10 * (elapsedMilliseconds - 1)) + from;
-                    }
-                    return change / 2 * (-Math.pow(2, -10 * --elapsedMilliseconds) + 2) + from;
-                };
-                return Exponential;
-            })();
-            Functions.Exponential = Exponential;
-        })(Tweening.Functions || (Tweening.Functions = {}));
-        var Functions = Tweening.Functions;
-    })(EndGate.Tweening || (EndGate.Tweening = {}));
-    var Tweening = EndGate.Tweening;
-})(EndGate || (EndGate = {}));
-
-var EndGate;
-(function (EndGate) {
-    (function (Tweening) {
-        /* Quadratic.ts */
         (function (Functions) {
             /**
             * Defines a Quadratic tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
@@ -10486,10 +9294,10 @@ var EndGate;
                 function Quadratic() {
                 }
                 Object.defineProperty(Quadratic, "EaseIn", {
-                    get: /**
+                    /**
                     * Gets the Quadratic EaseIn function.
                     */
-                    function () {
+                    get: function () {
                         return Quadratic._easeIn;
                     },
                     enumerable: true,
@@ -10497,10 +9305,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Quadratic, "EaseOut", {
-                    get: /**
+                    /**
                     * Gets the Quadratic EaseOut function.
                     */
-                    function () {
+                    get: function () {
                         return Quadratic._easeOut;
                     },
                     enumerable: true,
@@ -10508,10 +9316,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Quadratic, "EaseInOut", {
-                    get: /**
+                    /**
                     * Gets the Quadratic EaseInOut function.
                     */
-                    function () {
+                    get: function () {
                         return Quadratic._easeInOut;
                     },
                     enumerable: true,
@@ -10544,11 +9352,10 @@ var EndGate;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Quartic.ts */
         (function (Functions) {
             /**
             * Defines a Quartic tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
@@ -10557,10 +9364,10 @@ var EndGate;
                 function Quartic() {
                 }
                 Object.defineProperty(Quartic, "EaseIn", {
-                    get: /**
+                    /**
                     * Gets the Quartic EaseIn function.
                     */
-                    function () {
+                    get: function () {
                         return Quartic._easeIn;
                     },
                     enumerable: true,
@@ -10568,10 +9375,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Quartic, "EaseOut", {
-                    get: /**
+                    /**
                     * Gets the Quartic EaseOut function.
                     */
-                    function () {
+                    get: function () {
                         return Quartic._easeOut;
                     },
                     enumerable: true,
@@ -10579,10 +9386,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Quartic, "EaseInOut", {
-                    get: /**
+                    /**
                     * Gets the Quartic EaseInOut function.
                     */
-                    function () {
+                    get: function () {
                         return Quartic._easeInOut;
                     },
                     enumerable: true,
@@ -10614,11 +9421,10 @@ var EndGate;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Quintic.ts */
         (function (Functions) {
             /**
             * Defines a Quintic tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
@@ -10627,10 +9433,10 @@ var EndGate;
                 function Quintic() {
                 }
                 Object.defineProperty(Quintic, "EaseIn", {
-                    get: /**
+                    /**
                     * Gets the Quintic EaseIn function.
                     */
-                    function () {
+                    get: function () {
                         return Quintic._easeIn;
                     },
                     enumerable: true,
@@ -10638,10 +9444,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Quintic, "EaseOut", {
-                    get: /**
+                    /**
                     * Gets the Quintic EaseOut function.
                     */
-                    function () {
+                    get: function () {
                         return Quintic._easeOut;
                     },
                     enumerable: true,
@@ -10649,10 +9455,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Quintic, "EaseInOut", {
-                    get: /**
+                    /**
                     * Gets the Quintic EaseInOut function.
                     */
-                    function () {
+                    get: function () {
                         return Quintic._easeInOut;
                     },
                     enumerable: true,
@@ -10684,11 +9490,10 @@ var EndGate;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
-
+/// <reference path="ITweeningFunction.ts" />
 var EndGate;
 (function (EndGate) {
     (function (Tweening) {
-        /* Sinusoidal.ts */
         (function (Functions) {
             /**
             * Defines a Sinusoidal tweening function collection that has an EaseIn, EaseOut, and EaseInOut function that can be used with Tween's.
@@ -10697,10 +9502,10 @@ var EndGate;
                 function Sinusoidal() {
                 }
                 Object.defineProperty(Sinusoidal, "EaseIn", {
-                    get: /**
+                    /**
                     * Gets the Sinusoidal EaseIn function.
                     */
-                    function () {
+                    get: function () {
                         return Sinusoidal._easeIn;
                     },
                     enumerable: true,
@@ -10708,10 +9513,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Sinusoidal, "EaseOut", {
-                    get: /**
+                    /**
                     * Gets the Sinusoidal EaseOut function.
                     */
-                    function () {
+                    get: function () {
                         return Sinusoidal._easeOut;
                     },
                     enumerable: true,
@@ -10719,10 +9524,10 @@ var EndGate;
                 });
 
                 Object.defineProperty(Sinusoidal, "EaseInOut", {
-                    get: /**
+                    /**
                     * Gets the Sinusoidal EaseInOut function.
                     */
-                    function () {
+                    get: function () {
                         return Sinusoidal._easeInOut;
                     },
                     enumerable: true,
@@ -10751,8 +9556,1445 @@ var EndGate;
     })(EndGate.Tweening || (EndGate.Tweening = {}));
     var Tweening = EndGate.Tweening;
 })(EndGate || (EndGate = {}));
+/// <reference path="Tween.ts" />
+/// <reference path="../Assets/Sizes/Size2d.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Tweening) {
+        /**
+        * Defines a Size2dTween class that is used to move a Size2d from a start value to an end value.
+        */
+        var Size2dTween = (function (_super) {
+            __extends(Size2dTween, _super);
+            /**
+            * Creates a new instance of the Size2dTween object.
+            * @param from Start Size2d.
+            * @param to End Size2d.
+            * @param duration How fast to move the current Size2d from start to end.
+            * @param tweeningFunction The function to use to translate the current Size2d from start to end.  Different functions result in different translation behavior.
+            */
+            function Size2dTween(from, to, duration, tweeningFunction) {
+                _super.call(this, from, to, duration, tweeningFunction);
+            }
+            Size2dTween.prototype._UpdateTween = function () {
+                this.Current = new EndGate.Size2d(this.TweeningFunction(this.From.Width, this.To.Width, this.Elapsed, this.Duration), this.TweeningFunction(this.From.Height, this.To.Height, this.Elapsed, this.Duration));
+            };
+            return Size2dTween;
+        })(EndGate.Tweening.Tween);
+        Tweening.Size2dTween = Size2dTween;
+    })(EndGate.Tweening || (EndGate.Tweening = {}));
+    var Tweening = EndGate.Tweening;
+})(EndGate || (EndGate = {}));
+var EndGate;
+(function (EndGate) {
+    (function (MovementControllers) {
+        (function (Assets) {
+            /**
+            * Defines a direction management object that represents directional state.
+            */
+            var LinearDirections = (function () {
+                /**
+                * Creates a new instance of the LinearDirection object with all directions= indicators initially set to false.
+                */
+                function LinearDirections() {
+                    this.Left = false;
+                    this.Right = false;
+                    this.Up = false;
+                    this.Down = false;
+                }
+                return LinearDirections;
+            })();
+            Assets.LinearDirections = LinearDirections;
+        })(MovementControllers.Assets || (MovementControllers.Assets = {}));
+        var Assets = MovementControllers.Assets;
+    })(EndGate.MovementControllers || (EndGate.MovementControllers = {}));
+    var MovementControllers = EndGate.MovementControllers;
+})(EndGate || (EndGate = {}));
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Interfaces/IMoveable.ts" />
+/// <reference path="../Interfaces/IUpdateable.ts" />
+/// <reference path="../GameTime.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (MovementControllers) {
+        /**
+        * Abstract class that holds moveable objects and synchronizes positions across them.
+        */
+        var MovementController = (function () {
+            /**
+            * Should only ever be called by derived classes.
+            * @param moveables Moveable objects to synchronize.
+            */
+            function MovementController(moveables) {
+                this.Position = moveables.length > 0 ? moveables[0].Position : EndGate.Vector2d.Zero;
+                this.Velocity = EndGate.Vector2d.Zero;
+                this.Rotation = 0;
+                this._frozen = false;
 
-/* EventHandler3.ts */
+                this._moveables = moveables;
+            }
+            /**
+            * Prevents the MovementController from updating object locations.
+            */
+            MovementController.prototype.Freeze = function () {
+                this._frozen = true;
+            };
+
+            /**
+            * Used to re-enable movement within the MovementController.
+            */
+            MovementController.prototype.Thaw = function () {
+                this._frozen = false;
+            };
+
+            /**
+            * Determines if the MovementController is moving.  Frozen MovementControllers are not considered moving.
+            */
+            MovementController.prototype.IsMoving = function () {
+                return !this._frozen && !this.Velocity.IsZero();
+            };
+
+            /**
+            * Synchronizes the current position with all tracked moveable objects.  MovementController's must be updated in order to move.
+            * @param gameTime The current game time object.
+            */
+            MovementController.prototype.Update = function (gameTime) {
+                for (var i = 0; i < this._moveables.length; i++) {
+                    this._moveables[i].Position = this.Position;
+                    this._moveables[i].Rotation = this.Rotation;
+                }
+            };
+            return MovementController;
+        })();
+        MovementControllers.MovementController = MovementController;
+    })(EndGate.MovementControllers || (EndGate.MovementControllers = {}));
+    var MovementControllers = EndGate.MovementControllers;
+})(EndGate || (EndGate = {}));
+/// <reference path="../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Interfaces/IMoveable.ts" />
+/// <reference path="../Utilities/NoopTripInvoker.ts" />
+/// <reference path="../Extensions/MathExtensions.ts" />
+/// <reference path="../GameTime.ts" />
+/// <reference path="../Utilities/EventHandler1.ts" />
+/// <reference path="LinearDirections.ts" />
+/// <reference path="IMoveEvent.ts" />
+/// <reference path="MovementController.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (MovementControllers) {
+        /**
+        * Defines a LinearMovementController that can move objects Up, Right, Left, Down or a combination.
+        */
+        var LinearMovementController = (function (_super) {
+            __extends(LinearMovementController, _super);
+            function LinearMovementController(movables, moveSpeed, rotateWithMovements, multiDirectional) {
+                if (typeof rotateWithMovements === "undefined") { rotateWithMovements = true; }
+                if (typeof multiDirectional === "undefined") { multiDirectional = true; }
+                var _this = this;
+                _super.call(this, movables);
+
+                this._moveSpeed = moveSpeed;
+                this._moving = new EndGate.MovementControllers.Assets.LinearDirections();
+                this.OnMove = new EndGate.EventHandler1();
+                this._rotationUpdater = new EndGate._.Utilities.NoopTripInvoker(function () {
+                    _this.UpdateRotation();
+                }, rotateWithMovements);
+
+                if (multiDirectional) {
+                    this._velocityUpdater = this.UpdateVelocityWithMultiDirection;
+                } else {
+                    this._velocityUpdater = this.UpdateVelocityNoMultiDirection;
+                }
+            }
+            /**
+            * Determines if the movement controller is moving in the provided direction.
+            * @param direction The direction to check.
+            */
+            LinearMovementController.prototype.IsMovingInDirection = function (direction) {
+                return this._moving[direction] || false;
+            };
+
+            /**
+            * Starts moving the movement controller in the specified direction.
+            * @param direction The direction to start moving.
+            */
+            LinearMovementController.prototype.StartMoving = function (direction) {
+                this.Move(direction, true);
+            };
+
+            /**
+            * Stops the movement controller from moving in the specified direction.
+            * @param direction The direction to stop moving.
+            */
+            LinearMovementController.prototype.StopMoving = function (direction) {
+                this.Move(direction, false);
+            };
+
+            LinearMovementController.prototype.MoveSpeed = function (speed) {
+                if (typeof speed !== "undefined") {
+                    this._moveSpeed = speed;
+                    this._velocityUpdater();
+                }
+
+                return this._moveSpeed;
+            };
+
+            /**
+            * Moves the LinearMovementController in the currently active directions.  MovementController's must be updated in order to move.
+            * @param gameTime The current game time object.
+            */
+            LinearMovementController.prototype.Update = function (gameTime) {
+                if (!this._frozen) {
+                    this.Position = this.Position.Add(this.Velocity.Multiply(gameTime.Elapsed.Seconds));
+
+                    _super.prototype.Update.call(this, gameTime);
+                }
+            };
+
+            /**
+            * Triggers a move event on the MovementController.
+            * @param direction The direction to start or stop moving.
+            * @param startMoving Whether the movement is starting or stopping.
+            */
+            LinearMovementController.prototype.Move = function (direction, startMoving) {
+                if (typeof this._moving[direction] !== "undefined") {
+                    this._moving[direction] = startMoving;
+                    this._velocityUpdater();
+                    this._rotationUpdater.Invoke();
+                    this.OnMove.Trigger({
+                        Direction: direction,
+                        StartMoving: startMoving
+                    });
+                } else {
+                    throw new Error(direction + " is an unknown direction.");
+                }
+            };
+
+            LinearMovementController.prototype.UpdateVelocityNoMultiDirection = function () {
+                var velocity = EndGate.Vector2d.Zero;
+
+                if (velocity.IsZero()) {
+                    if (this._moving.Up) {
+                        velocity.Y -= this._moveSpeed;
+                    }
+                    if (this._moving.Down) {
+                        velocity.Y += this._moveSpeed;
+                    }
+
+                    if (velocity.Y === 0) {
+                        if (this._moving.Left) {
+                            velocity.X -= this._moveSpeed;
+                        }
+                        if (this._moving.Right) {
+                            velocity.X += this._moveSpeed;
+                        }
+                    }
+                }
+
+                this.Velocity = velocity;
+            };
+
+            LinearMovementController.prototype.UpdateVelocityWithMultiDirection = function () {
+                var velocity = EndGate.Vector2d.Zero;
+
+                if (this._moving.Up) {
+                    velocity.Y -= this._moveSpeed;
+                }
+                if (this._moving.Down) {
+                    velocity.Y += this._moveSpeed;
+                }
+                if (this._moving.Left) {
+                    velocity.X -= this._moveSpeed;
+                }
+                if (this._moving.Right) {
+                    velocity.X += this._moveSpeed;
+                }
+
+                this.Velocity = velocity;
+            };
+
+            LinearMovementController.prototype.UpdateRotation = function () {
+                if (!this.Velocity.IsZero()) {
+                    this.Rotation = Math.atan2(this.Velocity.Y, this.Velocity.X);
+                }
+            };
+            return LinearMovementController;
+        })(EndGate.MovementControllers.MovementController);
+        MovementControllers.LinearMovementController = LinearMovementController;
+    })(EndGate.MovementControllers || (EndGate.MovementControllers = {}));
+    var MovementControllers = EndGate.MovementControllers;
+})(EndGate || (EndGate = {}));
+/// <reference path="../Input/Keyboard/KeyboardHandler.ts" />
+/// <reference path="../MovementControllers/LinearDirections.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (InputControllers) {
+        /**
+        * Defines a DirectionalInputController that will monitor Up, Right, Left, and Down movement attempts.
+        */
+        var DirectionalInputController = (function () {
+            function DirectionalInputController(keyboard, onMove, upKeys, rightKeys, downKeys, leftKeys) {
+                if (typeof upKeys === "undefined") { upKeys = ["w", "Up"]; }
+                if (typeof rightKeys === "undefined") { rightKeys = ["d", "Right"]; }
+                if (typeof downKeys === "undefined") { downKeys = ["s", "Down"]; }
+                if (typeof leftKeys === "undefined") { leftKeys = ["a", "Left"]; }
+                this._keyboard = keyboard;
+                this._onMove = onMove;
+                this._directions = new EndGate.MovementControllers.Assets.LinearDirections();
+
+                this.BindKeys(upKeys, "OnCommandDown", "Up", true);
+                this.BindKeys(rightKeys, "OnCommandDown", "Right", true);
+                this.BindKeys(downKeys, "OnCommandDown", "Down", true);
+                this.BindKeys(leftKeys, "OnCommandDown", "Left", true);
+                this.BindKeys(upKeys, "OnCommandUp", "Up", false);
+                this.BindKeys(rightKeys, "OnCommandUp", "Right", false);
+                this.BindKeys(downKeys, "OnCommandUp", "Down", false);
+                this.BindKeys(leftKeys, "OnCommandUp", "Left", false);
+            }
+            DirectionalInputController.prototype.BindKeys = function (keyList, bindingAction, direction, startMoving) {
+                var _this = this;
+                for (var i = 0; i < keyList.length; i++) {
+                    this._keyboard[bindingAction](keyList[i], function () {
+                        if (_this._directions[direction] != startMoving) {
+                            _this._directions[direction] = startMoving;
+                            _this._onMove(direction, startMoving);
+                        }
+                    });
+                }
+            };
+            return DirectionalInputController;
+        })();
+        InputControllers.DirectionalInputController = DirectionalInputController;
+    })(EndGate.InputControllers || (EndGate.InputControllers = {}));
+    var InputControllers = EndGate.InputControllers;
+})(EndGate || (EndGate = {}));
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../Graphic2d.ts" />
+/// <reference path="../Color.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        /**
+        * Abstract drawable shape type that is used create customizable drawable graphics.
+        */
+        var Shape = (function (_super) {
+            __extends(Shape, _super);
+            function Shape(position, color) {
+                var _this = this;
+                _super.call(this, position);
+                this._type = "Shape";
+
+                this._fillChangeWire = function (color) {
+                    _this._State.FillStyle = color.toString();
+                };
+
+                this._strokeChangeWire = function (color) {
+                    _this._State.StrokeStyle = color.toString();
+                };
+
+                this._shadowChangeWire = function (color) {
+                    _this._State.ShadowColor = color.toString();
+                };
+
+                this.ShadowColor = this._shadowColor = EndGate.Graphics.Color.Black;
+                this.BorderColor = this._strokeStyle = EndGate.Graphics.Color.Black;
+
+                if (typeof color !== "undefined") {
+                    if (typeof color === "string") {
+                        color = new EndGate.Graphics.Color(color);
+                    }
+
+                    this.Color = this._fillStyle = color;
+                } else {
+                    this.Color = this._fillStyle = EndGate.Graphics.Color.Black;
+                }
+            }
+            Object.defineProperty(Shape.prototype, "Color", {
+                /**
+                * Gets or sets the current shape color.  Valid colors are strings like "red" or "rgb(255,0,0)".
+                */
+                get: function () {
+                    return this._fillStyle;
+                },
+                set: function (color) {
+                    if (typeof color === "string") {
+                        color = new EndGate.Graphics.Color(color);
+                    }
+
+                    // Unbind old
+                    this._fillStyle.OnChange.Unbind(this._fillChangeWire);
+                    this._fillStyle = color;
+
+                    // Bind new
+                    this._fillStyle.OnChange.Bind(this._fillChangeWire);
+
+                    // Update state
+                    this._fillChangeWire(color);
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Shape.prototype, "BorderThickness", {
+                /**
+                * Gets or sets the current border thickness.
+                */
+                get: function () {
+                    return this._State.LineWidth;
+                },
+                set: function (thickness) {
+                    this._State.LineWidth = thickness;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Shape.prototype, "BorderColor", {
+                /**
+                * Gets or sets the current border color.  Valid colors are strings like "red" or "rgb(255,0,0)".
+                */
+                get: function () {
+                    return this._strokeStyle;
+                },
+                set: function (color) {
+                    if (typeof color === "string") {
+                        color = new EndGate.Graphics.Color(color);
+                    }
+
+                    // Unbind old
+                    this._strokeStyle.OnChange.Unbind(this._strokeChangeWire);
+                    this._strokeStyle = color;
+
+                    // Bind new
+                    this._strokeStyle.OnChange.Bind(this._strokeChangeWire);
+
+                    // Update state
+                    this._strokeChangeWire(color);
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Shape.prototype, "ShadowColor", {
+                /**
+                * Gets or sets the current shadow color.  Valid colors are strings like "red" or "rgb(255,0,0)".
+                */
+                get: function () {
+                    return this._shadowColor;
+                },
+                set: function (color) {
+                    if (typeof color === "string") {
+                        color = new EndGate.Graphics.Color(color);
+                    }
+
+                    // Unbind old
+                    this._shadowColor.OnChange.Unbind(this._shadowChangeWire);
+                    this._shadowColor = color;
+
+                    // Bind new
+                    this._shadowColor.OnChange.Bind(this._shadowChangeWire);
+
+                    // Update state
+                    this._shadowChangeWire(color);
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Shape.prototype, "ShadowX", {
+                /**
+                * Gets or sets the current horizontal shadow position.
+                */
+                get: function () {
+                    return this._State.ShadowOffsetX;
+                },
+                set: function (x) {
+                    this._State.ShadowOffsetX = x;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Shape.prototype, "ShadowY", {
+                /**
+                * Gets or sets the current vertical shadow position.
+                */
+                get: function () {
+                    return this._State.ShadowOffsetY;
+                },
+                set: function (y) {
+                    this._State.ShadowOffsetY = y;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Shape.prototype, "ShadowBlur", {
+                /**
+                * Gets or sets the current shadow blur.
+                */
+                get: function () {
+                    return this._State.ShadowBlur;
+                },
+                set: function (blur) {
+                    this._State.ShadowBlur = blur;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Shape.prototype.Border = function (thickness, color) {
+                this.BorderThickness = thickness;
+                this.BorderColor = color;
+            };
+
+            Shape.prototype.Shadow = function (x, y, color, blur) {
+                this.ShadowX = x;
+                this.ShadowY = y;
+                this.ShadowColor = color;
+                this.ShadowBlur = blur;
+            };
+
+            Shape.prototype._StartDraw = function (context) {
+                _super.prototype._StartDraw.call(this, context);
+                context.beginPath();
+            };
+
+            Shape.prototype._EndDraw = function (context) {
+                context.fill();
+
+                if (this._State.LineWidth > 0) {
+                    context.stroke();
+                } else {
+                    context.closePath();
+                }
+
+                _super.prototype._EndDraw.call(this, context);
+            };
+
+            // This should be overridden if you want to build a proper shape
+            Shape.prototype._BuildPath = function (context) {
+            };
+
+            /**
+            * Draws the shape onto the given context.  If this shape is part of a scene the Draw function will be called automatically.
+            * @param context The canvas context to draw the shape onto.
+            */
+            Shape.prototype.Draw = function (context) {
+                this._StartDraw(context);
+                this._BuildPath(context);
+                this._EndDraw(context);
+            };
+
+            Shape.prototype.Dispose = function () {
+                _super.prototype.Dispose.call(this);
+
+                this._fillStyle.OnChange.Unbind(this._fillChangeWire);
+                this._strokeStyle.OnChange.Unbind(this._strokeChangeWire);
+                this._shadowColor.OnChange.Unbind(this._shadowChangeWire);
+            };
+
+            Shape.prototype._Clone = function (graphic) {
+                graphic.Border(this.BorderThickness, this.BorderColor.Clone());
+                graphic.Shadow(this.ShadowX, this.ShadowY, this.ShadowColor.Clone(), this.ShadowBlur);
+
+                _super.prototype._Clone.call(this, graphic);
+            };
+            return Shape;
+        })(EndGate.Graphics.Graphic2d);
+        Graphics.Shape = Shape;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        (function (Assets) {
+            /**
+            * Defines valid FontFamilies that can be used to display Text2d's differently.
+            */
+            (function (FontFamily) {
+                FontFamily[FontFamily["Antiqua"] = 0] = "Antiqua";
+                FontFamily[FontFamily["Arial"] = 1] = "Arial";
+                FontFamily[FontFamily["Avqest"] = 2] = "Avqest";
+                FontFamily[FontFamily["Blackletter"] = 3] = "Blackletter";
+                FontFamily[FontFamily["Calibri"] = 4] = "Calibri";
+                FontFamily[FontFamily["ComicSans"] = 5] = "ComicSans";
+                FontFamily[FontFamily["Courier"] = 6] = "Courier";
+                FontFamily[FontFamily["Decorative"] = 7] = "Decorative";
+                FontFamily[FontFamily["Fraktur"] = 8] = "Fraktur";
+                FontFamily[FontFamily["Frosty"] = 9] = "Frosty";
+                FontFamily[FontFamily["Garamond"] = 10] = "Garamond";
+                FontFamily[FontFamily["Georgia"] = 11] = "Georgia";
+                FontFamily[FontFamily["Helvetica"] = 12] = "Helvetica";
+                FontFamily[FontFamily["Impact"] = 13] = "Impact";
+                FontFamily[FontFamily["Minion"] = 14] = "Minion";
+                FontFamily[FontFamily["Modern"] = 15] = "Modern";
+                FontFamily[FontFamily["Monospace"] = 16] = "Monospace";
+                FontFamily[FontFamily["Palatino"] = 17] = "Palatino";
+                FontFamily[FontFamily["Roman"] = 18] = "Roman";
+                FontFamily[FontFamily["Script"] = 19] = "Script";
+                FontFamily[FontFamily["Swiss"] = 20] = "Swiss";
+                FontFamily[FontFamily["TimesNewRoman"] = 21] = "TimesNewRoman";
+                FontFamily[FontFamily["Verdana"] = 22] = "Verdana";
+            })(Assets.FontFamily || (Assets.FontFamily = {}));
+            var FontFamily = Assets.FontFamily;
+            ;
+        })(Graphics.Assets || (Graphics.Assets = {}));
+        var Assets = Graphics.Assets;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        (function (Assets) {
+            /**
+            * Defines valid FontVariant's that can be used to change the appearance of Text2d's.
+            */
+            (function (FontVariant) {
+                FontVariant[FontVariant["Normal"] = 0] = "Normal";
+                FontVariant[FontVariant["SmallCaps"] = 1] = "SmallCaps";
+            })(Assets.FontVariant || (Assets.FontVariant = {}));
+            var FontVariant = Assets.FontVariant;
+            ;
+        })(Graphics.Assets || (Graphics.Assets = {}));
+        var Assets = Graphics.Assets;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        (function (Assets) {
+            /**
+            * Defines valid FontStyles that can be used to modify the font's style for Text2d's.
+            */
+            (function (FontStyle) {
+                FontStyle[FontStyle["Normal"] = 0] = "Normal";
+                FontStyle[FontStyle["Italic"] = 1] = "Italic";
+                FontStyle[FontStyle["Oblique"] = 2] = "Oblique";
+            })(Assets.FontStyle || (Assets.FontStyle = {}));
+            var FontStyle = Assets.FontStyle;
+        })(Graphics.Assets || (Graphics.Assets = {}));
+        var Assets = Graphics.Assets;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+/// <reference path="FontFamily.ts" />
+/// <reference path="FontVariant.ts" />
+/// <reference path="FontStyle.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        (function (Assets) {
+            /**
+            * Defines a set of font settings that are used to modify the appearance of text that is drawn via Text2d's.
+            */
+            var FontSettings = (function () {
+                /**
+                * Creates a new instance of the FontSettings object with the following default values.
+                * FontSize: 10px
+                * FontFamily: Times New Roman
+                */
+                function FontSettings() {
+                    this._cachedState = {
+                        fontSize: "10px",
+                        fontFamily: 21 /* TimesNewRoman */,
+                        fontVariant: 0 /* Normal */,
+                        fontWeight: "",
+                        fontStyle: 0 /* Normal */
+                    };
+
+                    this._refreshCache = true;
+                    this._BuildFont();
+                }
+                Object.defineProperty(FontSettings.prototype, "FontSize", {
+                    /**
+                    * Gets or sets the current font size.  Values can be things such as 20px.
+                    */
+                    get: function () {
+                        return this._cachedState["fontSize"];
+                    },
+                    set: function (size) {
+                        this._refreshCache = true;
+                        this._cachedState["fontSize"] = size;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
+                Object.defineProperty(FontSettings.prototype, "FontFamily", {
+                    /**
+                    * Gets or sets the font family.
+                    */
+                    get: function () {
+                        return this._cachedState["fontFamily"];
+                    },
+                    set: function (family) {
+                        this._refreshCache = true;
+                        this._cachedState["fontFamily"] = family;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
+                Object.defineProperty(FontSettings.prototype, "FontVariant", {
+                    /**
+                    * Gets or sets the font variant.
+                    */
+                    get: function () {
+                        return this._cachedState["fontVariant"];
+                    },
+                    set: function (variant) {
+                        this._refreshCache = true;
+                        this._cachedState["fontVariant"] = variant;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
+                Object.defineProperty(FontSettings.prototype, "FontWeight", {
+                    /**
+                    * Gets or sets the current font weight.
+                    */
+                    get: function () {
+                        return this._cachedState["fontWeight"];
+                    },
+                    set: function (weight) {
+                        this._refreshCache = true;
+                        this._cachedState["fontWeight"] = weight;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
+                Object.defineProperty(FontSettings.prototype, "FontStyle", {
+                    /**
+                    * Gets or sets the current font style.
+                    */
+                    get: function () {
+                        return this._cachedState["fontStyle"];
+                    },
+                    set: function (style) {
+                        this._refreshCache = true;
+                        this._cachedState["fontStyle"] = style;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
+                FontSettings.prototype._BuildFont = function () {
+                    var font;
+
+                    if (this._refreshCache) {
+                        font = this._cachedState["fontWeight"] + " " + EndGate.Graphics.Assets.FontStyle[this._cachedState["fontStyle"]].replace("Normal", "") + " " + EndGate.Graphics.Assets.FontVariant[this._cachedState["fontVariant"]].replace("Normal", "") + " " + this._cachedState["fontSize"];
+
+                        if (this._cachedState["fontFamily"] !== undefined) {
+                            font += " " + EndGate.Graphics.Assets.FontFamily[this._cachedState["fontFamily"]];
+                        }
+
+                        this._cachedFont = font.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                        this._refreshCache = false;
+                    }
+
+                    return this._cachedFont;
+                };
+                return FontSettings;
+            })();
+            Assets.FontSettings = FontSettings;
+        })(Graphics.Assets || (Graphics.Assets = {}));
+        var Assets = Graphics.Assets;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+/// <reference path="../../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Graphic2d.ts" />
+/// <reference path="../../Color.ts" />
+/// <reference path="../../../Utilities/NoopTripInvoker.ts" />
+/// <reference path="../../../Bounds/BoundingRectangle.ts" />
+/// <reference path="../Shape.ts" />
+/// <reference path="Font/FontSettings.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        /**
+        * Defines a drawable text element.
+        */
+        var Text2d = (function (_super) {
+            __extends(Text2d, _super);
+            function Text2d(x, y, text, color) {
+                if (typeof color === "undefined") { color = EndGate.Graphics.Color.Black; }
+                _super.call(this, new EndGate.Vector2d(x, y), color);
+                this._type = "Text2d";
+
+                this._text = text;
+
+                this._drawBounds = new EndGate.Bounds.BoundingRectangle(this.Position, EndGate.Size2d.One);
+                this._recalculateBoundsSize = true;
+
+                this._fontSettings = new EndGate.Graphics.Assets.FontSettings();
+                this.Align = "center";
+                this.Baseline = "middle";
+            }
+            Object.defineProperty(Text2d.prototype, "Align", {
+                /**
+                * Gets or sets the text alignment of the Text2d.  Values can be "start", "end", "left", "center", or "right".
+                */
+                get: function () {
+                    return this._State.TextAlign;
+                },
+                set: function (alignment) {
+                    this._State.TextAlign = alignment;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Text2d.prototype, "Baseline", {
+                /**
+                * Gets or sets the text baseline of the Text2d.  Values can be "top", "hanging", "middle", "alphabetic", "ideographic", and "bottom".
+                */
+                get: function () {
+                    return this._State.TextBaseline;
+                },
+                set: function (baseline) {
+                    this._State.TextBaseline = baseline;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Text2d.prototype, "FontSettings", {
+                /**
+                * Gets the Text2d's FontSetting's.
+                */
+                get: function () {
+                    this._recalculateBoundsSize = true;
+
+                    return this._fontSettings;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(Text2d.prototype, "Text", {
+                /**
+                * Gets or sets the current Text2d's text.
+                */
+                get: function () {
+                    return this._text;
+                },
+                set: function (text) {
+                    this._recalculateBoundsSize = true;
+                    this._text = text;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Text2d.prototype._StartDraw = function (context) {
+                context.save();
+                this._State.SetContextState(context);
+
+                context.translate(this.Position.X, this.Position.Y);
+
+                if (this.Rotation !== 0) {
+                    context.rotate(this.Rotation);
+                }
+            };
+
+            Text2d.prototype._EndDraw = function (context) {
+                var children = this.GetChildren();
+
+                for (var i = 0; i < children.length; i++) {
+                    if (children[i].Visible) {
+                        children[i].Draw(context);
+                    }
+                }
+
+                context.restore();
+            };
+
+            /**
+            * Draws the text onto the given context.  If this Text2d is part of a scene the Draw function will be called automatically.
+            * @param context The canvas context to draw the text onto.
+            */
+            Text2d.prototype.Draw = function (context) {
+                var textSize;
+
+                this._State.Font = this._fontSettings._BuildFont();
+
+                this._StartDraw(context);
+
+                context.fillText(this._text, 0, 0);
+                if (this._State.LineWidth > 0) {
+                    context.strokeText(this._text, 0, 0);
+                }
+
+                // Only recalculate bounds if the text or font has changed since the last draw.
+                if (this._recalculateBoundsSize) {
+                    this._recalculateBoundsSize = false;
+                    textSize = context.measureText(this._text);
+                    this._drawBounds.Size.Width = textSize.width;
+                    this._drawBounds.Size.Height = parseInt(this._fontSettings.FontSize) * 1.5;
+                }
+
+                this._EndDraw(context);
+            };
+
+            /**
+            * The bounding area that represents where the Text2d will draw.
+            */
+            Text2d.prototype.GetDrawBounds = function () {
+                this._drawBounds.Rotation = this.Rotation;
+                this._drawBounds.Position = this.Position;
+
+                return this._drawBounds;
+            };
+
+            /**
+            * Scale's the fonts FontSize.
+            * @param scale The value to multiply the graphic's size by.
+            */
+            Text2d.prototype.Scale = function (scale) {
+                var size = parseInt(this.FontSettings.FontSize);
+
+                this.FontSettings.FontSize = this.FontSettings.FontSize.replace(size.toString(), (size * scale).toString());
+            };
+
+            /**
+            * Returns a nearly identical copy of this Text2d.  If this Text2d belongs to a parent, the cloned Text2d will not. If this Text2d has children, all children will be cloned as well.  Lastly, the cloned Text2d will not have the same event bindings as this one does.
+            */
+            Text2d.prototype.Clone = function () {
+                var graphic = new Text2d(this.Position.X, this.Position.Y, this.Text, this.Color.Clone());
+
+                graphic.Align = this.Align;
+                graphic.Baseline = this.Baseline;
+                graphic.FontSettings.FontFamily = this.FontSettings.FontFamily;
+                graphic.FontSettings.FontSize = this.FontSettings.FontSize;
+                graphic.FontSettings.FontStyle = this.FontSettings.FontStyle;
+                graphic.FontSettings.FontVariant = this.FontSettings.FontVariant;
+                graphic.FontSettings.FontWeight = this.FontSettings.FontWeight;
+
+                _super.prototype._Clone.call(this, graphic);
+
+                return graphic;
+            };
+            return Text2d;
+        })(EndGate.Graphics.Shape);
+        Graphics.Text2d = Text2d;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+/// <reference path="../../../Utilities/EventHandler.ts" />
+/// <reference path="../../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../../../Interfaces/IUpdateable.ts" />
+/// <reference path="../../../Interfaces/IDisposable.ts" />
+/// <reference path="../../../GameTime.ts" />
+/// <reference path="../../ImageSource.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        /**
+        * Defines an animation that can be drawn to the screen.
+        */
+        var SpriteAnimation = (function () {
+            function SpriteAnimation(imageSource, fps, frameSize, frameCount, startOffset) {
+                if (typeof startOffset === "undefined") { startOffset = EndGate.Vector2d.Zero; }
+                var _this = this;
+                this._imageSource = imageSource;
+                this._frameSize = frameSize;
+                this._frameCount = frameCount;
+                this._startOffset = startOffset;
+                this._playing = false;
+                this._repeating = false;
+                this._currentFrame = 0;
+                this._lastStepAt = 0;
+
+                this._onComplete = new EndGate.EventHandler();
+
+                this.Fps = fps;
+
+                if (imageSource.ClipSize !== null || imageSource.IsLoaded()) {
+                    this._framesPerRow = Math.min(Math.floor((imageSource.Size.Width - startOffset.X) / frameSize.Width), frameCount);
+                    this.UpdateImageSource();
+                } else {
+                    imageSource.OnLoaded.BindFor(function (image) {
+                        _this._framesPerRow = Math.min(Math.floor((imageSource.Size.Width - startOffset.X) / frameSize.Width), frameCount);
+                        _this.UpdateImageSource();
+                    }, 1);
+
+                    this._framesPerRow = 1;
+                }
+            }
+            Object.defineProperty(SpriteAnimation.prototype, "OnComplete", {
+                /**
+                * Gets an event that is triggered when the animation has completed, will not trigger if the animation is repeating.  Functions can be bound or unbound to this event to be executed when the event triggers.
+                */
+                get: function () {
+                    return this._onComplete;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(SpriteAnimation.prototype, "Fps", {
+                /**
+                * Gets or sets the current frames per second.
+                */
+                get: function () {
+                    return this._fps;
+                },
+                set: function (newFps) {
+                    this._fps = newFps;
+                    this._stepEvery = 1000 / this._fps;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            /**
+            * Determines if the animation is currently playing.
+            */
+            SpriteAnimation.prototype.IsPlaying = function () {
+                return this._playing;
+            };
+
+            /**
+            * Determines if the animation can play.  This is essentially checking if the underlying image source is loaded.
+            */
+            SpriteAnimation.prototype.CanPlay = function () {
+                return this._imageSource.IsLoaded();
+            };
+
+            SpriteAnimation.prototype.Play = function (repeat) {
+                if (typeof repeat === "undefined") { repeat = false; }
+                if (!this._imageSource.ClipSize) {
+                    throw new Error("Image source not loaded yet.");
+                }
+
+                this._lastStepAt = new Date().getTime();
+                this._repeating = repeat;
+                this._playing = true;
+                this.UpdateImageSource();
+            };
+
+            /**
+            * Pauses the animation.
+            */
+            SpriteAnimation.prototype.Pause = function () {
+                this._playing = false;
+            };
+
+            SpriteAnimation.prototype.Step = function (count) {
+                if (typeof count === "undefined") { count = 1; }
+                this._currentFrame += count;
+
+                if (this._currentFrame >= this._frameCount) {
+                    if (this._repeating) {
+                        this._currentFrame %= this._frameCount;
+                    } else {
+                        this._currentFrame = this._frameCount - 1;
+                        this.OnComplete.Trigger();
+                        this.Stop(false);
+                    }
+                }
+
+                if (count !== 0) {
+                    this.UpdateImageSource();
+                }
+            };
+
+            SpriteAnimation.prototype.Stop = function (resetFrame) {
+                if (typeof resetFrame === "undefined") { resetFrame = true; }
+                this._playing = false;
+                if (resetFrame) {
+                    this.Reset();
+                }
+            };
+
+            /**
+            * Resets the current animation frame to 0.
+            */
+            SpriteAnimation.prototype.Reset = function () {
+                this._currentFrame = 0;
+                this.UpdateImageSource();
+            };
+
+            /**
+            * Updates the animations current frame.  Needs to be updated in order to play the animation.
+            * @param gameTime The current game time object.
+            */
+            SpriteAnimation.prototype.Update = function (gameTime) {
+                var timeSinceStep = gameTime.Now.getTime() - this._lastStepAt, stepCount = 0;
+
+                if (this._playing) {
+                    stepCount = Math.floor(timeSinceStep / this._stepEvery);
+                    if (stepCount > 0) {
+                        this._lastStepAt = gameTime.Now.getTime();
+                        this.Step(stepCount);
+                    }
+                }
+            };
+
+            /**
+            * Unbinds all events.  Does not dispose the underlying image source.
+            */
+            SpriteAnimation.prototype.Dispose = function () {
+                this._onComplete.Dispose();
+            };
+
+            SpriteAnimation.prototype.UpdateImageSource = function () {
+                var row = this.GetFrameRow(), column = this.GetFrameColumn();
+
+                this._imageSource.ClipLocation.X = this._startOffset.X + column * this._frameSize.Width;
+                this._imageSource.ClipLocation.Y = this._startOffset.Y + row * this._frameSize.Height;
+                this._imageSource.ClipSize = this._frameSize;
+            };
+
+            SpriteAnimation.prototype.GetFrameRow = function () {
+                return Math.floor(this._currentFrame / this._framesPerRow);
+            };
+
+            SpriteAnimation.prototype.GetFrameColumn = function () {
+                return Math.ceil(this._currentFrame % this._framesPerRow);
+            };
+            return SpriteAnimation;
+        })();
+        Graphics.SpriteAnimation = SpriteAnimation;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Bounds/BoundingCircle.ts" />
+/// <reference path="../Color.ts" />
+/// <reference path="Shape.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        /**
+        * Defines a drawable circle.
+        */
+        var Circle = (function (_super) {
+            __extends(Circle, _super);
+            function Circle(x, y, radius, color) {
+                _super.call(this, new EndGate.Vector2d(x, y), color);
+                this._type = "Circle";
+
+                this.Radius = radius;
+            }
+            /**
+            * The bounding area that represents where the Circle will draw.
+            */
+            Circle.prototype.GetDrawBounds = function () {
+                var bounds = new EndGate.Bounds.BoundingCircle(this.Position, this.Radius);
+
+                bounds.Rotation = this.Rotation;
+
+                return bounds;
+            };
+
+            /**
+            * Scale's the circle graphic.
+            * @param scale The value to multiply the graphic's size by.
+            */
+            Circle.prototype.Scale = function (scale) {
+                this.Radius *= scale;
+            };
+
+            /**
+            * Returns a nearly identical copy of this Circle.  If this Circle belongs to a parent, the cloned Circle will not. If this Circle has children, all children will be cloned as well.  Lastly, the cloned Circle will not have the same event bindings as this one does.
+            */
+            Circle.prototype.Clone = function () {
+                var graphic = new Circle(this.Position.X, this.Position.Y, this.Radius, this.Color.Clone());
+
+                _super.prototype._Clone.call(this, graphic);
+
+                return graphic;
+            };
+
+            Circle.prototype._BuildPath = function (context) {
+                context.arc(0, 0, this.Radius, 0, Math.twoPI);
+            };
+            return Circle;
+        })(EndGate.Graphics.Shape);
+        Graphics.Circle = Circle;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+/// <reference path="../../Assets/Sizes/Size2d.ts" />
+/// <reference path="../../Assets/Vectors/Vector2d.ts" />
+/// <reference path="../../Bounds/BoundingRectangle.ts" />
+/// <reference path="../Color.ts" />
+/// <reference path="Shape.ts" />
+var EndGate;
+(function (EndGate) {
+    (function (Graphics) {
+        /**
+        * Defines a drawable rectangle.
+        */
+        var Rectangle = (function (_super) {
+            __extends(Rectangle, _super);
+            function Rectangle(x, y, width, height, color) {
+                _super.call(this, new EndGate.Vector2d(x, y), color);
+                this._type = "Rectangle";
+
+                this.Size = new EndGate.Size2d(width, height);
+            }
+            /**
+            * The bounding area that represents where the Rectangle will draw.
+            */
+            Rectangle.prototype.GetDrawBounds = function () {
+                var bounds = new EndGate.Bounds.BoundingRectangle(this.Position, this.Size);
+
+                bounds.Rotation = this.Rotation;
+
+                return bounds;
+            };
+
+            /**
+            * Scale's the rectangle graphic.
+            * @param scale The value to multiply the graphic's size by.
+            */
+            Rectangle.prototype.Scale = function (scale) {
+                this.Size.Width *= scale;
+                this.Size.Height *= scale;
+            };
+
+            /**
+            * Returns a nearly identical copy of this Rectangle.  If this Rectangle belongs to a parent, the cloned Rectangle will not. If this Rectangle has children, all children will be cloned as well.  Lastly, the cloned Rectangle will not have the same event bindings as this one does.
+            */
+            Rectangle.prototype.Clone = function () {
+                var graphic = new Rectangle(this.Position.X, this.Position.Y, this.Size.Width, this.Size.Height, this.Color.Clone());
+
+                _super.prototype._Clone.call(this, graphic);
+
+                return graphic;
+            };
+
+            Rectangle.prototype._BuildPath = function (context) {
+                context.rect(-this.Size.HalfWidth, -this.Size.HalfHeight, this.Size.Width, this.Size.Height);
+            };
+            return Rectangle;
+        })(EndGate.Graphics.Shape);
+        Graphics.Rectangle = Rectangle;
+    })(EndGate.Graphics || (EndGate.Graphics = {}));
+    var Graphics = EndGate.Graphics;
+})(EndGate || (EndGate = {}));
+/// <reference path="../../Interfaces/ITyped.ts" />
+/// <reference path="../../Interfaces/ICloneable.ts" />
+/// <reference path="../Vectors/Vector2d.ts" />
+/// <reference path="../../Extensions/MathExtensions.ts" />
+var EndGate;
+(function (EndGate) {
+    /**
+    * Defines a matrix with 2 columns and 2 rows (2x2).
+    */
+    var Matrix2x2 = (function () {
+        function Matrix2x2(topLeft, topRight, botLeft, botRight) {
+            if (typeof topLeft === "undefined") { topLeft = 0; }
+            if (typeof topRight === "undefined") { topRight = 0; }
+            if (typeof botLeft === "undefined") { botLeft = 0; }
+            if (typeof botRight === "undefined") { botRight = 0; }
+            this._type = "Matrix2x2";
+            this.Values = [
+                [topLeft, topRight],
+                [botLeft, botRight]
+            ];
+        }
+        Object.defineProperty(Matrix2x2, "Zero", {
+            /**
+            * Creates a Matrix2x2 with all its rows and columns initialized to 0.
+            */
+            get: function () {
+                return new Matrix2x2();
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+        Object.defineProperty(Matrix2x2, "Identity", {
+            /**
+            * Returns the identity matrix for a 2x2.
+            */
+            get: function () {
+                return new Matrix2x2(1, 0, 0, 1);
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+        /**
+        * Executes the action with each row and column item of this Matrix2x2 and modifies their values.
+        * @param action The function used to modify each row and column items.
+        */
+        Matrix2x2.prototype.Apply = function (action) {
+            this.Values[0][0] = action(this.Values[0][0]);
+            this.Values[0][1] = action(this.Values[0][1]);
+            this.Values[1][0] = action(this.Values[1][0]);
+            this.Values[1][1] = action(this.Values[1][1]);
+        };
+
+        /**
+        * Executes the action with each row and column item of this Matrix2x2.
+        * @param action The function to pass the row column item to.
+        */
+        Matrix2x2.prototype.Trigger = function (action) {
+            action(this.Values[0][0]);
+            action(this.Values[0][1]);
+            action(this.Values[1][0]);
+            action(this.Values[1][1]);
+        };
+
+        Matrix2x2.prototype.Add = function (val) {
+            if (val._type === "Matrix2x2") {
+                return new Matrix2x2(this.Values[0][0] + val.Values[0][0], this.Values[0][1] + val.Values[0][1], this.Values[1][0] + val.Values[1][0], this.Values[1][1] + val.Values[1][1]);
+            } else {
+                return new Matrix2x2(this.Values[0][0] + val, this.Values[0][1] + val, this.Values[1][0] + val, this.Values[1][1] + val);
+            }
+        };
+
+        Matrix2x2.prototype.Multiply = function (val) {
+            if (val._type === "Matrix2x2") {
+                return new Matrix2x2(this.Values[0][0] * val.Values[0][0] + this.Values[0][1] * val.Values[1][0], this.Values[0][0] * val.Values[0][1] + this.Values[0][1] * val.Values[1][1], this.Values[1][0] * val.Values[0][0] + this.Values[1][1] * val.Values[1][0], this.Values[1][0] * val.Values[0][1] + this.Values[1][1] * val.Values[1][1]);
+            } else {
+                return new Matrix2x2(this.Values[0][0] * val, this.Values[0][1] * val, this.Values[1][0] * val, this.Values[1][1] * val);
+            }
+        };
+
+        Matrix2x2.prototype.Subtract = function (val) {
+            if (val._type === "Matrix2x2") {
+                return new Matrix2x2(this.Values[0][0] - val.Values[0][0], this.Values[0][1] - val.Values[0][1], this.Values[1][0] - val.Values[1][0], this.Values[1][1] - val.Values[1][1]);
+            } else {
+                return new Matrix2x2(this.Values[0][0] - val, this.Values[0][1] - val, this.Values[1][0] - val, this.Values[1][1] - val);
+            }
+        };
+
+        Matrix2x2.prototype.SubtractFrom = function (val) {
+            if (val._type === "Matrix2x2") {
+                return new Matrix2x2(val.Values[0][0] - this.Values[0][0], val.Values[0][1] - this.Values[0][1], val.Values[1][0] - this.Values[1][0], val.Values[1][1] - this.Values[1][1]);
+            } else {
+                return new Matrix2x2(val - this.Values[0][0], val - this.Values[0][1], val - this.Values[1][0], val - this.Values[1][1]);
+            }
+        };
+
+        Matrix2x2.prototype.Divide = function (val) {
+            if (val._type === "Matrix2x2") {
+                return new Matrix2x2(this.Values[0][0] / val.Values[0][0], this.Values[0][1] / val.Values[0][1], this.Values[1][0] / val.Values[1][0], this.Values[1][1] / val.Values[1][1]);
+            } else {
+                return new Matrix2x2(this.Values[0][0] / val, this.Values[0][1] / val, this.Values[1][0] / val, this.Values[1][1] / val);
+            }
+        };
+
+        Matrix2x2.prototype.DivideFrom = function (val) {
+            if (val._type === "Matrix2x2") {
+                return new Matrix2x2(val.Values[0][0] / this.Values[0][0], val.Values[0][1] / this.Values[0][1], val.Values[1][0] / this.Values[1][0], val.Values[1][1] / this.Values[1][1]);
+            } else {
+                return new Matrix2x2(val / this.Values[0][0], val / this.Values[0][1], val / this.Values[1][0], val / this.Values[1][1]);
+            }
+        };
+
+        /**
+        * Returns a Vector2d that has been transformed by the current Matrix2x2.
+        * @param vector The vector to transform.
+        */
+        Matrix2x2.prototype.Transform = function (vector) {
+            return new EndGate.Vector2d(this.Values[0][0] * vector.X + this.Values[0][1] * vector.Y, this.Values[1][0] * vector.X + this.Values[1][1] * vector.Y);
+        };
+
+        /**
+        * Returns the transpose of the current Matrix2x2.
+        */
+        Matrix2x2.prototype.Transpose = function () {
+            return new Matrix2x2(this.Values[0][0], this.Values[1][0], this.Values[0][1], this.Values[1][1]);
+        };
+
+        /**
+        * Returns the determinant of the current Matrix2x2.
+        */
+        Matrix2x2.prototype.Determinant = function () {
+            return this.Values[0][0] * this.Values[1][1] - this.Values[0][1] * this.Values[1][0];
+        };
+
+        /**
+        * Returns the inverse of the current Matrix2x2.
+        */
+        Matrix2x2.prototype.Inverse = function () {
+            return new Matrix2x2(this.Values[1][1], -this.Values[0][1], -this.Values[1][0], this.Values[0][0]).Multiply(1 / this.Determinant());
+        };
+
+        /**
+        * Returns a Matrix2x2 that has identical rows and columns as the current Matrix2x2.
+        */
+        Matrix2x2.prototype.Clone = function () {
+            return new Matrix2x2(this.Values[0][0], this.Values[0][1], this.Values[1][0], this.Values[1][1]);
+        };
+
+        /**
+        * Determines whether this Matrix2x2 has the same row and column values as the provided Matrix2x2.
+        * @param matrix The Matrix2x2 to compare the current Matrix2x2 to.
+        */
+        Matrix2x2.prototype.Equivalent = function (matrix) {
+            return this.Values[0][0] === matrix.Values[0][0] && this.Values[0][1] === matrix.Values[0][1] && this.Values[1][0] === matrix.Values[1][0] && this.Values[1][1] === matrix.Values[1][1];
+        };
+
+        /**
+        * Overridden toString method to display Matrix2x2 in easy to read format: "[topLeft, topRight] [botLeft, botRight]"
+        */
+        Matrix2x2.prototype.toString = function () {
+            return this.Values[0].toString() + " " + this.Values[1].toString();
+        };
+
+        /**
+        * Creates a scaling matrix based off the provided Vector2d.
+        * @param vector The vector used to determine the X and Y scaling values.
+        */
+        Matrix2x2.Scale = function (vector) {
+            return new Matrix2x2(vector.X, 0, 0, vector.Y);
+        };
+        return Matrix2x2;
+    })();
+    EndGate.Matrix2x2 = Matrix2x2;
+})(EndGate || (EndGate = {}));
+/// <reference path="Game.ts" />
+/// <reference path="GameConfiguration.ts" />
+/// <reference path="GameTime.ts" />
+/// <reference path="Utilities/EventHandler.ts" />
+/// <reference path="Utilities/EventHandler1.ts" />
+/// <reference path="Utilities/EventHandler2.ts" />
+/// <reference path="Rendering/Scene2d.ts" />
+/// <reference path="Rendering/Camera/Camera2d.ts" />
+/// <reference path="MovementControllers/LinearMovementController.ts" />
+/// <reference path="InputControllers/DirectionalInputController.ts" />
+/// <reference path="Graphics/Graphic2d.ts" />
+/// <reference path="Graphics/Shapes/Text/Text2d.ts" />
+/// <reference path="Graphics/Sprites/Sprite2d.ts" />
+/// <reference path="Graphics/ImageSource.ts" />
+/// <reference path="Graphics/Sprites/Animation/SpriteAnimation.ts" />
+/// <reference path="Graphics/Shapes/Shape.ts" />
+/// <reference path="Graphics/Shapes/Circle.ts" />
+/// <reference path="Graphics/Shapes/Rectangle.ts" />
+/// <reference path="Graphics/Line2d.ts" />
+/// <reference path="Graphics/Grid/Grid.ts" />
+/// <reference path="Collision/Collidable.ts" />
+/// <reference path="Bounds/BoundingCircle.ts" />
+/// <reference path="Bounds/BoundingRectangle.ts" />
+/// <reference path="Sound/AudioClip.ts" />
+/// <reference path="Sound/AudioPlayer.ts" />
+/// <reference path="Sound/AudioSettings.ts" />
+/// <reference path="Assets/Sizes/Size2d.ts" />
+/// <reference path="Assets/Vectors/Vector2d.ts" />
+/// <reference path="Assets/Matrixes/Matrix2x2.ts" />
+/// <reference path="Graphics/TileMaps/SquareTileMap.ts" />
+/// <reference path="Graphics/TileMaps/TileMap.ts" />
+// When this file is compiled into a declaration file it does not include this line,
+// therefore in the build.ps1 we have to append this aliasing module.
+var eg = EndGate;
+/// <reference path="../Interfaces/IDisposable.ts" />
+/// <reference path="../Interfaces/ITyped.ts" />
 var EndGate;
 (function (EndGate) {
     /**
@@ -10842,4 +11084,4 @@ var EndGate;
     })();
     EndGate.EventHandler3 = EventHandler3;
 })(EndGate || (EndGate = {}));
-//@ sourceMappingURL=endgate-0.2.0.min.js.map
+//@ sourceMappingURL=endgate-0.2.1.min.js.map

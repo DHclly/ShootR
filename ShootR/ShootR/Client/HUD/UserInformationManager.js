@@ -2,7 +2,7 @@
 /// <reference path="../Server/IUserInformation.ts" />
 var ShootR;
 (function (ShootR) {
-    var UserInformationManager = (function () {
+    var UserInformationManager = /** @class */ (function () {
         function UserInformationManager(userInformation) {
             this._displayName = $("#DisplayName");
             this._displayNameLB = $("#DisplayNameLB");
@@ -14,7 +14,7 @@ var ShootR;
             this._youLB.attr("src", userInformation.Photo);
         }
         return UserInformationManager;
-    })();
+    }());
     ShootR.UserInformationManager = UserInformationManager;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=UserInformationManager.js.map

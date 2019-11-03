@@ -1,4 +1,4 @@
-/// <reference path="../../Scripts/endgate-0.2.0.d.ts" />
+/// <reference path="../../Scripts/endgate-0.2.1.d.ts" />
 /// <reference path="../Server/IPayloadDefinitions.ts" />
 /// <reference path="BulletGraphic.ts" />
 /// <reference path="BulletMovementController.ts" />
@@ -19,10 +19,9 @@ module ShootR {
 
         constructor(payload: Server.IBulletData, contentManager: eg.Content.ContentManager) {
             // Going to use the rectangle to "hold" all the other graphics
-            this.Graphic = new BulletGraphic(payload.MovementController.Position, Bullet.SIZE, contentManager);
-
-            super(this.Graphic.GetDrawBounds());
-
+            let bulletGraphic = new BulletGraphic(payload.MovementController.Position, Bullet.SIZE, contentManager);
+            super(bulletGraphic.GetDrawBounds());
+            this.Graphic = bulletGraphic;
             this.OnExplosion = new eg.EventHandler();
             this.MovementController = new BulletMovementController(new Array<eg.IMoveable>(this.Bounds, this.Graphic), payload.MovementController);
             this.AnimationHandler = new BulletAnimationHandler(this, contentManager);            

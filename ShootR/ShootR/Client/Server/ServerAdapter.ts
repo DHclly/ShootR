@@ -1,4 +1,4 @@
-/// <reference path="../../Scripts/endgate-0.2.0.d.ts" />
+/// <reference path="../../Scripts/endgate-0.2.1.d.ts" />
 /// <reference path="../../Scripts/typings/signalr/signalr.d.ts" />
 /// <reference path="IPayloadDefinitions.ts" />
 /// <reference path="PayloadDecompressor.ts" />
@@ -24,7 +24,7 @@ module ShootR.Server {
         private _payloadDecompressor: PayloadDecompressor;
         private _connectionManager: ServerConnectionManager;
 
-        constructor(public Connection: HubConnection, public Proxy: HubProxy, authCookieName: string) {
+        constructor(public Connection: SignalR.Hub.Connection, public Proxy: HubProxy, authCookieName: string) {
             var savedProxyInvoke = this.Proxy.invoke;
 
             this.OnPayload = new eg.EventHandler1<IPayloadData>();
@@ -37,9 +37,9 @@ module ShootR.Server {
 
             this._connectionManager = new ServerConnectionManager(authCookieName);
 
-            (<any>this.Proxy.invoke) = () => {
+            (<any>this.Proxy.invoke) = (...args) => {
                 if ((<any>this.Connection).state === $.signalR.connectionState.connected) {
-                    return savedProxyInvoke.apply(this.Proxy, arguments);
+                    return savedProxyInvoke.bind(this.Proxy, ...args);
                 }
             };
         }

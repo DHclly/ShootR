@@ -1,19 +1,27 @@
-/// <reference path="../../../Scripts/endgate-0.2.0.d.ts" />
+/// <reference path="../../../Scripts/endgate-0.2.1.d.ts" />
 /// <reference path="../../Common/Animation.ts" />
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var ShootR;
 (function (ShootR) {
-    var ShipDeathAnimation = (function (_super) {
+    var ShipDeathAnimation = /** @class */ (function (_super) {
         __extends(ShipDeathAnimation, _super);
         function ShipDeathAnimation(contentManager) {
-            _super.call(this, eg.Vector2d.Zero, contentManager.GetImage("ShipExplosion"), ShipDeathAnimation.FPS, ShipDeathAnimation.FRAME_SIZE, ShipDeathAnimation.FRAME_COUNT);
-            this.Rotation = (Math.random() * (Math.PI * 100)) / 100;
-            this.Visible = false;
+            var _this = _super.call(this, eg.Vector2d.Zero, contentManager.GetImage("ShipExplosion"), ShipDeathAnimation.FPS, ShipDeathAnimation.FRAME_SIZE, ShipDeathAnimation.FRAME_COUNT) || this;
+            _this.Rotation = (Math.random() * (Math.PI * 100)) / 100;
+            _this.Visible = false;
+            return _this;
         }
         ShipDeathAnimation.prototype.Play = function () {
             this.Visible = true;
@@ -23,7 +31,7 @@ var ShootR;
         ShipDeathAnimation.FRAME_COUNT = 30;
         ShipDeathAnimation.FPS = 25;
         return ShipDeathAnimation;
-    })(ShootR.Animation);
+    }(ShootR.Animation));
     ShootR.ShipDeathAnimation = ShipDeathAnimation;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=ShipDeathAnimation.js.map

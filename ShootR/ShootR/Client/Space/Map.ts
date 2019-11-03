@@ -1,4 +1,4 @@
-/// <reference path="../../Scripts/endgate-0.2.0.d.ts" />
+/// <reference path="../../Scripts/endgate-0.2.1.d.ts" />
 /// <reference path="../Server/ServerAdapter.ts" />
 /// <reference path="MapBoundary.ts" />
 /// <reference path="AreaRenderer.ts" />

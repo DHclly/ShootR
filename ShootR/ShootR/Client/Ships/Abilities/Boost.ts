@@ -1,4 +1,4 @@
-/// <reference path="../../../Scripts/endgate-0.2.0.d.ts" />
+/// <reference path="../../../Scripts/endgate-0.2.1.d.ts" />
 /// <reference path="MovementAbility.ts" />
 /// <reference path="../ShipMovementController.ts" />
 

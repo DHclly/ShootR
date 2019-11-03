@@ -1,4 +1,4 @@
-/// <reference path="../../Scripts/endgate-0.2.0.d.ts" />
+/// <reference path="../../Scripts/endgate-0.2.1.d.ts" />
 /// <reference path="../../Scripts/typings/signalr/signalr.d.ts" />
 /// <reference path="../Server/ServerAdapter.ts" />
 /// <reference path="GameInformer.ts" />
@@ -21,7 +21,7 @@ module ShootR.Debug {
             Disconnected: eg.Graphics.Color.Red
         };
 
-        private _connection: HubConnection;
+        private _connection: SignalR.Hub.Connection;
         private _textNode: eg.Graphics.Text2d;
 
         constructor(informer: GameInformer, serverAdapter: Server.ServerAdapter) {
