@@ -54,7 +54,8 @@ var ShootR;
             ServerAdapter.prototype.TryInitialize = function (userInformation, onComplete, count) {
                 var _this = this;
                 if (count === void 0) { count = 0; }
-                this.Proxy.invoke("initializeClient", userInformation.RegistrationID).done(function (initialization) {
+                var p = this.Proxy.invoke("initializeClient", [userInformation.RegistrationID]);
+                p.done(function (initialization) {
                     if (!initialization) {
                         if (count >= ServerAdapter.NEGOTIATE_RETRIES) {
                             console.log("Could not negotiate with server, refreshing the page.");
@@ -69,7 +70,7 @@ var ShootR;
                     else {
                         onComplete(initialization);
                     }
-                });
+                }).fail(function (err) { return console.log(err); });
             };
             ServerAdapter.prototype.Wire = function () {
                 var _this = this;

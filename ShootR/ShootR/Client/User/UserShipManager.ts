@@ -15,7 +15,7 @@ module ShootR {
 
         private _shipInputController: ShipInputController;
         private _userCameraController: UserCameraController;
-        private _proxy: HubProxy;
+        private _proxy: SignalR.Hub.Proxy;
         private _lastSync: Date;
 
         constructor(public ControlledShipId: number, private _shipManager: ShipManager, private _collisionManager: eg.Collision.CollisionManager, input: eg.Input.InputManager, private _camera: eg.Rendering.Camera2d, serverAdapter: Server.ServerAdapter) {

@@ -32,7 +32,7 @@ module ShootR.Debug {
 
             this.UpdateText();
 
-            this._connection.stateChanged((stateChange: SignalRStateChange) => {
+            this._connection.stateChanged((stateChange: SignalR.StateChanged) => {
                 this.UpdateText();
             });
         }

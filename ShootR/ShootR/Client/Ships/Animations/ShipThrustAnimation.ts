@@ -14,10 +14,15 @@ module ShootR {
         private _thrustStartAnimator: eg.Graphics.SpriteAnimation;
 
         constructor(contentManager: eg.Content.ContentManager) {
-            this._thrustStartSpriteSheet = contentManager.GetImage("ThrustStart");
-            this._thrustSpriteSheet = contentManager.GetImage("Thrust");
+            const thrustStartSpriteSheet = contentManager.GetImage("ThrustStart");
+            const thrustSpriteSheet = contentManager.GetImage("Thrust");
+            super(-Ship.SIZE.HalfWidth - ShipThrustAnimation.FRAME_SIZE.HalfWidth, 0,
+                thrustSpriteSheet, ShipThrustAnimation.FRAME_SIZE.Width, ShipThrustAnimation.FRAME_SIZE.Height);
+            this._thrustStartSpriteSheet = thrustStartSpriteSheet;
 
-            super(-Ship.SIZE.HalfWidth - ShipThrustAnimation.FRAME_SIZE.HalfWidth, 0, this._thrustSpriteSheet, ShipThrustAnimation.FRAME_SIZE.Width, ShipThrustAnimation.FRAME_SIZE.Height);
+            this._thrustSpriteSheet = thrustSpriteSheet;
+
+
 
             this._thrustStartAnimator = new eg.Graphics.SpriteAnimation(this._thrustStartSpriteSheet, ShipThrustAnimation.FPS, ShipThrustAnimation.FRAME_SIZE, ShipThrustAnimation.FRAME_COUNT);
             this._thrustAnimator = new eg.Graphics.SpriteAnimation(this._thrustSpriteSheet, ShipThrustAnimation.FPS, ShipThrustAnimation.FRAME_SIZE, ShipThrustAnimation.FRAME_COUNT);

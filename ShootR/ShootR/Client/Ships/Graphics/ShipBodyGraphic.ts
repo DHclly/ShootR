@@ -7,7 +7,8 @@ module ShootR {
         private static _bodyGraphics: Array<eg.Graphics.ImageSource>;
 
         constructor(levelManager: ShipLevelManager) {
-            super(0, 0, this.DetermineBody(levelManager));
+            const body = ShipBodyGraphic._bodyGraphics[Math.min(levelManager.Level, 13)];
+            super(0, 0, body);
 
             levelManager.OnLevelChange.Bind((newLevel: number) => {
                 this.Image = this.DetermineBody(levelManager);

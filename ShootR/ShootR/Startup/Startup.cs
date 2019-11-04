@@ -49,10 +49,11 @@ namespace ShootR
                 ConsumerSecret = ConfigurationManager.AppSettings["twitterConsumerSecret"]
             });
 
-            app.UseGoogleAuthentication(new GoogleAuthenticationOptions
-            {
-                SignInAsAuthenticationType = "ShootR"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+            //{
+            //    SignInAsAuthenticationType = "ShootR",
+            //    ClientId=""
+            //});
 
             app.UseFacebookAuthentication(new FacebookAuthenticationOptions
             {

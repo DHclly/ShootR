@@ -81,6 +81,7 @@ declare module ShootR.Server {
         Experience: number;
         ExperienceToNextLevel: number;
         Notification: any;
+        LastCommandProcessed: any,
         KilledByName: any;
         KilledByPhoto: any;
     }

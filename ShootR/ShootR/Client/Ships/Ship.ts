@@ -24,16 +24,18 @@ module ShootR {
         private _destroyed: boolean;
 
         constructor(payload: Server.IShipData, contentManager: eg.Content.ContentManager) {
+            const lifeController = new ShipLifeController(payload);
+            const levelManager = new ShipLevelManager(payload);
+            const graphic = new ShipGraphic(payload.Name, payload.UserControlled, levelManager, lifeController,
+                payload.MovementController.Position, payload.MovementController.Rotation, Ship.SIZE, contentManager);
+            // Going to use the rectangle to "hold" all the other graphics
+            super(graphic.GetDrawBounds());
             this._destroyed = false;
             this.OnExplosion = new eg.EventHandler();
 
-            this.LifeController = new ShipLifeController(payload);
-            this.LevelManager = new ShipLevelManager(payload);
-
-            this.Graphic = new ShipGraphic(payload.Name, payload.UserControlled, this.LevelManager, this.LifeController, payload.MovementController.Position, payload.MovementController.Rotation, Ship.SIZE, contentManager);
-
-            // Going to use the rectangle to "hold" all the other graphics
-            super(this.Graphic.GetDrawBounds());
+            this.LifeController = lifeController;
+            this.LevelManager = levelManager;
+            this.Graphic = graphic;
 
             this.MovementController = new ShipMovementController(new Array<eg.IMoveable>(this.Bounds, this.Graphic));
             this.MovementController.UserControlled = payload.UserControlled;

@@ -24,7 +24,7 @@ module ShootR.Server {
         private _payloadDecompressor: PayloadDecompressor;
         private _connectionManager: ServerConnectionManager;
 
-        constructor(public Connection: SignalR.Hub.Connection, public Proxy: HubProxy, authCookieName: string) {
+        constructor(public Connection: SignalR.Hub.Connection, public Proxy: SignalR.Hub.Proxy, authCookieName: string) {
             var savedProxyInvoke = this.Proxy.invoke;
 
             this.OnPayload = new eg.EventHandler1<IPayloadData>();
@@ -69,7 +69,8 @@ module ShootR.Server {
         }
 
         private TryInitialize(userInformation: IUserInformation, onComplete: (initialization: IClientInitialization) => void, count: number = 0): void {
-            this.Proxy.invoke("initializeClient", userInformation.RegistrationID).done((initialization: IClientInitialization) => {
+            let p = this.Proxy.invoke("initializeClient", [userInformation.RegistrationID]);
+            p.done((initialization: IClientInitialization) => {
                 if (!initialization) {
                     if (count >= ServerAdapter.NEGOTIATE_RETRIES) {
                         console.log("Could not negotiate with server, refreshing the page.");
@@ -82,7 +83,7 @@ module ShootR.Server {
                 } else {
                     onComplete(initialization);
                 }
-            });
+            }).fail(err => console.log(err));
         }
 
         private Wire(): void {

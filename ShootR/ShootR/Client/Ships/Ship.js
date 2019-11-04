@@ -6,48 +6,51 @@
 /// <reference path="ShipMovementController.ts" />
 /// <reference path="ShipLifeController.ts" />
 /// <reference path="Levels/ShipLevelManager.ts" />
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var ShootR;
 (function (ShootR) {
-    var Ship = (function (_super) {
+    var Ship = /** @class */ (function (_super) {
         __extends(Ship, _super);
         function Ship(payload, contentManager) {
-            this._destroyed = false;
-            this.OnExplosion = new eg.EventHandler();
-
-            this.LifeController = new ShootR.ShipLifeController(payload);
-            this.LevelManager = new ShootR.ShipLevelManager(payload);
-
-            this.Graphic = new ShootR.ShipGraphic(payload.Name, payload.UserControlled, this.LevelManager, this.LifeController, payload.MovementController.Position, payload.MovementController.Rotation, Ship.SIZE, contentManager);
-
+            var _this = this;
+            var lifeController = new ShootR.ShipLifeController(payload);
+            var levelManager = new ShootR.ShipLevelManager(payload);
+            var graphic = new ShootR.ShipGraphic(payload.Name, payload.UserControlled, levelManager, lifeController, payload.MovementController.Position, payload.MovementController.Rotation, Ship.SIZE, contentManager);
             // Going to use the rectangle to "hold" all the other graphics
-            _super.call(this, this.Graphic.GetDrawBounds());
-
-            this.MovementController = new ShootR.ShipMovementController(new Array(this.Bounds, this.Graphic));
-            this.MovementController.UserControlled = payload.UserControlled;
-
-            this.AbilityHandler = new ShootR.ShipAbilityHandler(this);
-            this.AnimationHandler = new ShootR.ShipAnimationHandler(this, contentManager);
-
-            this.LoadPayload(payload, true);
-
-            this.Graphic.RotateShip(this.MovementController.Rotation);
+            _this = _super.call(this, graphic.GetDrawBounds()) || this;
+            _this._destroyed = false;
+            _this.OnExplosion = new eg.EventHandler();
+            _this.LifeController = lifeController;
+            _this.LevelManager = levelManager;
+            _this.Graphic = graphic;
+            _this.MovementController = new ShootR.ShipMovementController(new Array(_this.Bounds, _this.Graphic));
+            _this.MovementController.UserControlled = payload.UserControlled;
+            _this.AbilityHandler = new ShootR.ShipAbilityHandler(_this);
+            _this.AnimationHandler = new ShootR.ShipAnimationHandler(_this, contentManager);
+            _this.LoadPayload(payload, true);
+            _this.Graphic.RotateShip(_this.MovementController.Rotation);
+            return _this;
         }
         Ship.prototype.Update = function (gameTime) {
             this.AbilityHandler.Update(gameTime);
             this.MovementController.Update(gameTime);
             this.AnimationHandler.Update(gameTime);
-
             // Updates rotation
             this.Graphic.RotateShip(this.MovementController.Rotation);
             this.Graphic.Update(gameTime);
         };
-
         Ship.prototype.LoadPayload = function (payload, forceMovement) {
             this.ID = payload.ID;
             this.MovementController.LoadPayload(payload.MovementController, forceMovement);
@@ -55,18 +58,16 @@ var ShootR;
             this.LevelManager.LoadPayload(payload);
             this.AbilityHandler.LoadPayload(payload.Abilities);
         };
-
         Ship.prototype.Destroy = function (explode) {
-            if (typeof explode === "undefined") { explode = false; }
+            if (explode === void 0) { explode = false; }
             if (!this._destroyed) {
                 this._destroyed = true;
-
                 this.MovementController.Dispose();
-
                 if (!explode) {
                     this.Graphic.Dispose();
                     this.Dispose();
-                } else {
+                }
+                else {
                     // We rely on the completion of the explosion to finish disposing the bounds and graphic
                     this.OnExplosion.Trigger();
                 }
@@ -75,7 +76,7 @@ var ShootR;
         Ship.SIZE = new eg.Size2d(75);
         Ship.DAMAGE_INCREASE_RATE = .1;
         return Ship;
-    })(eg.Collision.Collidable);
+    }(eg.Collision.Collidable));
     ShootR.Ship = Ship;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=Ship.js.map
