@@ -38,7 +38,7 @@ namespace ShootR
             return (utcNow - _spawnedAt) >= DIE_AFTER;
         }
 
-        public BulletMovementController MovementController
+        public new BulletMovementController MovementController
         {
             get
             {

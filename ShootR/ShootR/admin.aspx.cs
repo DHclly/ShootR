@@ -17,14 +17,14 @@ namespace ShootR
 
         protected override void OnPreRender(EventArgs e)
         {
-            if (ViewState["Page"] == "UpdateRuntime")
+            if (ViewState["Page"].ToString() == "UpdateRuntime")
             {
                 MaxUsers.Text = Game.Instance.RuntimeConfiguration.MaxServerUsers.ToString();
                 Login.Visible = false;
                 Config.Visible = true;
                 Error.Visible = false;
             }
-            else if (ViewState["Page"] == "Login")
+            else if (ViewState["Page"].ToString() == "Login")
             {
                 Login.Visible = true;
                 Config.Visible = false;

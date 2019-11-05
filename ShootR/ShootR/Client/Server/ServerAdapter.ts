@@ -39,7 +39,7 @@ module ShootR.Server {
 
             (<any>this.Proxy.invoke) = (...args) => {
                 if ((<any>this.Connection).state === $.signalR.connectionState.connected) {
-                    return savedProxyInvoke.bind(this.Proxy, ...args);
+                    return savedProxyInvoke.bind(this.Proxy,...args);
                 }
             };
         }

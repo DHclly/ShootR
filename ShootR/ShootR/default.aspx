@@ -22,7 +22,7 @@
 
         <asp:Panel runat="server" ID="GameScripts" Visible="false">
             <div id="loadContent" style="position: absolute; width: 100%;">
-                <img style="position: relative; margin: 120px auto 0; display: block;" alt="Loading..." src="/Images/Loading.png"></img>
+                <img style="position: relative; margin: 120px auto 0; display: block;" alt="Loading..." src="/Images/Loading.png"/>
                 <div class="progress progress-striped active" style="position: relative; margin: 15px auto 0; width: 280px;">
                     <div class="progress-bar" style="width: 100%;height:100%;"></div>
                 </div>

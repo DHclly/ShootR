@@ -54,7 +54,7 @@ namespace ShootR
         public ShipWeaponController WeaponController { get; private set; }
         public Ship LastKilledBy { get; private set; }
 
-        public ShipLifeController LifeController
+        public new ShipLifeController LifeController
         {
             get
             {
@@ -66,7 +66,7 @@ namespace ShootR
             }
         }
 
-        public ShipMovementController MovementController
+        public new ShipMovementController MovementController
         {
             get
             {
