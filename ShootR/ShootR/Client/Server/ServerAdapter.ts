@@ -39,7 +39,8 @@ module ShootR.Server {
 
             (<any>this.Proxy.invoke) = (...args) => {
                 if ((<any>this.Connection).state === $.signalR.connectionState.connected) {
-                    return savedProxyInvoke.bind(this.Proxy,...args);
+                    let bindSavedProxyInvoke = savedProxyInvoke.bind(this.Proxy);
+                    return bindSavedProxyInvoke(...args);
                 }
             };
         }
@@ -69,7 +70,7 @@ module ShootR.Server {
         }
 
         private TryInitialize(userInformation: IUserInformation, onComplete: (initialization: IClientInitialization) => void, count: number = 0): void {
-            let p = this.Proxy.invoke("initializeClient", [userInformation.RegistrationID]);
+            let p = this.Proxy.invoke("initializeClient", userInformation.RegistrationID);
             p.done((initialization: IClientInitialization) => {
                 if (!initialization) {
                     if (count >= ServerAdapter.NEGOTIATE_RETRIES) {
@@ -83,7 +84,7 @@ module ShootR.Server {
                 } else {
                     onComplete(initialization);
                 }
-            }).fail(err => console.log(err));
+            }).fail(err => console.log("TryInitialize Occur Error:",err));
         }
 
         private Wire(): void {

@@ -6,13 +6,6 @@
 /// <reference path="IUserInformation.ts" />
 /// <reference path="IClientInitialization.ts" />
 /// <reference path="../HUD/Chat.ts" />
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 var ShootR;
 (function (ShootR) {
     var Server;
@@ -37,7 +30,8 @@ var ShootR;
                         args[_i] = arguments[_i];
                     }
                     if (_this.Connection.state === $.signalR.connectionState.connected) {
-                        return savedProxyInvoke.bind.apply(savedProxyInvoke, __spreadArrays([_this.Proxy], args));
+                        var bindSavedProxyInvoke = savedProxyInvoke.bind(_this.Proxy);
+                        return bindSavedProxyInvoke.apply(void 0, args);
                     }
                 };
             }
@@ -61,7 +55,7 @@ var ShootR;
             ServerAdapter.prototype.TryInitialize = function (userInformation, onComplete, count) {
                 var _this = this;
                 if (count === void 0) { count = 0; }
-                var p = this.Proxy.invoke("initializeClient", [userInformation.RegistrationID]);
+                var p = this.Proxy.invoke("initializeClient", userInformation.RegistrationID);
                 p.done(function (initialization) {
                     if (!initialization) {
                         if (count >= ServerAdapter.NEGOTIATE_RETRIES) {
@@ -77,7 +71,7 @@ var ShootR;
                     else {
                         onComplete(initialization);
                     }
-                }).fail(function (err) { return console.log(err); });
+                }).fail(function (err) { return console.log("TryInitialize Occur Error:", err); });
             };
             ServerAdapter.prototype.Wire = function () {
                 var _this = this;
